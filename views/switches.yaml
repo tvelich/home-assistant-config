@@ -1,0 +1,13 @@
+path: switches_view
+title: Switches
+badges: []
+cards:
+  - type: 'custom:auto-entities'
+    card:
+      type: entities
+      title: Switches
+      show_header_toggle: false
+    filter:
+      include:
+        - group: group.all_switches
+icon: 'mdi:power'

@@ -1,0 +1,488 @@
+- id: on_sunset
+  alias: On Sunset
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+    service: script.outside_core_lights_on
+- id: on_sunrise
+  alias: On Sunrise
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+    service: script.outside_lights_off
+- id: on_time_9am
+  alias: On Time Is 9:00AM
+  trigger:
+    platform: time
+    at: '09:00:00'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.master_bedroom
+      brightness: 255
+      transition: 1800
+- id: on_time_11pm
+  alias: On Time Is 11:00PM
+  trigger:
+    platform: time
+    at: '23:00:00'
+  action:
+    service: script.fade_to_dim_front_yard
+- id: on_close_door
+  alias: On Close Door
+  trigger:
+    - entity_id: binary_sensor.front_door_open
+      platform: state
+      to: 'off'
+      for:
+        minutes: 15
+    - entity_id: binary_sensor.sunroom_door_open
+      platform: state
+      to: 'off'
+      for:
+        minutes: 15
+    - entity_id: binary_sensor.deck_door_open
+      platform: state
+      to: 'off'
+      for:
+        minutes: 15
+    - entity_id: binary_sensor.garage_door_open
+      platform: state
+      to: 'off'
+      for:
+        minutes: 15
+  action:
+    service: lock.lock
+    data_template:
+      entity_id: >
+        {% if trigger.entity_id == 'binary_sensor.deck_door_open' %}
+          lock.deck_door
+        {% elif trigger.entity_id == 'binary_sensor.front_door_open' %}
+          lock.front_door
+        {% elif trigger.entity_id == 'binary_sensor.garage_door_open' %}
+          lock.garage_door
+        {% elif trigger.entity_id == 'binary_sensor.sunroom_door_open' %}
+          lock.sunroom_door
+        {% endif %}
+- id: on_trigger_for_backyard_light
+  alias: On Trigger For Backyard Light
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.sunroom_door_open
+        - binary_sensor.deck_door_open
+        - binary_sensor.garage_door_open
+        - binary_sensor.backyard_camera_motion_detected
+        - binary_sensor.deck_camera_motion_detected
+        - light.backyard
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.backyard
+        brightness: 255
+    - service: script.backyard_timer_start
+- id: on_backyard_lights_idle
+  alias: On Backyard Lights Idle
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.backyard_lights
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.backyard
+      transition: 60
+- id: on_downstairs_bathroom_lights_idle
+  alias: On Downstairs Bathroom Lights Idle
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.downstairs_bathroom_lights
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.bathroom_downstairs
+- id: on_upstairs_bathroom_lights_idle
+  alias: On Upstairs Bathroom Lights Idle
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.upstairs_bathroom_lights
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.bathroom_upstairs
+- id: on_brighten_front_yard_idle
+  alias: On Brighten Front Yard Idle
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.brighten_front_yard
+  condition:
+    - condition: time
+      after: '23:00:00'
+      before: '12:00:00'
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    service: script.fade_to_dim_front_yard
+- id: on_home
+  alias: On Home
+  trigger:
+    entity_id: device_tracker.tom_phone
+    platform: state
+    to: home
+    from: not_home
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.abode_alarm
+    - service: script.inside_lights_on
+    - service: nest.set_away_mode
+      data:
+        away_mode: home
+- id: on_away
+  alias: On Away
+  trigger:
+    entity_id: device_tracker.tom_phone
+    platform: state
+    to: not_home
+    from: home
+  action:
+    - service: alarm_control_panel.alarm_arm_away
+      data:
+        entity_id: alarm_control_panel.abode_alarm
+    - service: script.inside_lights_off
+    - service: nest.set_away_mode
+      data:
+        away_mode: away
+- id: on_phone_charging
+  alias: On Phone Charging
+  trigger:
+    entity_id: sensor.tom_phone_charging
+    platform: state
+    to: 'true'
+  condition:
+    condition: time
+    after: '20:00:00'
+    before: '08:00:00'
+  action:
+    - service: script.bedtime
+- id: on_phone_discharging
+  alias: On Phone Discharging
+  trigger:
+    entity_id: sensor.tom_phone_charging
+    platform: state
+    to: 'false'
+  action:
+    - service: script.wake
+- id: on_nano_1_pressed
+  alias: On NanoMote Button 1 Pressed
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7680
+        scene_id: 1
+  action:
+    service: switch.toggle
+    data:
+      entity_id: switch.inside_lights
+- id: on_nano_1_held
+  alias: On NanoMote Button 1 Held
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7800
+        scene_id: 1
+  action:
+    service: script.noop
+- id: on_nano_2_pressed
+  alias: On NanoMote Button 2 Pressed
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7680
+        scene_id: 2
+  action:
+    service: script.noop
+- id: on_nano_2_held
+  alias: On NanoMote Button 2 Held
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7800
+        scene_id: 2
+  action:
+    service: script.noop
+- id: on_nano_3_pressed
+  alias: On NanoMote Button 3 Pressed
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7680
+        scene_id: 3
+  action:
+    - service: script.noop
+- id: on_nano_3_held
+  alias: On NanoMote Button 3 Held
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7800
+        scene_id: 3
+  action:
+    service: script.noop
+- id: on_nano_4_pressed
+  alias: On NanoMote Button 4 Pressed
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7680
+        scene_id: 4
+  action:
+    service: media_player.media_play_pause
+    data:
+      entity_id: media_player.living_room_chromecast
+- id: on_nano_4_held
+  alias: On NanoMote Button 4 Held
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7800
+        scene_id: 4
+  action:
+    service: media_player.media_stop
+    data:
+      entity_id: media_player.living_room_chromecast
+- id: on_trigger_for_downstairs_bathroom_lights
+  alias: On Trigger For Downstairs Bathroom Lights
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.downstairs_bathroom_motion
+        - light.bathroom_downstairs
+      to: 'on'
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: light.bathroom_downstairs
+        brightness: >
+          {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
+            1
+          {% else %}
+            255
+          {% endif %}
+    - service: timer.start
+      data:
+        entity_id: timer.downstairs_bathroom_lights
+        duration: '00:15:00'
+- id: on_trigger_for_upstairs_bathroom_lights
+  alias: On Trigger For Upstairs Bathroom Lights
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.upstairs_bathroom_motion
+        - light.bathroom_upstairs
+      to: 'on'
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: light.bathroom_upstairs
+        brightness: >
+          {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
+            1
+          {% else %}
+            255
+          {% endif %}
+    - service: timer.start
+      data:
+        entity_id: timer.upstairs_bathroom_lights
+        duration: '00:15:00'
+- id: on_vacuuming_complete
+  alias: On Vacuuming Complete
+  trigger:
+    entity_id: vacuum.roomba
+    platform: state
+    to: 'off'
+    for:
+      minutes: 120
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.abode_alarm
+    state: armed_home
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.downstairs_lights
+- id: on_home_assistant_start
+  alias: On Home Assistant Start
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    - service: timer.start
+      data:
+        entity_id: timer.downstairs_bathroom_lights
+        duration: '00:15:00'
+    - service: timer.start
+      data:
+        entity_id: timer.upstairs_bathroom_lights
+        duration: '00:15:00'
+    - service: script.backyard_timer_start
+    - service: timer.start
+      data:
+        entity_id: timer.brighten_front_yard
+        duration: '00:05:00'
+- id: on_trigger_to_brighten_front_yard
+  alias: On Trigger To Brighten Front Yard
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.front_door_open
+        - binary_sensor.porch_camera_motion_detected
+        - binary_sensor.garage_camera_motion_detected
+      to: 'on'
+    - platform: state
+      entity_id: cover.garage_lift_door
+      to: 'open'
+  condition:
+    - condition: time
+      after: '23:00:00'
+      before: '12:00:00'
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.front_yard
+        brightness: 255
+    - service: timer.start
+      data:
+        entity_id: timer.brighten_front_yard
+        duration: '00:05:00'
+- id: on_door_left_open
+  alias: On Door Left Open
+  trigger:
+    - entity_id: binary_sensor.front_door_open
+      platform: state
+      to: 'on'
+      for:
+        minutes: 5
+    - entity_id: binary_sensor.sunroom_door_open
+      platform: state
+      to: 'on'
+      for:
+        minutes: 5
+    - entity_id: binary_sensor.deck_door_open
+      platform: state
+      to: 'on'
+      for:
+        minutes: 5
+    - entity_id: binary_sensor.garage_door_open
+      platform: state
+      to: 'on'
+      for:
+        minutes: 5
+    - entity_id: cover.garage_lift_door
+      platform: state
+      to: 'open'
+      for:
+        minutes: 10
+  action:
+    service: script.post_slack_message
+    data_template:
+      message: >
+        {% if trigger.entity_id == 'binary_sensor.deck_door_open' %}
+          Deck door is still open!
+        {% elif trigger.entity_id == 'binary_sensor.front_door_open' %}
+          Front door is still open!
+        {% elif trigger.entity_id == 'binary_sensor.garage_door_open' %}
+          Garage door is still open!
+        {% elif trigger.entity_id == 'binary_sensor.sunroom_door_open' %}
+          Sunroom door is still open!
+        {% elif trigger.entity_id == 'cover.garage_lift_door' %}
+          Garage lift door is still open!
+        {% endif %}
+- id: on_door_left_unlocked
+  alias: On Door Left Unlocked
+  trigger:
+    - entity_id: lock.front_door
+      platform: state
+      to: 'unlocked'
+      for:
+        minutes: 20
+    - entity_id: lock.deck_door
+      platform: state
+      to: 'unlocked'
+      for:
+        minutes: 20
+    - entity_id: lock.sunroom_door
+      platform: state
+      to: 'unlocked'
+      for:
+        minutes: 20
+    - entity_id: lock.garage_door
+      platform: state
+      to: 'unlocked'
+      for:
+        minutes: 20
+  action:
+    service: script.post_slack_message
+    data_template:
+      message: >
+        {% if trigger.entity_id == 'lock.deck_door' %}
+          Deck door is still unlocked!
+        {% elif trigger.entity_id == 'lock.front_door' %}
+          Front door is still unlocked!
+        {% elif trigger.entity_id == 'lock.garage_door' %}
+          Garage door is still unlocked!
+        {% elif trigger.entity_id == 'lock.sunroom_door' %}
+          Sunroom door is still unlocked!
+        {% endif %}
+- id: on_water_detected
+  alias: On Water Detected
+  trigger:
+    - entity_id: binary_sensor.downstairs_bathroom_water
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.upstairs_bathroom_water
+      platform: state
+      to: 'on'
+  action:
+    service: script.post_slack_message
+    data_template:
+      message: >
+        {% if trigger.entity_id == 'binary_sensor.downstairs_bathroom_water' %}
+          Water detected in downstairs bathroom!
+        {% elif trigger.entity_id == 'binary_sensor.upstairs_bathroom_water' %}
+          Water detected in upstairs bathroom!
+        {% endif %}

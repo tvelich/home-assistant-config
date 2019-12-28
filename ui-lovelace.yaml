@@ -1,0 +1,24 @@
+resources:
+  - url: /local/lovelace/fold-entity-row.js
+    type: module
+  - url: /local/lovelace/auto-entities.js
+    type: module
+views:
+  - !include views/default.yaml
+  - !include views/weather.yaml
+  - !include views/security.yaml
+  - !include views/media.yaml
+  - !include views/switches.yaml
+  - !include views/settings.yaml
+  - !include views/backyard.yaml
+  - !include views/bedrooms.yaml
+  - !include views/dining_room.yaml
+  - !include views/family_room.yaml
+  - !include views/front_yard.yaml
+  - !include views/garage.yaml
+  - !include views/gym.yaml
+  - !include views/kitchen.yaml
+  - !include views/living_room.yaml
+  - !include views/office.yaml
+  - !include views/sunroom.yaml
+  - !include views/other_rooms.yaml

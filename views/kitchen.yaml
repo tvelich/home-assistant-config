@@ -1,0 +1,8 @@
+path: kitchen_view
+title: Kitchen
+badges: []
+cards:
+  - type: entities
+    entities:
+      - light.kitchen
+    title: Light

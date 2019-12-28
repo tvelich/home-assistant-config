@@ -1,0 +1,28 @@
+group.all_automations:
+  friendly_name: All Automations
+group.all_switches:
+  friendly_name: All Switches
+group.all_scripts:
+  friendly_name: All Scripts
+switch.fountain:
+  friendly_name: Fountain
+switch.outdoor_string_holiday_lights:
+  friendly_name: Outdoor String Holiday Lights
+switch.inside_lights:
+  friendly_name: Inside Lights
+switch.downstairs_lights:
+  friendly_name: Downstairs Lights
+switch.upstairs_lights:
+  friendly_name: Upstairs Lights
+switch.outside_lights:
+  friendly_name: Outside Lights
+lock.front_door:
+  friendly_name: Front Door Lock
+lock.deck_door:
+  friendly_name: Deck Door Lock
+lock.garage_door:
+  friendly_name: Garage Door Lock
+lock.sunroom_door:
+  friendly_name: Sunroom Door Lock
+cover.garage_lift_door:
+  friendly_name: Garage Lift Door

@@ -1,0 +1,6 @@
+- platform: harmony
+  name: Living Room
+  activity: STB
+- platform: harmony
+  name: Family Room
+  activity: STB

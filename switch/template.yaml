@@ -1,0 +1,26 @@
+- platform: template
+  switches:
+    inside_lights:
+      value_template: "{{ is_state('light.inside', 'on') }}"
+      turn_on:
+        service: script.inside_lights_on
+      turn_off:
+        service: script.inside_lights_off
+    downstairs_lights:
+      value_template: "{{ is_state('light.downstairs', 'on') }}"
+      turn_on:
+        service: script.downstairs_lights_on
+      turn_off:
+        service: script.downstairs_lights_off
+    upstairs_lights:
+      value_template: "{{ is_state('light.upstairs', 'on') }}"
+      turn_on:
+        service: script.upstairs_lights_on
+      turn_off:
+        service: script.upstairs_lights_off
+    outside_lights:
+      value_template: "{{ is_state('light.outside', 'on') }}"
+      turn_on:
+        service: script.outside_lights_on
+      turn_off:
+        service: script.outside_lights_off

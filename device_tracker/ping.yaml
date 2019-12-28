@@ -1,0 +1,5 @@
+- platform: ping
+  hosts:
+    tom_phone: !secret ip_tom_phone
+  interval_seconds: 5
+  consider_home: 1800

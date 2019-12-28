@@ -1,0 +1,30 @@
+cloud:
+homeassistant: !include homeassistant.yaml
+lovelace: !include lovelace.yaml
+
+# Components
+abode: !include abode.yaml
+automation: !include automation.yaml
+config:
+discovery:
+frontend: !include frontend.yaml
+group: !include group.yaml
+history:
+input_boolean: !include input_boolean.yaml
+logbook:
+nest: !include nest.yaml
+recorder: !include recorder.yaml
+rest_command: !include rest_command.yaml
+script: !include script.yaml
+sun:
+system_health:
+timer: !include timer.yaml
+tplink: !include tplink.yaml
+zwave: !include zwave.yaml
+
+# Platforms
+device_tracker: !include_dir_merge_list device_tracker
+remote: !include_dir_merge_list remote
+sensor: !include_dir_merge_list sensor
+switch: !include_dir_merge_list switch
+vacuum: !include_dir_merge_list vacuum

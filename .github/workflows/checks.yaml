@@ -1,0 +1,22 @@
+name: Checks
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: 0 10 * * 1
+jobs:
+  home_assistant:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v1
+      - name: Copy mock secrets
+        run: mv mock_secrets.yaml secrets.yaml
+      - name: Check version
+        uses: "docker://homeassistant/home-assistant:stable"
+        with:
+          args: python -m homeassistant --version
+      - name: Check config
+        uses: "docker://homeassistant/home-assistant:stable"
+        with:
+          args: python -m homeassistant --script check_config --config .

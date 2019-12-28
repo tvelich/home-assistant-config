@@ -1,0 +1,4 @@
+- platform: template
+  sensors:
+    slack_home_assistant_channel_id:
+      value_template: !secret slack_home_assistant_channel_id

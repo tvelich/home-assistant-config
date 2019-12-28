@@ -1,0 +1,39 @@
+path: automations_view
+title: Automations
+badges: []
+cards:
+  - type: entities
+    title: Settings
+    show_header_toggle: false
+    entities:
+      - type: custom:fold-entity-row
+        head: group.all_automations
+        entities:
+        - type: 'custom:auto-entities'
+          card:
+            type: entities
+            show_header_toggle: false
+          filter:
+            include:
+              - group: group.all_automations
+      - type: custom:fold-entity-row
+        head: group.all_scripts
+        entities:
+        - type: 'custom:auto-entities'
+          card:
+            type: entities
+            show_header_toggle: false
+          filter:
+            include:
+              - group: group.all_scripts
+      - type: custom:fold-entity-row
+        head: group.all_input_booleans
+        entities:
+        - type: 'custom:auto-entities'
+          card:
+            type: entities
+            show_header_toggle: false
+          filter:
+            include:
+              - group: group.all_input_booleans
+icon: 'mdi:cellphone-settings-variant'

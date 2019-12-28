@@ -1,0 +1,8 @@
+path: sunroom_view
+title: Sunroom
+badges: []
+cards:
+  - type: entities
+    entities:
+      - light.sunroom
+    title: Light

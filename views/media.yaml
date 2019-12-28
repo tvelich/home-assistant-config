@@ -1,0 +1,33 @@
+path: media_view
+title: Media
+badges: []
+cards:
+  - type: entities
+    entities:
+      - remote.family_room
+      - remote.living_room
+    title: Media
+    show_header_toggle: false
+  - type: media-control
+    entity: media_player.all
+  - type: media-control
+    entity: media_player.downstairs
+  - type: media-control
+    entity: media_player.upstairs
+  - type: media-control
+    entity: media_player.dining_room_home
+  - type: media-control
+    entity: media_player.family_room_home
+  - type: media-control
+    entity: media_player.master_bedroom_home
+  - type: media-control
+    entity: media_player.kitchen_chromecast
+  - type: media-control
+    entity: media_player.living_room_chromecast
+  - type: media-control
+    entity: media_player.living_room_home
+  - type: media-control
+    entity: media_player.garage_home
+  - type: media-control
+    entity: media_player.sunroom_home
+icon: 'mdi:play-network'

@@ -1,0 +1,3 @@
+is_roomba_enabled:
+  name: Enable Roomba
+  icon: mdi:robot-vacuum

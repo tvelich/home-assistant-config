@@ -1,0 +1,9 @@
+path: bedroom_view
+title: Bedrooms
+badges: []
+cards:
+  - type: entities
+    entities:
+      - light.master_bedroom
+      - light.guest_room
+    title: Light
