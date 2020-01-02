@@ -11,7 +11,7 @@ frontend: !include frontend.yaml
 group: !include group.yaml
 history:
 input_boolean: !include input_boolean.yaml
-logbook:
+logbook: !include logbook.yaml
 nest: !include nest.yaml
 recorder: !include recorder.yaml
 rest_command: !include rest_command.yaml
