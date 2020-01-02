@@ -84,7 +84,7 @@ wake:
           - media_player.master_bedroom_home
 colorloop_bar_lights:
   sequence:
-    - service: homeassistant.turn_on
+    - service: light.turn_on
       data:
         entity_id:
           - light.hue_bloom_1
@@ -92,17 +92,13 @@ colorloop_bar_lights:
         brightness: 255
         xy_color: [0,0]
     - delay: '00:00:01'
-    - service: scene.apply
+    - service: light.turn_on
       data:
-        entities:
-          light.hue_bloom_1:
-            state: true
-            brightness: 255
-            effect: colorloop
-          light.hue_lightstrip_plus_1:
-            state: true
-            brightness: 255
-            effect: colorloop
+        entity_id:
+          - light.hue_bloom_1
+          - light.hue_lightstrip_plus_1
+        brightness: 255
+        effect: colorloop
 upstairs_lights_on:
   sequence:
     - service: light.turn_on
@@ -174,13 +170,11 @@ colorloop_landscape_lights:
         brightness: 255
         xy_color: [0,0]
     - delay: '00:00:01'
-    - service: scene.apply
+    - service: light.turn_on
       data:
-        entities:
-          light.landscape_spot:
-            state: true
-            brightness: 255
-            effect: colorloop
+        entity_id: light.landscape_spot
+        brightness: 255
+        effect: colorloop
 fade_to_dim_front_yard:
   sequence:
     - service: light.turn_on
