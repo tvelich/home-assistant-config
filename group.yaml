@@ -1,3 +1,19 @@
+front_yard_lights:
+  entities:
+    - light.hue_color_candle_1
+    - light.hue_color_candle_2
+    - light.hue_color_candle_3
+    - light.hue_color_lamp_1
+    - light.hue_color_lamp_2
+    - light.hue_color_lamp_3
+landscape_spot_lights:
+  entities:
+    - light.hue_outdoor_spot_1
+    - light.hue_outdoor_spot_2
+    - light.hue_outdoor_spot_3
+    - light.hue_outdoor_spot_4
+    - light.hue_outdoor_spot_5
+
 living_room_media:
   name: Living Room Media
   entities:
