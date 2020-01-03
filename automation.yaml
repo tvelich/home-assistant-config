@@ -74,8 +74,8 @@
         - binary_sensor.sunroom_door_open
         - binary_sensor.deck_door_open
         - binary_sensor.garage_door_open
-        - binary_sensor.backyard_camera_motion_detected
-        - binary_sensor.deck_camera_motion_detected
+        - binary_sensor.backyard_camera_person_detected
+        - binary_sensor.deck_camera_person_detected
         - light.backyard
       to: 'on'
   condition:
@@ -99,7 +99,6 @@
     service: light.turn_off
     data:
       entity_id: light.backyard
-      transition: 60
 - id: on_downstairs_bathroom_lights_idle
   alias: On Downstairs Bathroom Lights Idle
   trigger:
