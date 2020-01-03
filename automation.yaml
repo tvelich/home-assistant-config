@@ -12,11 +12,11 @@
     event: sunrise
   action:
     service: script.outside_lights_off
-- id: on_time_9am
+- id: on_time_930am
   alias: On Time Is 9:00AM
   trigger:
     platform: time
-    at: '09:00:00'
+    at: '09:30:00'
   action:
     service: light.turn_on
     data:
