@@ -1,19 +1,16 @@
-- id: on_sunset
-  alias: On Sunset
+- alias: on_sunset
   trigger:
     platform: sun
     event: sunset
   action:
     service: script.outside_core_lights_on
-- id: on_sunrise
-  alias: On Sunrise
+- alias: on_sunrise
   trigger:
     platform: sun
     event: sunrise
   action:
     service: script.outside_lights_off
-- id: on_time_930am
-  alias: On Time Is 9:00AM
+- alias: on_time_930am
   trigger:
     platform: time
     at: '09:30:00'
@@ -23,15 +20,13 @@
       entity_id: light.master_bedroom
       brightness: 255
       transition: 1800
-- id: on_time_11pm
-  alias: On Time Is 11:00PM
+- alias: on_time_11pm
   trigger:
     platform: time
     at: '23:00:00'
   action:
     service: script.fade_to_dim_front_yard
-- id: on_close_door
-  alias: On Close Door
+- alias: on_close_door
   trigger:
     - entity_id: binary_sensor.front_door_open
       platform: state
@@ -66,8 +61,7 @@
         {% elif trigger.entity_id == 'binary_sensor.sunroom_door_open' %}
           lock.sunroom_door
         {% endif %}
-- id: on_trigger_for_backyard_light
-  alias: On Trigger For Backyard Light
+- alias: on_trigger_for_backyard_light
   trigger:
     - platform: state
       entity_id:
@@ -88,8 +82,7 @@
         entity_id: light.backyard
         brightness: 255
     - service: script.backyard_timer_start
-- id: on_backyard_lights_idle
-  alias: On Backyard Lights Idle
+- alias: on_backyard_lights_idle
   trigger:
     - platform: event
       event_type: timer.finished
@@ -99,8 +92,7 @@
     service: light.turn_off
     data:
       entity_id: light.backyard
-- id: on_downstairs_bathroom_lights_idle
-  alias: On Downstairs Bathroom Lights Idle
+- alias: on_downstairs_bathroom_lights_idle
   trigger:
     - platform: event
       event_type: timer.finished
@@ -110,8 +102,7 @@
     service: light.turn_off
     data:
       entity_id: light.bathroom_downstairs
-- id: on_upstairs_bathroom_lights_idle
-  alias: On Upstairs Bathroom Lights Idle
+- alias: on_upstairs_bathroom_lights_idle
   trigger:
     - platform: event
       event_type: timer.finished
@@ -121,8 +112,7 @@
     service: light.turn_off
     data:
       entity_id: light.bathroom_upstairs
-- id: on_brighten_front_yard_idle
-  alias: On Brighten Front Yard Idle
+- alias: on_brighten_front_yard_idle
   trigger:
     - platform: event
       event_type: timer.finished
@@ -137,8 +127,7 @@
       state: 'below_horizon'
   action:
     service: script.fade_to_dim_front_yard
-- id: on_home
-  alias: On Home
+- alias: on_home
   trigger:
     entity_id: device_tracker.tom_phone
     platform: state
@@ -152,8 +141,7 @@
     - service: nest.set_away_mode
       data:
         away_mode: home
-- id: on_away
-  alias: On Away
+- alias: on_away
   trigger:
     entity_id: device_tracker.tom_phone
     platform: state
@@ -167,8 +155,7 @@
     - service: nest.set_away_mode
       data:
         away_mode: away
-- id: on_phone_charging
-  alias: On Phone Charging
+- alias: on_phone_charging
   trigger:
     entity_id: sensor.tom_phone_charging
     platform: state
@@ -179,16 +166,14 @@
     before: '08:00:00'
   action:
     - service: script.bedtime
-- id: on_phone_discharging
-  alias: On Phone Discharging
+- alias: on_phone_discharging
   trigger:
     entity_id: sensor.tom_phone_charging
     platform: state
     to: 'false'
   action:
     - service: script.wake
-- id: on_nano_1_pressed
-  alias: On NanoMote Button 1 Pressed
+- alias: on_nano_1_pressed
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -200,8 +185,7 @@
     service: switch.toggle
     data:
       entity_id: switch.inside_lights
-- id: on_nano_1_held
-  alias: On NanoMote Button 1 Held
+- alias: on_nano_1_held
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -211,8 +195,7 @@
         scene_id: 1
   action:
     service: script.noop
-- id: on_nano_2_pressed
-  alias: On NanoMote Button 2 Pressed
+- alias: on_nano_2_pressed
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -222,8 +205,7 @@
         scene_id: 2
   action:
     service: script.noop
-- id: on_nano_2_held
-  alias: On NanoMote Button 2 Held
+- alias: on_nano_2_held
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -233,8 +215,7 @@
         scene_id: 2
   action:
     service: script.noop
-- id: on_nano_3_pressed
-  alias: On NanoMote Button 3 Pressed
+- alias: on_nano_3_pressed
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -244,8 +225,7 @@
         scene_id: 3
   action:
     - service: script.noop
-- id: on_nano_3_held
-  alias: On NanoMote Button 3 Held
+- alias: on_nano_3_held
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -255,8 +235,7 @@
         scene_id: 3
   action:
     service: script.noop
-- id: on_nano_4_pressed
-  alias: On NanoMote Button 4 Pressed
+- alias: on_nano_4_pressed
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -268,8 +247,7 @@
     service: media_player.media_play_pause
     data:
       entity_id: media_player.living_room_chromecast
-- id: on_nano_4_held
-  alias: On NanoMote Button 4 Held
+- alias: on_nano_4_held
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -281,8 +259,7 @@
     service: media_player.media_stop
     data:
       entity_id: media_player.living_room_chromecast
-- id: on_trigger_for_downstairs_bathroom_lights
-  alias: On Trigger For Downstairs Bathroom Lights
+- alias: on_trigger_for_downstairs_bathroom_lights
   trigger:
     - platform: state
       entity_id:
@@ -303,8 +280,7 @@
       data:
         entity_id: timer.downstairs_bathroom_lights
         duration: '00:15:00'
-- id: on_trigger_for_upstairs_bathroom_lights
-  alias: On Trigger For Upstairs Bathroom Lights
+- alias: on_trigger_for_upstairs_bathroom_lights
   trigger:
     - platform: state
       entity_id:
@@ -325,8 +301,7 @@
       data:
         entity_id: timer.upstairs_bathroom_lights
         duration: '00:15:00'
-- id: on_vacuuming_complete
-  alias: On Vacuuming Complete
+- alias: on_vacuuming_complete
   trigger:
     entity_id: vacuum.roomba
     platform: state
@@ -341,8 +316,7 @@
     service: switch.turn_off
     data:
       entity_id: switch.downstairs_lights
-- id: on_home_assistant_start
-  alias: On Home Assistant Start
+- alias: on_home_assistant_start
   trigger:
     platform: homeassistant
     event: start
@@ -360,8 +334,7 @@
       data:
         entity_id: timer.brighten_front_yard
         duration: '00:05:00'
-- id: on_trigger_to_brighten_front_yard
-  alias: On Trigger To Brighten Front Yard
+- alias: on_trigger_to_brighten_front_yard
   trigger:
     - platform: state
       entity_id:
@@ -388,8 +361,7 @@
       data:
         entity_id: timer.brighten_front_yard
         duration: '00:05:00'
-- id: on_door_left_open
-  alias: On Door Left Open
+- alias: on_door_left_open
   trigger:
     - entity_id: binary_sensor.front_door_open
       platform: state
@@ -431,8 +403,7 @@
         {% elif trigger.entity_id == 'cover.garage_lift_door' %}
           Garage lift door is still open!
         {% endif %}
-- id: on_door_left_unlocked
-  alias: On Door Left Unlocked
+- alias: on_door_left_unlocked
   trigger:
     - entity_id: lock.front_door
       platform: state
@@ -467,8 +438,7 @@
         {% elif trigger.entity_id == 'lock.sunroom_door' %}
           Sunroom door is still unlocked!
         {% endif %}
-- id: on_water_detected
-  alias: On Water Detected
+- alias: on_water_detected
   trigger:
     - entity_id: binary_sensor.downstairs_bathroom_water
       platform: state
