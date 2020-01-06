@@ -1,7 +1,7 @@
 resources:
-  - url: /local/lovelace/fold-entity-row.js
+  - url: /local/lovelace/fold-entity-row/index.js
     type: module
-  - url: /local/lovelace/auto-entities.js
+  - url: /local/lovelace/auto-entities/index.js
     type: module
 views:
   - !include views/default.yaml
