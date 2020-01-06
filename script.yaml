@@ -19,8 +19,6 @@ bedtime:
       data:
         entity_id:
           - light.upstairs
-          - switch.fireplace_mantel_lights
-          - switch.christmas_tree_lights
           - switch.dining_room_lights
           - media_player.dining_room_home
           - media_player.family_room_home
@@ -123,21 +121,13 @@ downstairs_lights_on:
         entity_id: light.downstairs
         brightness: 255
         xy_color: [0.31495,0.32501]
-    - service: switch.turn_on
-      data:
-        entity_id:
-          - switch.fireplace_mantel_lights
-          - switch.christmas_tree_lights
     - delay: '00:00:01'
     - service: script.colorloop_bar_lights
 downstairs_lights_off:
   sequence:
-    service: homeassistant.turn_off
+    service: light.turn_off
     data:
-      entity_id:
-        - light.downstairs
-        - switch.fireplace_mantel_lights
-        - switch.christmas_tree_lights
+      entity_id: light.downstairs
 inside_lights_on:
   sequence:
     - service: light.turn_on
@@ -147,10 +137,7 @@ inside_lights_on:
         xy_color: [0.31495,0.32501]
     - service: switch.turn_on
       data:
-        entity_id:
-          - switch.fireplace_mantel_lights
-          - switch.christmas_tree_lights
-          - switch.dining_room_lights
+        entity_id: switch.dining_room_lights
     - delay: '00:00:01'
     - service: script.colorloop_bar_lights
 inside_lights_off:
@@ -159,8 +146,6 @@ inside_lights_off:
     data:
       entity_id:
         - light.inside
-        - switch.fireplace_mantel_lights
-        - switch.christmas_tree_lights
         - switch.dining_room_lights
 colorloop_landscape_lights:
   sequence:
