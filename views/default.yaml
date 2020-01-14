@@ -11,7 +11,8 @@ cards:
       - type: horizontal-stack
         cards:
           - type: entity-button
-            entity: light.inside
+            entity: switch.inside_lights
+            name: Inside
             icon_height: 50px
             tap_action:
               action: call-service
@@ -19,10 +20,12 @@ cards:
               service_data:
                 entity_id: switch.inside_lights
           - type: entity-button
-            entity: light.upstairs
+            entity: switch.upstairs_lights
+            name: Upstairs
             icon_height: 50px
           - type: entity-button
-            entity: light.downstairs
+            entity: switch.downstairs_lights
+            name: Downstairs
             icon_height: 50px
             tap_action:
               action: call-service
@@ -30,7 +33,8 @@ cards:
               service_data:
                 entity_id: switch.downstairs_lights
           - type: entity-button
-            entity: light.outside
+            entity: switch.outside_lights
+            name: Outside
             icon_height: 50px
             tap_action:
               action: call-service

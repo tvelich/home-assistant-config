@@ -15,11 +15,12 @@ bedtime:
     - service: alarm_control_panel.alarm_arm_home
       data:
         entity_id: alarm_control_panel.abode_alarm
+    - service: switch.turn_off
+      data:
+        entity_id: switch.inside_lights
     - service: homeassistant.turn_off
       data:
         entity_id:
-          - light.upstairs
-          - switch.dining_room_lights
           - media_player.dining_room_home
           - media_player.family_room_home
           - media_player.family_room_speakers
@@ -32,6 +33,7 @@ bedtime:
           - media_player.sunroom_home
           - remote.family_room
           - remote.living_room
+    - delay: '00:00:05'
     - service: script.vacuum_start
 noop:
   sequence:
@@ -60,7 +62,7 @@ vacuum_start:
         {% set isRoombaEnabled = is_state('input_boolean.is_roomba_enabled', 'on') %}
         {% set isArmedHome = is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
         {% if isRoombaEnabled and isArmedHome %}
-          light.turn_on
+          python_script.light_turn_on
         {% else %}
           script.noop
         {% endif %}
@@ -76,124 +78,107 @@ wake:
     - service: remote.turn_on
       data:
         entity_id: remote.living_room
-    - service: homeassistant.turn_off
+    - service: media_player.turn_off
       data:
-        entity_id:
-          - media_player.master_bedroom_home
+        entity_id: media_player.master_bedroom_home
 colorloop_bar_lights:
   sequence:
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id:
           - light.hue_bloom_1
           - light.hue_lightstrip_plus_1
-        brightness: 255
-        xy_color: [0,0]
-    - delay: '00:00:01'
-    - service: light.turn_on
+        color_name: blue
+    - service: python_script.light_turn_on
       data:
         entity_id:
           - light.hue_bloom_1
           - light.hue_lightstrip_plus_1
-        brightness: 255
         effect: colorloop
 upstairs_lights_on:
   sequence:
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.upstairs
-        brightness: 255
-        xy_color: [0.31495,0.32501]
     - service: switch.turn_on
       data:
         entity_id: switch.dining_room_lights
 upstairs_lights_off:
   sequence:
-    service: homeassistant.turn_off
-    data:
-      entity_id:
-        - light.upstairs
-        - switch.dining_room_lights
+    - service: switch.turn_off
+      data:
+        entity_id: switch.dining_room_lights
+    - service: python_script.light_turn_off
+      data:
+        entity_id: light.upstairs
 downstairs_lights_on:
   sequence:
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.downstairs
-        brightness: 255
-        xy_color: [0.31495,0.32501]
-    - delay: '00:00:01'
     - service: script.colorloop_bar_lights
 downstairs_lights_off:
   sequence:
-    service: light.turn_off
+    service: python_script.light_turn_off
     data:
       entity_id: light.downstairs
 inside_lights_on:
   sequence:
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.inside_core
-        brightness: 255
-        xy_color: [0.31495,0.32501]
     - service: switch.turn_on
       data:
         entity_id: switch.dining_room_lights
-    - delay: '00:00:01'
     - service: script.colorloop_bar_lights
 inside_lights_off:
   sequence:
-    service: homeassistant.turn_off
-    data:
-      entity_id:
-        - light.inside
-        - switch.dining_room_lights
+    - service: python_script.light_turn_off
+      data:
+        entity_id: light.inside
+    - service: switch.turn_off
+      data:
+        entity_id: switch.dining_room_lights
 colorloop_landscape_lights:
   sequence:
-    - service: homeassistant.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.landscape_spot
-        brightness: 255
-        xy_color: [0,0]
-    - delay: '00:00:01'
-    - service: light.turn_on
+        color_name: blue
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
       data:
         entity_id: light.landscape_spot
-        brightness: 255
         effect: colorloop
 fade_to_dim_front_yard:
   sequence:
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.front_yard
         brightness: 85
         transition: 60
+        replay: false
 outside_core_lights_on_default:
   sequence:
-    - service: homeassistant.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id:
           - light.front_yard
           - light.landscape_spot
-        brightness: 255
-        xy_color: [0.31495,0.32501]
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.landscape_path
         brightness: 85
-        xy_color: [0.31495,0.32501]
-    - delay: '00:00:01'
     - service: script.colorloop_landscape_lights
 outside_core_lights_on_christmas:
   sequence:
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.holiday_outside_color_1
-        brightness: 255
         color_name: green
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.holiday_outside_color_2
-        brightness: 255
         color_name: red
     - service: switch.turn_on
       data:
@@ -209,22 +194,19 @@ outside_core_lights_on:
       {% endif %}
 outside_lights_on:
   sequence:
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.outside
-        brightness: 255
-        xy_color: [0.31495,0.32501]
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.landscape_path
         brightness: 85
-        xy_color: [0.31495,0.32501]
-    - delay: '00:00:01'
     - service: script.colorloop_landscape_lights
 outside_lights_off:
   sequence:
-    service: homeassistant.turn_off
-    data:
-      entity_id:
-        - light.outside
-        - switch.outdoor_string_holiday_lights
+    - service: python_script.light_turn_off
+      data:
+        entity_id: light.outside
+    - service: switch.turn_off
+      data:
+        entity_id: switch.outdoor_string_holiday_lights

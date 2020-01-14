@@ -15,11 +15,11 @@
     platform: time
     at: '09:30:00'
   action:
-    service: light.turn_on
+    service: python_script.light_turn_on
     data:
       entity_id: light.master_bedroom
-      brightness: 255
       transition: 1800
+      replay: false
 - alias: on_time_11pm
   trigger:
     platform: time
@@ -77,10 +77,9 @@
     entity_id: sun.sun
     state: below_horizon
   action:
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.backyard
-        brightness: 255
     - service: script.backyard_timer_start
 - alias: on_backyard_lights_idle
   trigger:
@@ -89,7 +88,7 @@
       event_data:
         entity_id: timer.backyard_lights
   action:
-    service: light.turn_off
+    service: python_script.light_turn_off
     data:
       entity_id: light.backyard
 - alias: on_downstairs_bathroom_lights_idle
@@ -99,7 +98,7 @@
       event_data:
         entity_id: timer.downstairs_bathroom_lights
   action:
-    service: light.turn_off
+    service: python_script.light_turn_off
     data:
       entity_id: light.bathroom_downstairs
 - alias: on_upstairs_bathroom_lights_idle
@@ -109,7 +108,7 @@
       event_data:
         entity_id: timer.upstairs_bathroom_lights
   action:
-    service: light.turn_off
+    service: python_script.light_turn_off
     data:
       entity_id: light.bathroom_upstairs
 - alias: on_brighten_front_yard_idle
@@ -267,12 +266,12 @@
         - light.bathroom_downstairs
       to: 'on'
   action:
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data_template:
         entity_id: light.bathroom_downstairs
         brightness: >
           {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
-            1
+            10
           {% else %}
             255
           {% endif %}
@@ -288,12 +287,12 @@
         - light.bathroom_upstairs
       to: 'on'
   action:
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data_template:
         entity_id: light.bathroom_upstairs
         brightness: >
           {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
-            1
+            10
           {% else %}
             255
           {% endif %}
@@ -353,10 +352,9 @@
       entity_id: sun.sun
       state: 'below_horizon'
   action:
-    - service: light.turn_on
+    - service: python_script.light_turn_on
       data:
         entity_id: light.front_yard
-        brightness: 255
     - service: timer.start
       data:
         entity_id: timer.brighten_front_yard
