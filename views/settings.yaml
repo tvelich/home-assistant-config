@@ -1,39 +1,44 @@
-path: automations_view
-title: Automations
+path: settings_view
+title: Settings
 badges: []
 cards:
-  - type: entities
-    title: Settings
-    show_header_toggle: false
+  - type: custom:fold-entity-row
+    head:
+      type: section
+      label: Automations
     entities:
-      - type: custom:fold-entity-row
-        head: group.all_automations
-        entities:
-        - type: 'custom:auto-entities'
-          card:
-            type: entities
-            show_header_toggle: false
-          filter:
-            include:
-              - group: group.all_automations
-      - type: custom:fold-entity-row
-        head: group.all_scripts
-        entities:
-        - type: 'custom:auto-entities'
-          card:
-            type: entities
-            show_header_toggle: false
-          filter:
-            include:
-              - group: group.all_scripts
-      - type: custom:fold-entity-row
-        head: group.all_input_booleans
-        entities:
-        - type: 'custom:auto-entities'
-          card:
-            type: entities
-            show_header_toggle: false
-          filter:
-            include:
-              - group: group.all_input_booleans
+      - type: 'custom:auto-entities'
+        card:
+          type: entities
+        filter:
+          include:
+            - entity_id: "automation.*"
+        sort:
+          method: entity_id
+  - type: custom:fold-entity-row
+    head:
+      type: section
+      label: Scripts
+    entities:
+      - type: 'custom:auto-entities'
+        card:
+          type: entities
+        filter:
+          include:
+            - entity_id: "script.*"
+        sort:
+          method: entity_id
+  - type: custom:fold-entity-row
+    head:
+      type: section
+      label: Inputs
+    entities:
+      - type: 'custom:auto-entities'
+        card:
+          type: entities
+        filter:
+          include:
+            - entity_id: "input*.*"
+        sort:
+          method: entity_id
 icon: 'mdi:cellphone-settings-variant'

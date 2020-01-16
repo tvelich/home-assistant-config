@@ -2,33 +2,19 @@ path: security_view
 title: Security
 badges: []
 cards:
-  - type: entities
-    entities:
-      - lock.front_door
-      - lock.deck_door
-      - lock.sunroom_door
-      - lock.garage_door
-      - cover.garage_lift_door
-      - binary_sensor.deck_door_open
-      - binary_sensor.front_door_open
-      - binary_sensor.garage_door_open
-      - binary_sensor.sunroom_door_open
-      - binary_sensor.gym_glass
-      - binary_sensor.sunroom_glass_1
-      - binary_sensor.sunroom_glass_2
-      - binary_sensor.sunroom_glass_3
-      - binary_sensor.living_room_glass_1
-      - binary_sensor.living_room_glass_2
-      - binary_sensor.living_room_glass_3
-      - binary_sensor.bedroom_glass
-      - binary_sensor.deck_door_glass
-      - binary_sensor.sunroom_acoustic_glass
-      - binary_sensor.dining_room_siren
-      - binary_sensor.garage_siren
-      - binary_sensor.remote
-      - group.all_cameras
-    title: Security
-    show_header_toggle: false
+  - type: 'custom:auto-entities'
+    card:
+      type: entities
+      title: Security
+      show_header_toggle: false
+    filter:
+      include:
+        - entity_id: "lock.*"
+        - entity_id: "cover.*"
+        - entity_id: "binary_sensor.*door_open"
+        - entity_id: "binary_sensor.*glass*"
+        - entity_id: "binary_sensor.*siren"
+        - entity_id: "camera.*"
   - type: alarm-panel
     entity: alarm_control_panel.abode_alarm
   - type: picture-entity

@@ -8,7 +8,6 @@ automation: !include automation.yaml
 config:
 discovery:
 frontend: !include frontend.yaml
-group: !include group.yaml
 history:
 input_boolean: !include input_boolean.yaml
 logbook: !include logbook.yaml

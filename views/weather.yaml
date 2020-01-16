@@ -2,22 +2,13 @@ path: weather_view
 title: Weather
 badges: []
 cards:
-  - type: entities
-    entities:
-      - sun.sun
-      - sensor.weather_cloudiness
-      - sensor.weather_dewpoint_temperature
-      - sensor.weather_fog
-      - sensor.weather_high_clouds
-      - sensor.weather_humidity
-      - sensor.weather_low_clouds
-      - sensor.weather_medium_clouds
-      - sensor.weather_precipitation
-      - sensor.weather_pressure
-      - sensor.weather_symbol
-      - sensor.weather_temperature
-      - sensor.weather_wind_direction
-      - sensor.weather_wind_speed
-    title: Weather
-    show_header_toggle: false
+  - type: 'custom:auto-entities'
+    card:
+      type: entities
+      title: Weather
+      show_header_toggle: false
+    filter:
+      include:
+        - entity_id: "sun.all"
+        - entity_id: "*weather*"
 icon: 'mdi:weather-partly-cloudy'

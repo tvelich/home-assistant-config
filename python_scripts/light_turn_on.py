@@ -9,7 +9,7 @@ effect = data.get('effect')
 brightness = data.get('brightness', DEFAULT_BRIGHTNESS)
 transition = data.get('transition', DEFAULT_TRANSITION)
 preserve_brightness = data.get('preserve_brightness')
-replay = data.get('replay', 'true') == 'false'
+replay = data.get('replay', 'true') == 'true'
 
 if entity_id:
     service_data = { 'entity_id': entity_id, 'transition': transition }
@@ -29,9 +29,8 @@ if entity_id:
     hass.services.call('light', 'turn_on', service_data, False)
 
     # In case something failed to turn on, replay after when the transition should be complete
-    if not replay:
+    if replay:
         time.sleep(transition + 1)
         hass.services.call('light', 'turn_on', service_data, False)
-
 else:
     logger.error('Missing entity id!')

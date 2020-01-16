@@ -6,8 +6,9 @@ cards:
     card:
       type: entities
       title: Switches
-      show_header_toggle: false
     filter:
       include:
-        - group: group.all_switches
+        - entity_id: "switch.*"
+    sort:
+      method: entity_id
 icon: 'mdi:power'
