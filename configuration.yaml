@@ -28,3 +28,4 @@ remote: !include_dir_merge_list remote
 sensor: !include_dir_merge_list sensor
 switch: !include_dir_merge_list switch
 vacuum: !include_dir_merge_list vacuum
+weather: !include_dir_merge_list weather
