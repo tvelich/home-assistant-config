@@ -164,14 +164,29 @@
     after: '20:00:00'
     before: '08:00:00'
   action:
-    - service: script.bedtime
+    service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.sleep_mode
 - alias: on_phone_discharging
   trigger:
     entity_id: sensor.tom_phone_charging
     platform: state
     to: 'false'
   action:
-    - service: script.wake
+    service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.sleep_mode
+- alias: on_sleep_mode_change
+  trigger:
+    platform: state
+    entity_id: input_boolean.sleep_mode
+  action:
+    service_template: >
+      {% if trigger.to_state.state == 'on' %}
+        script.bedtime
+      {% else %}
+        script.wake
+      {% endif %}
 - alias: on_nano_1_pressed
   trigger:
     - platform: event

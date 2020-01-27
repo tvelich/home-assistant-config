@@ -44,21 +44,25 @@ cards:
       - type: horizontal-stack
         cards:
           - type: entity-button
-            entity: script.bedtime
+            entity: input_boolean.sleep_mode
             icon: 'mdi:sleep'
             icon_height: 50px
             show_name: false
             tap_action:
               action: call-service
-              service: script.bedtime
+              service: input_boolean.turn_on
+              service_data:
+                entity_id: input_boolean.sleep_mode
           - type: entity-button
-            entity: script.bedtime
+            entity: input_boolean.sleep_mode
             icon: 'mdi:sleep-off'
             icon_height: 50px
             show_name: false
             tap_action:
               action: call-service
-              service: script.wake
+              service: input_boolean.turn_off
+              service_data:
+                entity_id: input_boolean.sleep_mode
           - type: entity-button
             entity: vacuum.roomba
             icon_height: 50px

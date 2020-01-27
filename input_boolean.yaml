@@ -1,3 +1,2 @@
-is_roomba_enabled:
-  name: Enable Roomba
-  icon: mdi:robot-vacuum
+roomba_enabled:
+sleep_mode:
