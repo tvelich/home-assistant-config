@@ -15,9 +15,6 @@ bedtime:
     - service: alarm_control_panel.alarm_arm_home
       data:
         entity_id: alarm_control_panel.abode_alarm
-    - service: switch.turn_off
-      data:
-        entity_id: switch.inside_lights
     - service: homeassistant.turn_off
       data:
         entity_id:
@@ -33,6 +30,9 @@ bedtime:
           - media_player.sunroom_home
           - remote.family_room
           - remote.living_room
+    - service: switch.turn_off
+      data:
+        entity_id: switch.inside_lights
     - delay: '00:00:05'
     - service: script.vacuum_start
 noop:
@@ -74,13 +74,15 @@ wake:
     - service: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.abode_alarm
-    - service: script.inside_lights_on
     - service: remote.turn_on
       data:
         entity_id: remote.living_room
     - service: media_player.turn_off
       data:
         entity_id: media_player.master_bedroom_home
+    - service: switch.turn_on
+      data:
+        entity_id: switch.inside_lights
 colorloop_bar_lights:
   sequence:
     - service: python_script.light_turn_on

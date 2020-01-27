@@ -2,12 +2,14 @@
   trigger:
     platform: sun
     event: sunset
+    offset: '00:25:00'
   action:
     service: script.outside_core_lights_on
 - alias: on_sunrise
   trigger:
     platform: sun
     event: sunrise
+    offset: '-00:25:00'
   action:
     service: script.outside_lights_off
 - alias: on_time_930am
@@ -118,12 +120,13 @@
       event_data:
         entity_id: timer.brighten_front_yard
   condition:
-    - condition: time
-      after: '23:00:00'
-      before: '12:00:00'
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
+    condition: or
+    conditions:
+      - condition: time
+        after: '23:00:00'
+      - condition: sun
+        before: sunrise
+        before_offset: '-00:25:00'
   action:
     service: script.fade_to_dim_front_yard
 - alias: on_home
@@ -136,7 +139,9 @@
     - service: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.abode_alarm
-    - service: script.inside_lights_on
+    - service: switch.turn_on
+      data:
+        entity_id: switch.inside_lights
     - service: nest.set_away_mode
       data:
         away_mode: home
@@ -150,7 +155,9 @@
     - service: alarm_control_panel.alarm_arm_away
       data:
         entity_id: alarm_control_panel.abode_alarm
-    - service: script.inside_lights_off
+    - service: switch.turn_off
+      data:
+        entity_id: switch.inside_lights
     - service: nest.set_away_mode
       data:
         away_mode: away
@@ -360,12 +367,13 @@
       entity_id: cover.garage_lift_door
       to: 'open'
   condition:
-    - condition: time
-      after: '23:00:00'
-      before: '12:00:00'
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
+    condition: or
+    conditions:
+      - condition: time
+        after: '23:00:00'
+      - condition: sun
+        before: sunrise
+        before_offset: '-00:25:00'
   action:
     - service: python_script.light_turn_on
       data:
