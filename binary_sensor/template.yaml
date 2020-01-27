@@ -1,0 +1,14 @@
+- platform: template
+  sensors:
+    near_freezing_last_three_days:
+      value_template: "{{ states('sensor.temperature_last_three_days') | float < 35 }}"
+    high_winds_last_hour:
+      value_template: "{{ states('sensor.wind_speed_last_hour') | float > 10 }}"
+    poor_fountain_conditions:
+      delay_off:
+        hours: 1
+      value_template: >
+        {{
+          is_state('binary_sensor.near_freezing_last_three_days', 'on') or
+          is_state('binary_sensor.high_winds_last_hour', 'on')
+        }}

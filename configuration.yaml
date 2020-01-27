@@ -23,6 +23,7 @@ tplink: !include tplink.yaml
 zwave: !include zwave.yaml
 
 # Platforms
+binary_sensor: !include_dir_merge_list binary_sensor
 device_tracker: !include_dir_merge_list device_tracker
 remote: !include_dir_merge_list remote
 sensor: !include_dir_merge_list sensor

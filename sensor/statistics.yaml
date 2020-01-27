@@ -1,0 +1,12 @@
+- platform: statistics
+  name: Wind Speed Last Hour
+  entity_id: sensor.dark_sky_wind_speed
+  sampling_size: 50
+  max_age:
+    hours: 1
+- platform: statistics
+  name: Temperature Last Three Days
+  entity_id: sensor.dark_sky_temperature
+  sampling_size: 3000
+  max_age:
+    days: 3

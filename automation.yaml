@@ -462,3 +462,16 @@
     service: script.post_slack_message
     data:
       message: You've got mail!
+- alias: on_poor_fountain_conditions_change
+  trigger:
+    platform: state
+    entity_id: binary_sensor.poor_fountain_conditions
+  action:
+    service_template: >
+      {% if trigger.to_state.state == 'on' %}
+        switch.turn_off
+      {% else %}
+        switch.turn_on
+      {% endif %}
+    data:
+      entity_id: switch.fountain
