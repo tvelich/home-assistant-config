@@ -3,7 +3,7 @@ DEFAULT_BRIGHTNESS = 255
 DEFAULT_TRANSITION = 3
 
 entity_id = data.get('entity_id')
-kelvin = data.get('kelvin')
+kelvin = data.get('kelvin') or float(hass.states.get('input_number.default_kelvin').state) or DEFAULT_KELVIN
 color_name = data.get('color_name')
 effect = data.get('effect')
 brightness = data.get('brightness', DEFAULT_BRIGHTNESS)
@@ -19,12 +19,10 @@ if entity_id:
 
     if color_name:
         service_data['color_name'] = color_name
-    elif kelvin:
-        service_data['kelvin'] = kelvin
     elif effect:
         service_data['effect'] = effect
     else:
-        service_data['kelvin'] = DEFAULT_KELVIN
+        service_data['kelvin'] = kelvin
 
     hass.services.call('light', 'turn_on', service_data, False)
 

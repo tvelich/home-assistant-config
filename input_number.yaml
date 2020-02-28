@@ -1,0 +1,3 @@
+default_kelvin:
+  min: 2000
+  max: 6500
