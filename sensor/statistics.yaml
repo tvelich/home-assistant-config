@@ -5,8 +5,8 @@
   max_age:
     hours: 1
 - platform: statistics
-  name: Temperature Last Three Days
+  name: Temperature Last Two Days
   entity_id: sensor.dark_sky_temperature
-  sampling_size: 3000
+  sampling_size: 1500
   max_age:
-    days: 3
+    days: 2
