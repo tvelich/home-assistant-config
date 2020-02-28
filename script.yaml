@@ -30,9 +30,12 @@ bedtime:
           - media_player.sunroom_home
           - remote.family_room
           - remote.living_room
-    - service: switch.turn_off
+    - service: media_player.volume_set
       data:
-        entity_id: switch.inside_lights
+        entity_id: media_player.master_bedroom_home
+        volume_level: 0.35
+    - service: script.play_sleep_sounds
+    - service: script.inside_lights_off
     - delay: '00:00:05'
     - service: script.vacuum_start
 noop:
@@ -212,3 +215,10 @@ outside_lights_off:
     - service: switch.turn_off
       data:
         entity_id: switch.outdoor_string_holiday_lights
+play_sleep_sounds:
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.master_bedroom_home
+        media_content_id: https://www.gstatic.com/voice_delight/sounds/long/pink_noise.mp3
+        media_content_type: audio/mp3

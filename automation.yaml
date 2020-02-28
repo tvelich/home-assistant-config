@@ -498,3 +498,13 @@
       {% endif %}
     data:
       entity_id: switch.fountain
+- alias: on_interval_while_sleeping
+  trigger:
+    platform: time_pattern
+    minutes: 55
+  condition:
+    condition: state
+    entity_id: input_boolean.sleep_mode
+    state: 'on'
+  action:
+    service: script.play_sleep_sounds
