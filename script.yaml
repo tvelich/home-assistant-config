@@ -83,9 +83,7 @@ wake:
     - service: media_player.turn_off
       data:
         entity_id: media_player.master_bedroom_home
-    - service: switch.turn_on
-      data:
-        entity_id: switch.inside_lights
+    - service: script.inside_lights_on
 colorloop_bar_lights:
   sequence:
     - service: python_script.light_turn_on
@@ -102,12 +100,12 @@ colorloop_bar_lights:
         effect: colorloop
 upstairs_lights_on:
   sequence:
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.upstairs
     - service: switch.turn_on
       data:
         entity_id: switch.dining_room_lights
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.upstairs
 upstairs_lights_off:
   sequence:
     - service: switch.turn_off
@@ -129,21 +127,21 @@ downstairs_lights_off:
       entity_id: light.downstairs
 inside_lights_on:
   sequence:
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.inside_core
     - service: switch.turn_on
       data:
         entity_id: switch.dining_room_lights
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.inside_core
     - service: script.colorloop_bar_lights
 inside_lights_off:
   sequence:
-    - service: python_script.light_turn_off
-      data:
-        entity_id: light.inside
     - service: switch.turn_off
       data:
         entity_id: switch.dining_room_lights
+    - service: python_script.light_turn_off
+      data:
+        entity_id: light.inside
 colorloop_landscape_lights:
   sequence:
     - service: python_script.light_turn_on

@@ -139,9 +139,7 @@
     - service: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.abode_alarm
-    - service: switch.turn_on
-      data:
-        entity_id: switch.inside_lights
+    - service: script.inside_lights_on
     - service: nest.set_away_mode
       data:
         away_mode: home
@@ -155,9 +153,7 @@
     - service: alarm_control_panel.alarm_arm_away
       data:
         entity_id: alarm_control_panel.abode_alarm
-    - service: switch.turn_off
-      data:
-        entity_id: switch.inside_lights
+    - service: script.inside_lights_off
     - service: nest.set_away_mode
       data:
         away_mode: away
@@ -334,9 +330,7 @@
     entity_id: alarm_control_panel.abode_alarm
     state: armed_home
   action:
-    service: switch.turn_off
-    data:
-      entity_id: switch.downstairs_lights
+    service: script.downstairs_lights_off
 - alias: on_home_assistant_start
   trigger:
     platform: homeassistant
