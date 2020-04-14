@@ -110,17 +110,4 @@ cards:
         entity: alarm_control_panel.abode_alarm
       - type: thermostat
         entity: climate.hallway
-      - type: entities
-        entities:
-          - sun.sun
-          - sensor.weather_cloudiness
-          - sensor.weather_fog
-          - sensor.weather_humidity
-          - sensor.weather_precipitation
-          - sensor.weather_symbol
-          - sensor.weather_temperature
-          - sensor.weather_wind_speed
-          - timer.backyard_lights
-        title: Weather
-        show_header_toggle: false
 icon: 'mdi:home'
