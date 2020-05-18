@@ -16,6 +16,7 @@ nest: !include nest.yaml
 python_script:
 recorder: !include recorder.yaml
 rest_command: !include rest_command.yaml
+roomba: !include roomba.yaml
 script: !include script.yaml
 sun:
 system_health:
