@@ -502,3 +502,31 @@
     state: 'on'
   action:
     service: script.play_sleep_sounds
+- alias: on_living_room_chromecast_play_begin
+  trigger:
+    platform: state
+    entity_id: media_player.living_room_chromecast
+    to: 'playing'
+  action:
+    service: remote.turn_on
+    data:
+      entity_id: remote.living_room
+      activity: 'chromecast'
+- alias: on_kitchen_chromecast_play_begin
+  trigger:
+    platform: state
+    entity_id: media_player.kitchen_chromecast
+    to: 'playing'
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.kitchen_media
+- alias: on_kitchen_chromecast_cast_stop
+  trigger:
+    platform: state
+    entity_id: media_player.kitchen_chromecast
+    to: 'off'
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.kitchen_media
