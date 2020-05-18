@@ -530,3 +530,14 @@
     service: switch.turn_off
     data:
       entity_id: switch.kitchen_media
+- alias: on_toaster_oven_idle
+  trigger:
+    platform: state
+    entity_id: switch.toaster_oven
+    to: 'on'
+    for:
+      minutes: 30
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.toaster_oven
