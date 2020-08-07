@@ -13,7 +13,9 @@ input_boolean: !include input_boolean.yaml
 input_number: !include input_number.yaml
 logbook: !include logbook.yaml
 nest: !include nest.yaml
+netatmo: !include netatmo.yaml
 python_script:
+rainmachine: !include rainmachine.yaml
 recorder: !include recorder.yaml
 rest_command: !include rest_command.yaml
 roomba: !include roomba.yaml
