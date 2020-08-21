@@ -1,0 +1,7 @@
+irrigation:
+  name: Irrigation Mode
+  options:
+    - Maintenance
+    - New Seed
+    - 'Off'
+  icon: mdi:sprinkler-variant

@@ -541,3 +541,146 @@
     service: switch.turn_off
     data:
       entity_id: switch.toaster_oven
+- alias: on_front_yard_irrigation_maintenance
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '-01:00:00'
+  condition:
+    - condition: time
+      weekday:
+        - sun
+        - wed
+    - condition: state
+      entity_id: input_select.irrigation
+      state: Maintenance
+  action:
+    - service: python_script.maintenance_irrigation_run
+      data:
+        zones:
+          - 1
+          - 2
+          - 6
+- alias: on_backyard_irrigation_maintenance
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '-01:00:00'
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - thu
+    - condition: state
+      entity_id: input_select.irrigation
+      state: Maintenance
+  action:
+    - service: python_script.maintenance_irrigation_run
+      data:
+        zones:
+          - 3
+          - 4
+          - 5
+- alias: on_front_yard_irrigation_maintenance_excessive_heat
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '-01:00:00'
+  condition:
+    - condition: time
+      weekday:
+        - fri
+    - condition: state
+      entity_id: input_select.irrigation
+      state: Maintenance
+    - condition: numeric_state
+      entity_id: sensor.netatmo_weather_outdoor_max_temp
+      above: 85
+  action:
+    - service: python_script.maintenance_irrigation_run
+      data:
+        zones:
+          - 1
+          - 2
+          - 6
+- alias: on_front_yard_irrigation_syringe_excessive_heat
+  trigger:
+    platform: time
+    at: '14:30:00'
+  condition:
+    - condition: state
+      entity_id: input_select.irrigation
+      state: Maintenance
+    - condition: numeric_state
+      entity_id: sensor.netatmo_weather_outdoor_max_temp
+      above: 85
+  action:
+    - service: rainmachine.start_zone
+      data:
+        zone_id: 1
+        zone_run_time: 300
+    - service: rainmachine.start_zone
+      data:
+        zone_id: 2
+        zone_run_time: 300
+    - service: rainmachine.start_zone
+      data:
+        zone_id: 6
+        zone_run_time: 300
+    - service: script.post_slack_message
+      data:
+        message: Started syringe watering for front yard because of excessive heat
+- alias: on_new_seed_watering_time
+  trigger:
+    - platform: time
+      at: '06:30:00'
+    - platform: time
+      at: '08:00:00'
+    - platform: time
+      at: '09:30:00'
+    - platform: time
+      at: '11:00:00'
+    - platform: time
+      at: '12:30:00'
+    - platform: time
+      at: '14:00:00'
+    - platform: time
+      at: '15:30:00'
+    - platform: time
+      at: '17:00:00'
+    - platform: time
+      at: '18:30:00'
+    - platform: time
+      at: '20:00:00'
+  condition:
+    - condition: state
+      entity_id: input_select.irrigation
+      state: New Seed
+  action:
+    - service: rainmachine.start_zone
+      data:
+        zone_id: 1
+        zone_run_time: 300
+    - service: rainmachine.start_zone
+      data:
+        zone_id: 3
+        zone_run_time: 300
+    - service: rainmachine.start_zone
+      data:
+        zone_id: 5
+        zone_run_time: 300
+    - service: rainmachine.start_zone
+      data:
+        zone_id: 2
+        zone_run_time: 300
+    - service: rainmachine.start_zone
+      data:
+        zone_id: 4
+        zone_run_time: 300
+    - service: rainmachine.start_zone
+      data:
+        zone_id: 6
+        zone_run_time: 300
+    - service: script.post_slack_message
+      data:
+        message: Started watering for new seed
