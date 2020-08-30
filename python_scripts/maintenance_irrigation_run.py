@@ -6,7 +6,7 @@ zones = data.get('zones')
 
 rain_two_days_ago = float(hass.states.get('sensor.rain_two_days_ago').state) or 0
 rain_one_days_ago = float(hass.states.get('sensor.rain_one_days_ago').state) or 0
-rain_today = float(hass.states.get('sensor.rain_today').state) or 0
+rain_today = float(hass.states.get('sensor.netatmo_weather_rain_sum_rain_24').state) or 0
 
 water_last_two_days = rain_two_days_ago + rain_one_days_ago + rain_today
 
