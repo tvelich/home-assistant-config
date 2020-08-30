@@ -14,11 +14,6 @@ cards:
             entity: switch.inside_lights
             name: Inside
             icon_height: 50px
-            tap_action:
-              action: call-service
-              service: switch.toggle
-              service_data:
-                entity_id: switch.inside_lights
           - type: entity-button
             entity: switch.upstairs_lights
             name: Upstairs
@@ -27,44 +22,18 @@ cards:
             entity: switch.downstairs_lights
             name: Downstairs
             icon_height: 50px
-            tap_action:
-              action: call-service
-              service: switch.toggle
-              service_data:
-                entity_id: switch.downstairs_lights
           - type: entity-button
             entity: switch.outside_lights
             name: Outside
             icon_height: 50px
-            tap_action:
-              action: call-service
-              service: switch.toggle
-              service_data:
-                entity_id: switch.outside_lights
       - type: horizontal-stack
         cards:
           - type: entity-button
             entity: input_boolean.sleep_mode
-            icon: 'mdi:sleep'
             icon_height: 50px
             show_name: false
-            tap_action:
-              action: call-service
-              service: input_boolean.turn_on
-              service_data:
-                entity_id: input_boolean.sleep_mode
           - type: entity-button
-            entity: input_boolean.sleep_mode
-            icon: 'mdi:sleep-off'
-            icon_height: 50px
-            show_name: false
-            tap_action:
-              action: call-service
-              service: input_boolean.turn_off
-              service_data:
-                entity_id: input_boolean.sleep_mode
-          - type: entity-button
-            entity: vacuum.roomba
+            entity: input_boolean.game_mode
             icon_height: 50px
             show_name: false
       - type: horizontal-stack

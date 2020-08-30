@@ -220,3 +220,26 @@ play_sleep_sounds:
         entity_id: media_player.master_bedroom_home
         media_content_id: https://www.gstatic.com/voice_delight/sounds/long/pink_noise.mp3
         media_content_type: audio/mp3
+game_mode_on:
+  sequence:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.left_monitor
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.inside_core
+        brightness: 125
+    - service: remote.turn_off
+      data:
+        entity_id: remote.living_room
+game_mode_off:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.left_monitor
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.inside_core
+    - service: remote.turn_on
+      data:
+        entity_id: remote.living_room

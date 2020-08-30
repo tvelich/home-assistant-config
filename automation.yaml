@@ -190,6 +190,17 @@
       {% else %}
         script.wake
       {% endif %}
+- alias: on_game_mode_change
+  trigger:
+    platform: state
+    entity_id: input_boolean.game_mode
+  action:
+    service_template: >
+      {% if trigger.to_state.state == 'on' %}
+        script.game_mode_on
+      {% else %}
+        script.game_mode_off
+      {% endif %}
 - alias: on_nano_1_pressed
   trigger:
     - platform: event

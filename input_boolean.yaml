@@ -1,2 +1,5 @@
 roomba_enabled:
 sleep_mode:
+  icon: 'mdi:sleep'
+game_mode:
+  icon: 'mdi:gamepad'
