@@ -210,9 +210,7 @@
         scene_data: 7680
         scene_id: 1
   action:
-    service: switch.toggle
-    data:
-      entity_id: switch.inside_lights
+    service: script.inside_lights_on
 - alias: on_nano_1_held
   trigger:
     - platform: event
@@ -232,7 +230,10 @@
         scene_data: 7680
         scene_id: 2
   action:
-    service: script.noop
+    service: python_script.light_turn_on
+    data:
+      entity_id: light.inside_core
+      brightness: 125
 - alias: on_nano_2_held
   trigger:
     - platform: event
@@ -252,7 +253,7 @@
         scene_data: 7680
         scene_id: 3
   action:
-    - service: script.noop
+    service: script.inside_lights_off
 - alias: on_nano_3_held
   trigger:
     - platform: event
