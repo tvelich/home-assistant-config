@@ -1,12 +1,6 @@
 - platform: statistics
-  name: Wind Speed Last Hour
-  entity_id: sensor.dark_sky_wind_speed
-  sampling_size: 50
-  max_age:
-    hours: 1
-- platform: statistics
   name: Temperature Last Two Days
-  entity_id: sensor.dark_sky_temperature
+  entity_id: sensor.netatmo_weather_outdoor_temperature
   sampling_size: 1500
   max_age:
     days: 2

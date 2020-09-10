@@ -3,7 +3,7 @@ title: Weather
 badges: []
 cards:
   - type: weather-forecast
-    entity: weather.dark_sky
+    entity: weather.openweathermap
   - type: 'custom:auto-entities'
     card:
       type: entities
@@ -12,7 +12,8 @@ cards:
     filter:
       include:
         - entity_id: "sun.*"
-        - entity_id: "*dark_sky*"
+        - entity_id: "*openweathermap*"
+        - entity_id: "*owm*"
     sort:
       method: entity_id
 icon: 'mdi:weather-partly-cloudy'
