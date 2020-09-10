@@ -41,4 +41,4 @@ cards:
             - entity_id: "input*.*"
         sort:
           method: entity_id
-icon: 'mdi:cellphone-settings-variant'
+icon: 'mdi:cellphone-cog'
