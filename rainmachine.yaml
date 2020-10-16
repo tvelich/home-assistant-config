@@ -1,3 +1,4 @@
 controllers:
   - ip_address: !secret ip_rain_machine
     password: !secret rainmachine_password
+    scan_interval: 300

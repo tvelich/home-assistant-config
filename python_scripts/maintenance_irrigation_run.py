@@ -4,16 +4,21 @@ cycles = 2
 
 zones = data.get('zones')
 
+rain_three_days_ago = float(hass.states.get('sensor.rain_three_days_ago').state) or 0
 rain_two_days_ago = float(hass.states.get('sensor.rain_two_days_ago').state) or 0
 rain_one_days_ago = float(hass.states.get('sensor.rain_one_days_ago').state) or 0
 rain_today = float(hass.states.get('sensor.netatmo_weather_rain_sum_rain_24').state) or 0
+excessive_heat_today = hass.states.get('sensor.excessive_heat_today').state == 'on'
 
-water_last_two_days = rain_two_days_ago + rain_one_days_ago + rain_today
+past_water = rain_two_days_ago + rain_one_days_ago + rain_today
+
+if not excessive_heat_today:
+	past_water = past_water + rain_three_days_ago
 
 logger.setLevel('INFO')
 
-if water_last_two_days < amount_to_water:
-	adjusted_amount_to_water = ((amount_to_water - water_last_two_days) / sprinkler_rate_per_hour) * 60
+if past_water < amount_to_water:
+	adjusted_amount_to_water = ((amount_to_water - past_water) / sprinkler_rate_per_hour) * 60
 	complete_cycle_time = ((len(zones) * adjusted_amount_to_water) / cycles)
 	zone_run_time = (adjusted_amount_to_water / cycles) * 60
 
@@ -45,6 +50,6 @@ if water_last_two_days < amount_to_water:
 	logger.info(message)
 	hass.services.call('script', 'post_slack_message', { 'message':  message }, False)
 else:
-	message = f'Maintenance watering not needed today because water the last two days was {water_last_two_days}mm'
+	message = f'Maintenance watering not needed today because water the last few days was {past_water}mm'
 	logger.info(message)
 	hass.services.call('script', 'post_slack_message', { 'message':  message }, False)

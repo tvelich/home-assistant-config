@@ -1,6 +1,21 @@
 - platform: sql
   db_url: !secret postgres_connection_string
   queries:
+    - name: Rain Three Days Ago
+      query: |
+        SELECT state
+        FROM public.states
+        WHERE entity_id = 'sensor.netatmo_weather_rain_sum_rain_24'
+        AND last_updated::DATE = (NOW() - INTERVAL '3 DAY')::DATE
+        AND state IS NOT NULL
+        AND state NOT IN ('unavailable', 'unknown')
+        ORDER BY last_updated DESC
+        LIMIT 1
+      column: state
+      unit_of_measurement: mm
+- platform: sql
+  db_url: !secret postgres_connection_string
+  queries:
     - name: Rain Two Days Ago
       query: |
         SELECT state
