@@ -23,7 +23,7 @@ bedtime:
           - media_player.family_room_speakers
           - media_player.guest_room_speakers
           - media_player.kitchen_chromecast
-          - media_player.living_room_chromecast
+          - media_player.living_room_google_tv
           - media_player.living_room_home
           - media_player.living_room_speakers
           - media_player.garage_home
@@ -232,6 +232,9 @@ game_mode_on:
     - service: remote.turn_off
       data:
         entity_id: remote.living_room
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.living_room_google_tv
 game_mode_off:
   sequence:
     - service: switch.turn_on
@@ -243,6 +246,11 @@ game_mode_off:
     - service: remote.turn_on
       data:
         entity_id: remote.living_room
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room
+        device: 39570907 # living room av receiver
+        command: Mute
 run_sprinklers:
   fields:
     zone_duration:

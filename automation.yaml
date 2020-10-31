@@ -275,7 +275,7 @@
   action:
     service: media_player.media_play_pause
     data:
-      entity_id: media_player.living_room_chromecast
+      entity_id: media_player.living_room_google_tv
 - alias: on_nano_4_held
   trigger:
     - platform: event
@@ -287,7 +287,7 @@
   action:
     service: media_player.media_stop
     data:
-      entity_id: media_player.living_room_chromecast
+      entity_id: media_player.living_room_google_tv
 - alias: on_trigger_for_downstairs_bathroom_lights
   trigger:
     - platform: state
@@ -514,16 +514,16 @@
     state: 'on'
   action:
     service: script.play_sleep_sounds
-- alias: on_living_room_chromecast_play_begin
+- alias: on_living_room_google_tv_play_begin
   trigger:
     platform: state
-    entity_id: media_player.living_room_chromecast
+    entity_id: media_player.living_room_google_tv
     to: 'playing'
   action:
     service: remote.turn_on
     data:
       entity_id: remote.living_room
-      activity: 'chromecast'
+      activity: 'GoogleTV'
 - alias: on_kitchen_chromecast_play_begin
   trigger:
     platform: state
