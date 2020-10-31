@@ -2,16 +2,11 @@ path: living_room_view
 title: Living Room
 badges: []
 cards:
-  - type: entities
-    entities:
-      - remote.living_room
-    title: Living Room Media
-    show_header_toggle: false
-  - type: media-control
-    entity: media_player.living_room_chromecast
-  - type: media-control
-    entity: media_player.living_room_home
-  - type: entities
-    entities:
-      - light.living_room
-    title: Light
+  - type: 'custom:auto-entities'
+    card:
+      type: entities
+    filter:
+      include:
+        - entity_id: "*living_room*"
+    sort:
+      method: entity_id

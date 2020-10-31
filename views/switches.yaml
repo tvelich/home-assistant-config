@@ -8,7 +8,9 @@ cards:
       title: Switches
     filter:
       include:
-        - entity_id: "switch.*"
+        - domain: "switch"
+      exclude:
+        - entity_id: "*light*"
     sort:
-      method: entity_id
+      method: name
 icon: 'mdi:power'
