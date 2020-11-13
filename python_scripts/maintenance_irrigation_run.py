@@ -1,55 +1,52 @@
-sprinkler_rate_per_hour = 11.43
-amount_to_water = 12.7
-cycles = 2
+REPEAT_TIMES = 5
+SPRINKLER_RATE_PER_HOUR = 11.43
+AMOUNT_TO_WATER = 12.7
+CYCLES = 2
 
-zones = data.get('zones')
+def call_service_repeat(service_data):
+    for cycle in range(REPEAT_TIMES):
+        hass.services.call('rainmachine', 'start_zone', service_data, True)
 
-rain_three_days_ago = float(hass.states.get('sensor.rain_three_days_ago').state) or 0
-rain_two_days_ago = float(hass.states.get('sensor.rain_two_days_ago').state) or 0
-rain_one_days_ago = float(hass.states.get('sensor.rain_one_days_ago').state) or 0
-rain_today = float(hass.states.get('sensor.netatmo_weather_rain_sum_rain_24').state) or 0
-excessive_heat_today = hass.states.get('sensor.excessive_heat_today').state == 'on'
+def main():
+    zones = data.get('zones')
 
-past_water = rain_two_days_ago + rain_one_days_ago + rain_today
+    rain_three_days_ago_sensor = hass.states.get('sensor.rain_three_days_ago').state
+    rain_three_days_ago = float(0 if rain_three_days_ago_sensor == 'unknown' else rain_three_days_ago_sensor)
+    rain_two_days_ago_sensor = hass.states.get('sensor.rain_two_days_ago').state
+    rain_two_days_ago = float(0 if rain_two_days_ago_sensor == 'unknown' else rain_two_days_ago_sensor)
+    rain_one_day_ago_sensor = hass.states.get('sensor.rain_one_day_ago').state
+    rain_one_day_ago = float(0 if rain_one_day_ago_sensor == 'unknown' else rain_one_day_ago_sensor)
+    rain_today_sensor = hass.states.get('sensor.netatmo_weather_rain_sum_rain_24').state
+    rain_today = float(0 if rain_today_sensor == 'unknown' else rain_today_sensor)
+    excessive_heat_today = hass.states.get('sensor.excessive_heat_today').state == 'on'
 
-if not excessive_heat_today:
-	past_water = past_water + rain_three_days_ago
+    past_water = rain_two_days_ago + rain_one_day_ago + rain_today
 
-logger.setLevel('INFO')
+    if not excessive_heat_today:
+        past_water = past_water + rain_three_days_ago
 
-if past_water < amount_to_water:
-	adjusted_amount_to_water = ((amount_to_water - past_water) / sprinkler_rate_per_hour) * 60
-	complete_cycle_time = ((len(zones) * adjusted_amount_to_water) / cycles)
-	zone_run_time = (adjusted_amount_to_water / cycles) * 60
+    logger.setLevel('INFO')
 
-	message = f'Starting maintenance watering for {zones} for {int(round(adjusted_amount_to_water))} minutes per zone across {cycles} cycles'
-	logger.info(message)
-	hass.services.call('script', 'post_slack_message', { 'message':  message }, False)
+    if past_water < AMOUNT_TO_WATER:
+        adjusted_amount_to_water = ((AMOUNT_TO_WATER - past_water) / SPRINKLER_RATE_PER_HOUR) * 60
+        zone_run_time = (adjusted_amount_to_water / CYCLES) * 60
 
-	for cycle in range(cycles):
-		for zone in zones:
-			running = False
-			retries = 5
-			attempt = 0
+        message = f'Starting maintenance watering for {zones} for {int(round(adjusted_amount_to_water))} minutes per zone across {CYCLES} cycles'
+        logger.info(message)
+        hass.services.call('script', 'post_slack_message', { 'message':  message }, False)
 
-			while (not running):
-				if attempt > 5:
-					message = f'Zone {zone} cycle {cycle + 1} exceeded retries and will be skipped'
-					logger.error(message)
-					hass.services.call('script', 'post_slack_message', { 'message':  message }, False)
+        for cycle in range(CYCLES):
+            for zone in zones:
+                service_data = {'zone_id': zone, 'zone_run_time': zone_run_time}
+                call_service_repeat(service_data)
+                time.sleep(zone_run_time)
 
-				attempt = attempt + 1
-				service_data = { 'zone_id': zone, 'zone_run_time': zone_run_time }
-				hass.services.call('rainmachine', 'start_zone', service_data, True)
-				time.sleep(60)
-				running = hass.states.get(f'switch.zone_{zone}').state == 'on'
+        message = f'Completed maintenance watering for {zones} for {int(round(adjusted_amount_to_water))} minutes per zone across {CYCLES} cycles'
+        logger.info(message)
+        hass.services.call('script', 'post_slack_message', { 'message':  message }, False)
+    else:
+        message = f'Maintenance watering not needed today because water the last few days was {round(past_water, 2)}mm'
+        logger.info(message)
+        hass.services.call('script', 'post_slack_message', { 'message':  message }, False)
 
-			time.sleep(zone_run_time)
-
-	message = f'Completed maintenance watering for {zones} for {int(round(adjusted_amount_to_water))} minutes per zone across {cycles} cycles'
-	logger.info(message)
-	hass.services.call('script', 'post_slack_message', { 'message':  message }, False)
-else:
-	message = f'Maintenance watering not needed today because water the last few days was {past_water}mm'
-	logger.info(message)
-	hass.services.call('script', 'post_slack_message', { 'message':  message }, False)
+main()
