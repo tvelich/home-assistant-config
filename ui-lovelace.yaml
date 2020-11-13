@@ -2,7 +2,6 @@ views:
   - !include views/default.yaml
   - !include views/weather.yaml
   - !include views/security.yaml
-  - !include views/media.yaml
   - !include views/lights.yaml
   - !include views/switches.yaml
   - !include views/settings.yaml
