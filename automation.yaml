@@ -726,3 +726,19 @@
     state: 'on'
   action:
     - service: python_script.handle_fireplace
+- alias: on_tom_phone_battery_level_change
+  trigger:
+    platform: state
+    entity_id: sensor.tom_phone_battery
+  action:
+    service_template: >
+      {% set battery_level = states('sensor.tom_phone_battery') | float %}
+      {% if battery_level and battery_level < 65 %}
+        switch.turn_on
+      {% elif battery_level and battery_level > 80 %}
+        switch.turn_off
+      {% else %}
+        script.noop
+      {% endif %}
+    data:
+      entity_id: switch.living_room_charger
