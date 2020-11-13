@@ -228,7 +228,7 @@ game_mode_on:
     - service: python_script.light_turn_on
       data:
         entity_id: light.inside_core
-        brightness: 125
+        brightness: 170
     - service: remote.turn_off
       data:
         entity_id: remote.living_room
