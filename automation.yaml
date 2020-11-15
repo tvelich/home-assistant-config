@@ -12,16 +12,6 @@
     offset: '-00:15:00'
   action:
     service: script.outside_lights_off
-- alias: on_time_930am
-  trigger:
-    platform: time
-    at: '09:30:00'
-  action:
-    service: python_script.light_turn_on
-    data:
-      entity_id: light.master_bedroom
-      transition: 1800
-      replay: false
 - alias: on_time_11pm
   trigger:
     platform: time
