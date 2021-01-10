@@ -464,6 +464,12 @@
     - entity_id: binary_sensor.upstairs_bathroom_water
       platform: state
       to: 'on'
+    - entity_id: binary_sensor.washing_machine
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.water_heater
+      platform: state
+      to: 'on'
   action:
     service: script.post_slack_message
     data_template:
@@ -472,6 +478,10 @@
           Water detected in downstairs bathroom!
         {% elif trigger.entity_id == 'binary_sensor.upstairs_bathroom_water' %}
           Water detected in upstairs bathroom!
+        {% elif trigger.entity_id == 'binary_sensor.washing_machine' %}
+          Water detected at washing machine!
+        {% elif trigger.entity_id == 'binary_sensor.water_heater' %}
+          Water detected at water heater!
         {% endif %}
 - alias: on_water_detected_reminder
   trigger:
@@ -486,6 +496,12 @@
       - condition: state
         entity_id: 'binary_sensor.upstairs_bathroom_water'
         state: 'on'
+      - condition: state
+        entity_id: 'binary_sensor.washing_machine'
+        state: 'on'
+      - condition: state
+        entity_id: 'binary_sensor.water_heater'
+        state: 'on'
   action:
     service: script.post_slack_message
     data_template:
@@ -494,6 +510,10 @@
           Water detected in downstairs bathroom!
         {% elif states('binary_sensor.upstairs_bathroom_water') == 'on' %}
           Water detected in upstairs bathroom!
+        {% elif states('binary_sensor.washing_machine') == 'on' %}
+          Water detected at washing machine!
+        {% elif states('binary_sensor.water_heater') == 'on' %}
+          Water detected at water heater!
         {% endif %}
 - alias: on_mailbox_motion
   trigger:
