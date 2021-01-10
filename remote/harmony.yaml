@@ -1,8 +1,4 @@
 - platform: harmony
   name: Living Room
   host: !secret ip_harmony_living_room
-  activity: STB
-- platform: harmony
-  name: Family Room
-  host: !secret ip_harmony_family_room
-  activity: STB
+  activity: Google TV
