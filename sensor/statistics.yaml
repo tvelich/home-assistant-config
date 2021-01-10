@@ -1,6 +1,6 @@
 - platform: statistics
   name: Temperature Last Two Days
-  entity_id: sensor.netatmo_weather_outdoor_temperature
+  entity_id: sensor.netatmo_weather_indoor_outdoor_temperature
   sampling_size: 1500
   max_age:
     days: 2

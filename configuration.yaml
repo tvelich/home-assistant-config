@@ -14,7 +14,6 @@ input_number: !include input_number.yaml
 input_select: !include input_select.yaml
 logbook: !include logbook.yaml
 nest: !include nest.yaml
-netatmo: !include netatmo.yaml
 python_script:
 rainmachine: !include rainmachine.yaml
 recorder: !include recorder.yaml

@@ -5,7 +5,7 @@
       query: |
         SELECT state
         FROM public.states
-        WHERE entity_id = 'sensor.netatmo_weather_rain_sum_rain_24'
+        WHERE entity_id = 'sensor.netatmo_weather_indoor_rain_rain_today'
         AND last_updated::DATE = (NOW() - INTERVAL '3 DAY')::DATE
         AND state IS NOT NULL
         AND state NOT IN ('unavailable', 'unknown')
@@ -20,7 +20,7 @@
       query: |
         SELECT state
         FROM public.states
-        WHERE entity_id = 'sensor.netatmo_weather_rain_sum_rain_24'
+        WHERE entity_id = 'sensor.netatmo_weather_indoor_rain_rain_today'
         AND last_updated::DATE = (NOW() - INTERVAL '2 DAY')::DATE
         AND state IS NOT NULL
         AND state NOT IN ('unavailable', 'unknown')
@@ -35,7 +35,7 @@
       query: |
         SELECT state
         FROM public.states
-        WHERE entity_id = 'sensor.netatmo_weather_rain_sum_rain_24'
+        WHERE entity_id = 'sensor.netatmo_weather_indoor_rain_rain_today'
         AND last_updated::DATE = (NOW() - INTERVAL '1 DAY')::DATE
         AND state IS NOT NULL
         AND state NOT IN ('unavailable', 'unknown')
