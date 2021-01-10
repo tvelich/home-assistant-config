@@ -28,3 +28,8 @@
         }}
     excessive_heat_today:
       value_template: "{{ states('sensor.excessive_heat_today_already') or states('sensor.excessive_heat_today_predicted') }}"
+    is_holiday_season:
+      value_template: >
+        {% set month = now().month %}
+        {% set day = now().day %}
+        {{ (month == 11 and day > 26) or (month == 12 and day < 31) }}
