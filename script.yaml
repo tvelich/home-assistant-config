@@ -316,3 +316,19 @@ run_sprinklers:
       data_template:
         zone_id: 6
         zone_run_time: "{{ zone_duration | int }}"
+fireplace_on:
+  sequence:
+    - repeat:
+        count: 5
+        sequence:
+          - service: light.turn_on
+            data:
+              entity_id: light.fireplace
+fireplace_off:
+  sequence:
+    - repeat:
+        count: 5
+        sequence:
+          - service: light.turn_off
+            data:
+              entity_id: light.fireplace
