@@ -374,6 +374,7 @@
     - service: python_script.light_turn_on
       data:
         entity_id: light.front_yard
+        preserve_color: true
     - service: timer.start
       data:
         entity_id: timer.brighten_front_yard

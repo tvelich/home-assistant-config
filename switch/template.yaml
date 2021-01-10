@@ -7,7 +7,13 @@
       turn_off:
         service: script.inside_lights_off
       icon_template: >
-        {% if is_state('light.inside', 'on') or is_state('switch.dining_room_lights', 'on') %}
+        {%
+          if
+          is_state('light.inside', 'on') or
+          is_state('switch.dining_room_lights', 'on') or
+          is_state('switch.christmas_tree_lights', 'on') or
+          is_state('switch.desk', 'on')
+        %}
           mdi:lightbulb-on
         {% else %}
           mdi:lightbulb-on-outline

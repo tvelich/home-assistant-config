@@ -102,7 +102,9 @@ upstairs_lights_on:
   sequence:
     - service: switch.turn_on
       data:
-        entity_id: switch.dining_room_lights
+        entity_id:
+          - switch.dining_room_lights
+          - switch.christmas_tree_lights
     - service: python_script.light_turn_on
       data:
         entity_id: light.upstairs
@@ -110,7 +112,9 @@ upstairs_lights_off:
   sequence:
     - service: switch.turn_off
       data:
-        entity_id: switch.dining_room_lights
+        entity_id:
+          - switch.dining_room_lights
+          - switch.christmas_tree_lights
     - service: python_script.light_turn_off
       data:
         entity_id: light.upstairs
@@ -118,18 +122,25 @@ downstairs_lights_on:
   sequence:
     - service: python_script.light_turn_on
       data:
-        entity_id: light.downstairs
+        entity_id:
+          - light.downstairs
+          - switch.desk
     - service: script.colorloop_bar_lights
 downstairs_lights_off:
   sequence:
     service: python_script.light_turn_off
     data:
-      entity_id: light.downstairs
+      entity_id:
+        - light.downstairs
+        - switch.desk
 inside_lights_on:
   sequence:
     - service: switch.turn_on
       data:
-        entity_id: switch.dining_room_lights
+        entity_id:
+          - switch.dining_room_lights
+          - switch.desk
+          - switch.christmas_tree_lights
     - service: python_script.light_turn_on
       data:
         entity_id: light.inside_core
@@ -138,7 +149,10 @@ inside_lights_off:
   sequence:
     - service: switch.turn_off
       data:
-        entity_id: switch.dining_room_lights
+        entity_id:
+          - switch.dining_room_lights
+          - switch.desk
+          - switch.christmas_tree_lights
     - service: python_script.light_turn_off
       data:
         entity_id: light.inside
@@ -158,6 +172,7 @@ fade_to_dim_front_yard:
     - service: python_script.light_turn_on
       data:
         entity_id: light.front_yard
+        preserve_color: true
         brightness: 50
         transition: 60
         replay: false
@@ -173,28 +188,90 @@ outside_core_lights_on_default:
         entity_id: light.landscape_path
         brightness: 85
     - service: script.colorloop_landscape_lights
-outside_core_lights_on_christmas:
+outside_core_lights_on_holiday:
   sequence:
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.holiday_outside_color_1
-        color_name: green
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.holiday_outside_color_2
-        color_name: red
     - service: switch.turn_on
       data:
         entity_id: switch.outdoor_string_holiday_lights
+    - service: python_script.light_turn_on
+      data:
+        entity_id:
+          - light.front_yard
+          - light.landscape_spot
+        color_name: blue
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_outdoor_spot_4
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_outdoor_spot_2
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_outdoor_spot_3
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_outdoor_bollard_1
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_outdoor_bollard_2
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_color_lamp_1
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_outdoor_spot_1
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_outdoor_spot_5
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_color_candle_1
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_color_candle_2
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_color_candle_3
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_color_lamp_3
+        effect: colorloop
+    - delay: '00:00:03'
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_color_lamp_2
+        effect: colorloop
 outside_core_lights_on:
   sequence:
-    service_template: >
-      {% set now=now() %}
-      {% if (now.month == 11 and now.day > 24) or (now.month == 12 and now.day < 31) %}
-        script.outside_core_lights_on_christmas
-      {% else %}
-        script.outside_core_lights_on_default
-      {% endif %}
+    - service_template: >
+        {% if states('binary_sensor.is_holiday_season') == 'on' %}
+          script.outside_core_lights_on_holiday
+        {% else %}
+          script.outside_core_lights_on_default
+        {% endif %}
 outside_lights_on:
   sequence:
     - service: python_script.light_turn_on
@@ -224,7 +301,7 @@ game_mode_on:
   sequence:
     - service: switch.turn_off
       data:
-        entity_id: switch.left_monitor
+        entity_id: switch.desk
     - service: python_script.light_turn_on
       data:
         entity_id: light.inside_core
@@ -239,7 +316,7 @@ game_mode_off:
   sequence:
     - service: switch.turn_on
       data:
-        entity_id: switch.left_monitor
+        entity_id: switch.desk
     - service: python_script.light_turn_on
       data:
         entity_id: light.inside_core
