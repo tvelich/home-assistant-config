@@ -15,21 +15,7 @@ bedtime:
     - service: alarm_control_panel.alarm_arm_home
       data:
         entity_id: alarm_control_panel.abode_alarm
-    - service: homeassistant.turn_off
-      data:
-        entity_id:
-          - media_player.dining_room_home
-          - media_player.family_room_home
-          - media_player.family_room_speakers
-          - media_player.guest_room_speakers
-          - media_player.kitchen_chromecast
-          - media_player.living_room_google_tv
-          - media_player.living_room_home
-          - media_player.living_room_speakers
-          - media_player.garage_home
-          - media_player.sunroom_home
-          - remote.family_room
-          - remote.living_room
+    - service: script.media_devices_off
     - service: script.reset_google_home_volumes
     - service: script.play_sleep_sounds
     - service: script.inside_lights_off
@@ -419,3 +405,19 @@ reset_google_home_volumes:
           - media_player.living_room_home
           - media_player.sunroom_home
         volume_level: 0.35
+media_devices_off:
+  sequence:
+    - service: homeassistant.turn_off
+      data:
+        entity_id:
+          - media_player.dining_room_home
+          - media_player.family_room_home
+          - media_player.kitchen_chromecast
+          - media_player.living_room_google_tv
+          - media_player.living_room_home
+          - media_player.garage_home
+          - media_player.sunroom_home
+          - media_player.living_room_desk_home
+          - media_player.master_bedroom_home
+          - remote.family_room
+          - remote.living_room
