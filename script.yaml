@@ -66,6 +66,7 @@ wake:
     - service: media_player.turn_off
       data:
         entity_id: media_player.master_bedroom_home
+    - service: script.living_room_tv_on
     - service: script.inside_lights_on
 colorloop_bar_lights:
   sequence:
@@ -421,3 +422,14 @@ media_devices_off:
           - media_player.master_bedroom_home
           - remote.family_room
           - remote.living_room
+living_room_tv_on:
+  sequence:
+    - service: remote.turn_on
+      data:
+        entity_id: remote.living_room
+        activity: 'Google TV'
+living_room_tv_off:
+  sequence:
+    - service: remote.turn_off
+      data:
+        entity_id: remote.living_room
