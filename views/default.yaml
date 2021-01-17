@@ -33,7 +33,7 @@ cards:
             icon_height: 50px
             show_name: false
           - type: entity-button
-            entity: input_boolean.game_mode
+            entity: input_boolean.dota_mode
             icon_height: 50px
             show_name: false
       - type: horizontal-stack

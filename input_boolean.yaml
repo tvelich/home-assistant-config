@@ -1,6 +1,6 @@
 roomba_enabled:
 sleep_mode:
   icon: 'mdi:sleep'
-game_mode:
+dota_mode:
   icon: 'mdi:gamepad'
 fireplace_enabled:
