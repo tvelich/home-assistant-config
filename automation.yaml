@@ -553,10 +553,7 @@
     entity_id: media_player.living_room_google_tv
     to: 'playing'
   action:
-    service: remote.turn_on
-    data:
-      entity_id: remote.living_room
-      activity: 'GoogleTV'
+    service: script.living_room_tv_on
 - alias: on_kitchen_chromecast_play_begin
   trigger:
     platform: state
