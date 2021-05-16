@@ -1,4 +1,0 @@
-- platform: harmony
-  name: Living Room
-  host: !secret ip_harmony_living_room
-  activity: Google TV

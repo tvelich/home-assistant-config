@@ -3,7 +3,6 @@ homeassistant: !include homeassistant.yaml
 lovelace: !include lovelace.yaml
 
 # Components
-abode: !include abode.yaml
 automation: !include automation.yaml
 config:
 discovery:
@@ -15,7 +14,6 @@ input_select: !include input_select.yaml
 logbook: !include logbook.yaml
 nest: !include nest.yaml
 python_script:
-rainmachine: !include rainmachine.yaml
 recorder: !include recorder.yaml
 rest_command: !include rest_command.yaml
 roomba: !include roomba.yaml
@@ -29,8 +27,6 @@ zwave: !include zwave.yaml
 # Platforms
 binary_sensor: !include_dir_merge_list binary_sensor
 device_tracker: !include_dir_merge_list device_tracker
-remote: !include_dir_merge_list remote
 sensor: !include_dir_merge_list sensor
 switch: !include_dir_merge_list switch
 vacuum: !include_dir_merge_list vacuum
-weather: !include_dir_merge_list weather
