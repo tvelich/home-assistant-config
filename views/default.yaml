@@ -5,9 +5,12 @@ panel: true
 cards:
   - type: vertical-stack
     cards:
-      - type: entities
-        entities:
-          - device_tracker.tom_phone
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: device_tracker.tom_phone
+          - type: entity
+            entity: device_tracker.katherine_phone
       - type: horizontal-stack
         cards:
           - type: entity-button

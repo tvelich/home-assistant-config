@@ -121,10 +121,10 @@
     service: script.fade_to_dim_front_yard
 - alias: on_home
   trigger:
-    entity_id: device_tracker.tom_phone
+    entity_id: binary_sensor.home
     platform: state
-    to: home
-    from: not_home
+    to: 'on'
+    from: 'off'
   action:
     - service: alarm_control_panel.alarm_disarm
       data:
@@ -135,10 +135,10 @@
         away_mode: home
 - alias: on_away
   trigger:
-    entity_id: device_tracker.tom_phone
+    entity_id: binary_sensor.home
     platform: state
-    to: not_home
-    from: home
+    to: 'off'
+    from: 'on'
   action:
     - service: alarm_control_panel.alarm_arm_away
       data:
