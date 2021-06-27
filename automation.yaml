@@ -686,10 +686,10 @@
       entity_id: input_select.irrigation
       state: New Seed (Phase 1)
     - condition: numeric_state
-      entity_id: sensor.netatmo_weather_indoor_rain_rain
+      entity_id: sensor.netatmo_home_indoor_rain_rain
       below: .1
     - condition: numeric_state
-      entity_id: sensor.netatmo_weather_indoor_rain_rain_today
+      entity_id: sensor.netatmo_home_indoor_rain_rain_today
       below: 1
   action:
     - service: script.post_slack_message
@@ -707,10 +707,10 @@
       entity_id: input_select.irrigation
       state: New Seed (Phase 2)
     - condition: numeric_state
-      entity_id: sensor.netatmo_weather_indoor_rain_rain
+      entity_id: sensor.netatmo_home_indoor_rain_rain
       below: .1
     - condition: numeric_state
-      entity_id: sensor.netatmo_weather_indoor_rain_rain_today
+      entity_id: sensor.netatmo_home_indoor_rain_rain_today
       below: 1
   action:
     - service: script.post_slack_message

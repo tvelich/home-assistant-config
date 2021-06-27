@@ -6,7 +6,7 @@
       value_template: >
         {%
           set temps = [
-            states('sensor.netatmo_weather_indoor_temperature') | float,
+            states('sensor.netatmo_home_indoor_temperature') | float,
             states('sensor.living_room_hue_temperature') | float
           ] | select('gt', 0) | list
         %}

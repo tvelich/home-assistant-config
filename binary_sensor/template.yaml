@@ -3,7 +3,7 @@
     near_freezing_last_two_days:
       value_template: "{{ states('sensor.temperature_last_two_days') | float < 35 }}"
     high_winds_last_hour:
-      value_template: "{{ states('sensor.netatmo_weather_indoor_wind_wind_strength') | float > 5 }}"
+      value_template: "{{ states('sensor.netatmo_home_indoor_wind_wind_strength') | float > 5 }}"
     poor_fountain_conditions:
       delay_on:
         minutes: 15
@@ -13,7 +13,7 @@
           is_state('binary_sensor.high_winds_last_hour', 'on')
         }}
     excessive_heat_today_already:
-      value_template: "{{ states('sensor.netatmo_weather_indoor_outdoor_max_temp') | float > 85 }}"
+      value_template: "{{ states('sensor.netatmo_home_indoor_outdoor_temperature') | float > 85 }}"
     excessive_heat_today_predicted:
       value_template: >
         {% set start = (now().replace(hour=0,minute=0,second=0).timestamp() * 1000) | int %}

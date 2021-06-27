@@ -16,7 +16,7 @@ def main():
     rain_two_days_ago = float(0 if rain_two_days_ago_sensor == 'unknown' else rain_two_days_ago_sensor)
     rain_one_day_ago_sensor = hass.states.get('sensor.rain_one_day_ago').state
     rain_one_day_ago = float(0 if rain_one_day_ago_sensor == 'unknown' else rain_one_day_ago_sensor)
-    rain_today_sensor = hass.states.get('sensor.netatmo_weather_indoor_rain_rain_today').state
+    rain_today_sensor = hass.states.get('sensor.netatmo_home_indoor_rain_rain_today').state
     rain_today = float(0 if rain_today_sensor == 'unknown' else rain_today_sensor)
     excessive_heat_today = hass.states.get('sensor.excessive_heat_today').state == 'on'
 
