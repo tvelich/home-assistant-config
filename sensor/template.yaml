@@ -2,17 +2,3 @@
   sensors:
     slack_home_assistant_channel_id:
       value_template: !secret slack_home_assistant_channel_id
-    avg_living_room_temperature:
-      value_template: >
-        {%
-          set temps = [
-            states('sensor.netatmo_home_indoor_temperature') | float,
-            states('sensor.living_room_hue_temperature') | float
-          ] | select('gt', 0) | list
-        %}
-        {% if temps | length == 2 %}
-          {{ temps | sum / temps | length }}
-        {% else %}
-          {{ states('sensor.avg_living_room_temperature') }}
-        {% endif %}
-      unit_of_measurement: temperature
