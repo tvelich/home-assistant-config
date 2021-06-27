@@ -1,9 +1,0 @@
-discovery: false
-switch:
-  - host: !secret ip_tp_link_1
-  - host: !secret ip_tp_link_2
-  - host: !secret ip_tp_link_3
-  - host: !secret ip_tp_link_4
-  - host: !secret ip_tp_link_5
-  - host: !secret ip_tp_link_6
-  - host: !secret ip_tp_link_7
