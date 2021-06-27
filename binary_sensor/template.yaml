@@ -15,19 +15,9 @@
     excessive_heat_today_already:
       value_template: "{{ states('sensor.netatmo_home_indoor_outdoor_temperature') | float > 85 }}"
     excessive_heat_today_predicted:
-      value_template: >
-        {% set start = (now().replace(hour=0,minute=0,second=0).timestamp() * 1000) | int %}
-        {% set end = start + 86400000 %}
-        {{
-           state_attr('weather.openweathermap', 'forecast') |
-           selectattr('datetime', '>', start) |
-           selectattr('datetime','<=', end) |
-           map(attribute='temperature') |
-           list |
-           max
-        }}
+      value_template: "{{ state_attr('weather.openweathermap', 'forecast')[0].temperature > 85 }}"
     excessive_heat_today:
-      value_template: "{{ states('sensor.excessive_heat_today_already') or states('sensor.excessive_heat_today_predicted') }}"
+      value_template: "{{ states('binary_sensor.excessive_heat_today_already') or states('binary_sensor.excessive_heat_today_predicted') }}"
     is_holiday_season:
       value_template: >
         {% set month = now().month %}

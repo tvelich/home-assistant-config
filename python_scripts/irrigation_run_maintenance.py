@@ -37,7 +37,7 @@ def main():
 
         for cycle in range(CYCLES):
             for zone in zones:
-                service_data = {'zone_id': zone, 'zone_run_time': zone_run_time}
+                service_data = {'entity_id': f'switch.zone_{zone}', 'zone_id': zone, 'zone_run_time': zone_run_time}
                 call_service_repeat(service_data)
                 time.sleep(zone_run_time)
 

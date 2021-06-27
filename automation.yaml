@@ -592,7 +592,7 @@
       entity_id: input_select.irrigation
       state: Maintenance
   action:
-    - service: python_script.maintenance_irrigation_run
+    - service: python_script.irrigation_run_maintenance.py
       data:
         zones:
           - 1
@@ -612,7 +612,7 @@
       entity_id: input_select.irrigation
       state: Maintenance
   action:
-    - service: python_script.maintenance_irrigation_run
+    - service: python_script.irrigation_run_maintenance.py
       data:
         zones:
           - 3
@@ -634,13 +634,13 @@
       entity_id: binary_sensor.excessive_heat_today
       state: 'on'
   action:
-    - service: python_script.maintenance_irrigation_run
+    - service: python_script.irrigation_run_maintenance.py
       data:
         zones:
           - 1
           - 2
           - 6
-- alias: on_front_yard_irrigation_syringe_excessive_heat
+- alias: on_irrigation_syringe_excessive_heat
   trigger:
     platform: time
     at: '14:30:00'
@@ -652,21 +652,9 @@
       entity_id: binary_sensor.excessive_heat_today
       state: 'on'
   action:
-    - service: rainmachine.start_zone
+    - service: python_script.irrigation_run_all_zones
       data:
-        zone_id: 1
-        zone_run_time: 360
-    - service: rainmachine.start_zone
-      data:
-        zone_id: 2
-        zone_run_time: 360
-    - service: rainmachine.start_zone
-      data:
-        zone_id: 6
-        zone_run_time: 360
-    - service: script.post_slack_message
-      data:
-        message: Started syringe watering for front yard because of excessive heat
+        duration: 360
 - alias: on_new_seed_phase_1_watering_time
   trigger:
     - platform: time
@@ -676,9 +664,11 @@
     - platform: time
       at: '12:00:00'
     - platform: time
-      at: '14:00:00'
+      at: '13:30:00'
     - platform: time
-      at: '16:00:00'
+      at: '15:00:00'
+    - platform: time
+      at: '16:30:00'
     - platform: time
       at: '18:00:00'
   condition:
@@ -688,16 +678,10 @@
     - condition: numeric_state
       entity_id: sensor.netatmo_home_indoor_rain_rain
       below: .1
-    - condition: numeric_state
-      entity_id: sensor.netatmo_home_indoor_rain_rain_today
-      below: 1
   action:
-    - service: script.post_slack_message
+    - service: python_script.irrigation_run_all_zones
       data:
-        message: Started watering for new seed
-    - service: script.run_sprinklers
-      data:
-        zone_duration: 360
+        duration: 480
 - alias: on_new_seed_phase_2_watering_time
   trigger:
     - platform: sun
@@ -716,9 +700,9 @@
     - service: script.post_slack_message
       data:
         message: Started watering for new seed
-    - service: script.run_sprinklers
+    - service: python_script.irrigation_run_all_zones
       data:
-        zone_duration: 900
+        duration: 900
 - alias: on_handle_fireplace_trigger
   trigger:
     - platform: time_pattern
