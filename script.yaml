@@ -327,7 +327,7 @@ reset_google_home_volumes:
           - media_player.living_room_desk_home
           - media_player.living_room_home
           - media_player.sunroom_home
-        volume_level: 0.35
+        volume_level: 0.50
 media_devices_off:
   sequence:
     - service: homeassistant.turn_off
