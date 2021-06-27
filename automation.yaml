@@ -592,7 +592,7 @@
       entity_id: input_select.irrigation
       state: Maintenance
   action:
-    - service: python_script.irrigation_run_maintenance.py
+    - service: python_script.irrigation_run_maintenance
       data:
         zones:
           - 1
@@ -612,7 +612,7 @@
       entity_id: input_select.irrigation
       state: Maintenance
   action:
-    - service: python_script.irrigation_run_maintenance.py
+    - service: python_script.irrigation_run_maintenance
       data:
         zones:
           - 3
@@ -634,7 +634,7 @@
       entity_id: binary_sensor.excessive_heat_today
       state: 'on'
   action:
-    - service: python_script.irrigation_run_maintenance.py
+    - service: python_script.irrigation_run_maintenance
       data:
         zones:
           - 1

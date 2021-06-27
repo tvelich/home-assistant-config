@@ -24,7 +24,7 @@ def main():
     if is_zone_6_enabled:
         zones.append(6)
 
-    message = f'Starting watering for {zones} for {duration} minutes per zone'
+    message = f'Starting watering for {zones} for {int(round(duration))} minutes per zone'
     logger.info(message)
     hass.services.call('script', 'post_slack_message', { 'message':  message }, False)
 
