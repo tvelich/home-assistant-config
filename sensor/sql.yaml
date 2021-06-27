@@ -3,14 +3,17 @@
   queries:
     - name: Rain Three Days Ago
       query: |
-        SELECT state
-        FROM public.states
-        WHERE entity_id = 'sensor.netatmo_home_indoor_rain_rain_today'
-        AND last_updated::DATE = (NOW() - INTERVAL '3 DAY')::DATE
-        AND state IS NOT NULL
-        AND state NOT IN ('unavailable', 'unknown')
-        ORDER BY last_updated DESC
-        LIMIT 1
+        SELECT COALESCE(
+          (
+              SELECT state
+              FROM public.states
+              WHERE entity_id = 'sensor.netatmo_home_indoor_rain_rain_today'
+              AND last_updated::DATE = (NOW() - INTERVAL '3 DAY')::DATE
+              AND state IS NOT NULL
+              AND state NOT IN ('unavailable', 'unknown')
+              ORDER BY last_updated DESC
+              LIMIT 1
+          ), '0') AS state
       column: state
       unit_of_measurement: mm
 - platform: sql
@@ -18,14 +21,17 @@
   queries:
     - name: Rain Two Days Ago
       query: |
-        SELECT state
-        FROM public.states
-        WHERE entity_id = 'sensor.netatmo_home_indoor_rain_rain_today'
-        AND last_updated::DATE = (NOW() - INTERVAL '2 DAY')::DATE
-        AND state IS NOT NULL
-        AND state NOT IN ('unavailable', 'unknown')
-        ORDER BY last_updated DESC
-        LIMIT 1
+        SELECT COALESCE(
+          (
+              SELECT state
+              FROM public.states
+              WHERE entity_id = 'sensor.netatmo_home_indoor_rain_rain_today'
+              AND last_updated::DATE = (NOW() - INTERVAL '2 DAY')::DATE
+              AND state IS NOT NULL
+              AND state NOT IN ('unavailable', 'unknown')
+              ORDER BY last_updated DESC
+              LIMIT 1
+          ), '0') AS state
       column: state
       unit_of_measurement: mm
 - platform: sql
@@ -33,13 +39,16 @@
   queries:
     - name: Rain One Day Ago
       query: |
-        SELECT state
-        FROM public.states
-        WHERE entity_id = 'sensor.netatmo_home_indoor_rain_rain_today'
-        AND last_updated::DATE = (NOW() - INTERVAL '1 DAY')::DATE
-        AND state IS NOT NULL
-        AND state NOT IN ('unavailable', 'unknown')
-        ORDER BY last_updated DESC
-        LIMIT 1
+        SELECT COALESCE(
+          (
+              SELECT state
+              FROM public.states
+              WHERE entity_id = 'sensor.netatmo_home_indoor_rain_rain_today'
+              AND last_updated::DATE = (NOW() - INTERVAL '1 DAY')::DATE
+              AND state IS NOT NULL
+              AND state NOT IN ('unavailable', 'unknown')
+              ORDER BY last_updated DESC
+              LIMIT 1
+          ), '0') AS state
       column: state
       unit_of_measurement: mm
