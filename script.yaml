@@ -45,9 +45,9 @@ vacuum_start:
       data:
         entity_id: vacuum.roomba
     - service_template: >
-        {% set isRoombaEnabled = is_state('input_boolean.roomba_enabled', 'on') %}
-        {% set isArmedHome = is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
-        {% if isRoombaEnabled and isArmedHome %}
+        {% set is_roomba_enabled = is_state('input_boolean.roomba_enabled', 'on') %}
+        {% set is_sleep_mode = is_state('input_boolean.sleep_mode', 'on') %}
+        {% if is_roomba_enabled and is_sleep_mode %}
           python_script.light_turn_on
         {% else %}
           script.noop

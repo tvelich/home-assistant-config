@@ -290,7 +290,7 @@
       data_template:
         entity_id: light.bathroom_downstairs
         brightness: >
-          {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
+          {% if is_state('input_boolean.sleep_mode', 'on') %}
             10
           {% else %}
             255
@@ -311,7 +311,7 @@
       data_template:
         entity_id: light.bathroom_upstairs
         brightness: >
-          {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
+          {% if is_state('input_boolean.sleep_mode', 'on') %}
             10
           {% else %}
             255
@@ -329,8 +329,8 @@
       minutes: 120
   condition:
     condition: state
-    entity_id: alarm_control_panel.abode_alarm
-    state: armed_home
+    entity_id: input_boolean.sleep_mode
+    state: 'on'
   action:
     service: script.downstairs_lights_off
 - alias: on_home_assistant_start
