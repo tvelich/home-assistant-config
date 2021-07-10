@@ -43,6 +43,9 @@ wake:
         entity_id: media_player.master_bedroom_home
     - service: script.living_room_tv_on
     - service: script.inside_lights_on
+    - service: vacuum.stop
+      data:
+        entity_id: vacuum.roomba
     - service: vacuum.return_to_base
       data:
         entity_id: vacuum.roomba
