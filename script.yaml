@@ -19,8 +19,6 @@ bedtime:
     - service: script.reset_google_home_volumes
     - service: script.play_sleep_sounds
     - service: script.inside_lights_off
-    - delay: '00:00:05'
-    - service: script.vacuum_start
 noop:
   sequence:
     delay: '00:00:00'
@@ -34,27 +32,6 @@ post_slack_message:
             "channel": "{{ states('sensor.slack_home_assistant_channel_id') }}",
             "text": "{{ message }}"
           }
-vacuum_start:
-  sequence:
-    - service_template: >
-        {% if is_state('input_boolean.roomba_enabled', 'on') %}
-          vacuum.start
-        {% else %}
-          script.noop
-        {% endif %}
-      data:
-        entity_id: vacuum.roomba
-    - service_template: >
-        {% set is_roomba_enabled = is_state('input_boolean.roomba_enabled', 'on') %}
-        {% set is_sleep_mode = is_state('input_boolean.sleep_mode', 'on') %}
-        {% if is_roomba_enabled and is_sleep_mode %}
-          python_script.light_turn_on
-        {% else %}
-          script.noop
-        {% endif %}
-      data:
-        entity_id: light.downstairs
-        brightness: 125
 wake:
   sequence:
     - service: alarm_control_panel.alarm_disarm
@@ -66,6 +43,9 @@ wake:
         entity_id: media_player.master_bedroom_home
     - service: script.living_room_tv_on
     - service: script.inside_lights_on
+    - service: vacuum.return_to_base
+      data:
+        entity_id: vacuum.roomba
 colorloop_bar_lights:
   sequence:
     - service: python_script.light_turn_on
