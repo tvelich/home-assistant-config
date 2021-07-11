@@ -3,7 +3,7 @@ homeassistant: !include homeassistant.yaml
 lovelace: !include lovelace.yaml
 
 # Components
-automation: !include automation.yaml
+automation: !include_dir_merge_list automation
 config:
 discovery:
 frontend: !include frontend.yaml
