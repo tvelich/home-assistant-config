@@ -24,22 +24,22 @@
       platform: state
       to: 'off'
       for:
-        minutes: 15
+        minutes: 10
     - entity_id: binary_sensor.sunroom_door_open
       platform: state
       to: 'off'
       for:
-        minutes: 15
+        minutes: 10
     - entity_id: binary_sensor.deck_door_open
       platform: state
       to: 'off'
       for:
-        minutes: 15
+        minutes: 10
     - entity_id: binary_sensor.garage_door_open
       platform: state
       to: 'off'
       for:
-        minutes: 15
+        minutes: 10
   action:
     service: lock.lock
     data_template:
