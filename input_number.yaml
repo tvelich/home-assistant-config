@@ -1,6 +1,9 @@
 default_kelvin:
   min: 2000
   max: 6500
+default_light_transition_time:
+  min: 0
+  max: 10
 fireplace_temp:
   min: 65
   max: 75

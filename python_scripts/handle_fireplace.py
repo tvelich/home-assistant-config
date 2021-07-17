@@ -13,7 +13,7 @@ def main():
     is_heat_mode = hass.states.is_state('sensor.hallway_thermostat_operation_mode', 'heat')
     is_fireplace_probably_on = hass.states.is_state('light.fireplace', 'on')
     is_home = hass.states.is_state('binary_sensor.home', 'on')
-    is_sleep_mode = hass.states.is_state('input_boolean.sleep_mode', 'on')
+    is_sleep_mode = hass.states.is_state('sensor.sleep_mode', 'on')
     target_temp = float(hass.states.get('input_number.fireplace_temp').state)
     current_temp = float(hass.states.get('sensor.netatmo_home_indoor_temperature').state)
 

@@ -10,15 +10,6 @@ backyard_timer_start:
           {% else %}
             00:15:00
           {% endif %}
-bedtime:
-  sequence:
-    - service: alarm_control_panel.alarm_arm_home
-      data:
-        entity_id: alarm_control_panel.abode_alarm
-    - service: script.media_devices_off
-    - service: script.reset_google_home_volumes
-    - service: script.play_sleep_sounds
-    - service: script.inside_lights_off
 noop:
   sequence:
     delay: '00:00:00'
@@ -32,23 +23,6 @@ post_slack_message:
             "channel": "{{ states('sensor.slack_home_assistant_channel_id') }}",
             "text": "{{ message }}"
           }
-wake:
-  sequence:
-    - service: alarm_control_panel.alarm_disarm
-      data:
-        entity_id: alarm_control_panel.abode_alarm
-    - service: script.living_room_tv_on
-    - service: media_player.turn_off
-      data:
-        entity_id: media_player.master_bedroom_home
-    - service: script.living_room_tv_on
-    - service: script.inside_lights_on
-    - service: vacuum.stop
-      data:
-        entity_id: vacuum.roomba
-    - service: vacuum.return_to_base
-      data:
-        entity_id: vacuum.roomba
 colorloop_bar_lights:
   sequence:
     - service: python_script.light_turn_on
@@ -257,6 +231,10 @@ outside_lights_off:
         entity_id: switch.outdoor_string_holiday_lights
 play_sleep_sounds:
   sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.master_bedroom_home
+        volume_level: 0.50
     - service: media_player.play_media
       data:
         entity_id: media_player.master_bedroom_home

@@ -90,9 +90,15 @@
       event_data:
         entity_id: timer.downstairs_bathroom_lights
   action:
-    service: python_script.light_turn_off
+    service: light.turn_off
     data:
       entity_id: light.bathroom_downstairs
+      transition: >
+        {% if is_state('sensor.sleep_mode', 'partial') or is_state('sensor.sleep_mode', 'on') %}
+          0
+        {% else %}
+          {{ states('input_number.default_light_transition_time') | float }}
+        {% endif %}
 - alias: on_upstairs_bathroom_lights_idle
   trigger:
     - platform: event
@@ -100,9 +106,15 @@
       event_data:
         entity_id: timer.upstairs_bathroom_lights
   action:
-    service: python_script.light_turn_off
+    service: light.turn_off
     data:
       entity_id: light.bathroom_upstairs
+      transition: >
+        {% if is_state('sensor.sleep_mode', 'partial') or is_state('sensor.sleep_mode', 'on') %}
+          0
+        {% else %}
+          {{ states('input_number.default_light_transition_time') | float }}
+        {% endif %}
 - alias: on_brighten_front_yard_idle
   trigger:
     - platform: event
@@ -147,39 +159,6 @@
     - service: nest.set_away_mode
       data:
         away_mode: away
-- alias: on_phone_charging
-  trigger:
-    entity_id: sensor.tom_phone_charging
-    platform: state
-    to: 'true'
-  condition:
-    condition: time
-    after: '20:00:00'
-    before: '08:00:00'
-  action:
-    service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.sleep_mode
-- alias: on_phone_discharging
-  trigger:
-    entity_id: sensor.tom_phone_charging
-    platform: state
-    to: 'false'
-  action:
-    service: input_boolean.turn_off
-    data:
-      entity_id: input_boolean.sleep_mode
-- alias: on_sleep_mode_change
-  trigger:
-    platform: state
-    entity_id: input_boolean.sleep_mode
-  action:
-    service_template: >
-      {% if trigger.to_state.state == 'on' %}
-        script.bedtime
-      {% else %}
-        script.wake
-      {% endif %}
 - alias: on_dota_mode_change
   trigger:
     platform: state
@@ -286,19 +265,25 @@
         - light.bathroom_downstairs
       to: 'on'
   action:
-    - service: python_script.light_turn_on
-      data_template:
+    - service: light.turn_on
+      data:
         entity_id: light.bathroom_downstairs
-        brightness: >
-          {% if is_state('input_boolean.sleep_mode', 'on') %}
-            10
+        brightness_pct: >
+          {% if is_state('sensor.sleep_mode', 'on') %}
+            1
           {% else %}
-            255
+            100
           {% endif %}
+        transition: "{{ states('input_number.default_light_transition_time') | float }}"
     - service: timer.start
       data:
         entity_id: timer.downstairs_bathroom_lights
-        duration: '00:15:00'
+        duration: >
+          {% if is_state('sensor.sleep_mode', 'on') %}
+            00:01:00
+          {% else %}
+            00:15:00
+          {% endif %}
 - alias: on_trigger_for_upstairs_bathroom_lights
   trigger:
     - platform: state
@@ -307,26 +292,32 @@
         - light.bathroom_upstairs
       to: 'on'
   action:
-    - service: python_script.light_turn_on
-      data_template:
+    - service: light.turn_on
+      data:
         entity_id: light.bathroom_upstairs
-        brightness: >
-          {% if is_state('input_boolean.sleep_mode', 'on') %}
-            10
+        brightness_pct: >
+          {% if is_state('sensor.sleep_mode', 'partial') or is_state('sensor.sleep_mode', 'on') %}
+            1
           {% else %}
-            255
+            100
           {% endif %}
+        transition: "{{ states('input_number.default_light_transition_time') | float }}"
     - service: timer.start
       data:
         entity_id: timer.upstairs_bathroom_lights
-        duration: '00:15:00'
+        duration: >
+          {% if is_state('sensor.sleep_mode', 'on') %}
+            00:01:00
+          {% else %}
+            00:15:00
+          {% endif %}
 - alias: downstairs_vacuum_check_eligiblity
   trigger:
     platform: time_pattern
     minutes: '/5'
   condition:
     - condition: state
-      entity_id: input_boolean.sleep_mode
+      entity_id: sensor.sleep_mode
       state: 'on'
     - condition: state
       entity_id: input_boolean.roomba_enabled
@@ -344,7 +335,7 @@
     minutes: '/5'
   condition:
     - condition: state
-      entity_id: input_boolean.sleep_mode
+      entity_id: sensor.sleep_mode
       state: 'on'
     - condition: state
       entity_id: input_boolean.roomba_enabled
@@ -562,8 +553,10 @@
     minutes: 55
   condition:
     condition: state
-    entity_id: input_boolean.sleep_mode
-    state: 'on'
+    entity_id: sensor.sleep_mode
+    state:
+      - 'on'
+      - 'partial'
   action:
     service: script.play_sleep_sounds
 - alias: on_living_room_google_tv_play_begin

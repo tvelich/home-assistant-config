@@ -1,6 +1,4 @@
 roomba_enabled:
-sleep_mode:
-  icon: 'mdi:sleep'
 dota_mode:
   icon: 'mdi:gamepad'
 fireplace_enabled:
@@ -10,3 +8,5 @@ irrigation_zone_3:
 irrigation_zone_4:
 irrigation_zone_5:
 irrigation_zone_6:
+tom_sleep:
+katherine_sleep:

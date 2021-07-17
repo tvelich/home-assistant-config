@@ -1,0 +1,25 @@
+- alias: master_bedroom_fibaro_button_pressed
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.fibaro_system_fgpb101_button
+      scene_id: 1
+      scene_data: 7680 # single tap
+  action:
+    service: input_boolean.toggle
+    data:
+      entity_id: input_boolean.katherine_sleep
+- alias: master_bedroom_fibaro_button_double_pressed
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.fibaro_system_fgpb101_button
+      scene_id: 1
+      scene_data: 7860 # double tap
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.bathroom_upstairs
+      transition: "{{ states('input_number.default_light_transition_time') | float }}"
