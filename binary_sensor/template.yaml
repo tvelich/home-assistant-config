@@ -17,7 +17,7 @@
     excessive_heat_today_predicted:
       value_template: "{{ state_attr('weather.openweathermap', 'forecast')[0].temperature > 85 }}"
     excessive_heat_today:
-      value_template: "{{ states('binary_sensor.excessive_heat_today_already') or states('binary_sensor.excessive_heat_today_predicted') }}"
+      value_template: "{{ is_state('binary_sensor.excessive_heat_today_already', 'on') or is_state('binary_sensor.excessive_heat_today_predicted', 'on') }}"
     is_holiday_season:
       value_template: >
         {% set month = now().month %}
