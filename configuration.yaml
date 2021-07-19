@@ -21,6 +21,7 @@ script: !include script.yaml
 sun:
 system_health:
 timer: !include timer.yaml
+tplink: !include tplink.yaml
 zwave: !include zwave.yaml
 
 # Platforms
