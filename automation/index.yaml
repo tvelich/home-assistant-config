@@ -159,17 +159,6 @@
     - service: nest.set_away_mode
       data:
         away_mode: away
-- alias: on_dota_mode_change
-  trigger:
-    platform: state
-    entity_id: input_boolean.dota_mode
-  action:
-    service_template: >
-      {% if trigger.to_state.state == 'on' %}
-        script.dota_mode_on
-      {% else %}
-        script.dota_mode_off
-      {% endif %}
 - alias: on_nano_1_pressed
   trigger:
     - platform: event
@@ -180,16 +169,6 @@
         scene_id: 1
   action:
     service: script.inside_lights_on
-- alias: on_nano_1_held
-  trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
-        scene_data: 7800
-        scene_id: 1
-  action:
-    service: script.noop
 - alias: on_nano_2_pressed
   trigger:
     - platform: event
@@ -203,16 +182,6 @@
     data:
       entity_id: light.inside_core
       brightness: 125
-- alias: on_nano_2_held
-  trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
-        scene_data: 7800
-        scene_id: 2
-  action:
-    service: script.noop
 - alias: on_nano_3_pressed
   trigger:
     - platform: event
@@ -223,16 +192,6 @@
         scene_id: 3
   action:
     service: script.inside_lights_off
-- alias: on_nano_3_held
-  trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
-        scene_data: 7800
-        scene_id: 3
-  action:
-    service: script.noop
 - alias: on_nano_4_pressed
   trigger:
     - platform: event
@@ -243,18 +202,6 @@
         scene_id: 4
   action:
     service: media_player.media_play_pause
-    data:
-      entity_id: media_player.living_room_google_tv
-- alias: on_nano_4_held
-  trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
-        scene_data: 7800
-        scene_id: 4
-  action:
-    service: media_player.media_stop
     data:
       entity_id: media_player.living_room_google_tv
 - alias: on_trigger_for_downstairs_bathroom_lights
@@ -559,13 +506,6 @@
       - 'partial'
   action:
     service: script.play_sleep_sounds
-- alias: on_living_room_google_tv_play_begin
-  trigger:
-    platform: state
-    entity_id: media_player.living_room_google_tv
-    to: 'playing'
-  action:
-    service: script.living_room_tv_on
 - alias: on_kitchen_chromecast_play_begin
   trigger:
     platform: state
@@ -584,17 +524,6 @@
     service: switch.turn_off
     data:
       entity_id: switch.kitchen_media
-- alias: on_toaster_oven_idle
-  trigger:
-    platform: state
-    entity_id: switch.toaster_oven
-    to: 'on'
-    for:
-      minutes: 30
-  action:
-    service: switch.turn_off
-    data:
-      entity_id: switch.toaster_oven
 - alias: on_handle_fireplace_trigger
   trigger:
     - platform: time_pattern
