@@ -296,3 +296,24 @@ living_room_tv_off:
     - service: remote.turn_off
       data:
         entity_id: remote.living_room
+queue_sprinkler_zone:
+  mode: queued
+  max: 30
+  fields:
+    zone:
+      description: "Which zone of sprinklers to run (1-6)"
+      example: 1
+    minutes:
+      description: "The number of minutes to run the zone"
+      example: 5
+  sequence:
+    - condition: template
+      value_template: "{{ is_state('input_boolean.irrigation_zone_' ~ zone, 'on') }}"
+    - service: rainmachine.start_zone
+      target:
+        entity_id: "switch.zone_{{ zone }}"
+      data:
+        zone_id: "{{ zone | int }}"
+        zone_run_time: "{{ minutes | int * 60}}"
+    - delay:
+        seconds: "{{ [0, (minutes * 60) - 15] | max }}"
