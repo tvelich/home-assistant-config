@@ -78,15 +78,15 @@
     - service: script.queue_sprinkler_zone
       data:
         zone: 1
-        minutes: 15
+        minutes: 8
     - service: script.queue_sprinkler_zone
       data:
         zone: 2
-        minutes: 15
+        minutes: 8
     - service: script.queue_sprinkler_zone
       data:
         zone: 6
-        minutes: 15
+        minutes: 8
 - alias: irrigation_new_seed_phase_1_backyard
   trigger:
     - platform: time
@@ -117,15 +117,15 @@
     - service: script.queue_sprinkler_zone
       data:
         zone: 3
-        minutes: 15
+        minutes: 8
     - service: script.queue_sprinkler_zone
       data:
         zone: 4
-        minutes: 15
+        minutes: 8
     - service: script.queue_sprinkler_zone
       data:
         zone: 5
-        minutes: 15
+        minutes: 8
 - alias: irrigation_new_seed_phase_2_front_yard
   trigger:
     - platform: sun
