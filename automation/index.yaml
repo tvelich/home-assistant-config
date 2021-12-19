@@ -258,43 +258,6 @@
           {% else %}
             00:15:00
           {% endif %}
-- alias: downstairs_vacuum_check_eligiblity
-  trigger:
-    platform: time_pattern
-    minutes: '/5'
-  condition:
-    - condition: state
-      entity_id: sensor.sleep_mode
-      state: 'on'
-    - condition: state
-      entity_id: input_boolean.roomba_enabled
-      state: 'on'
-    - condition: state
-      entity_id: vacuum.roomba
-      state: 'docked'
-  action:
-    service: vacuum.start
-    data:
-      entity_id: vacuum.roomba
-- alias: downstairs_lights_check_vacuum_lighting
-  trigger:
-    platform: time_pattern
-    minutes: '/5'
-  condition:
-    - condition: state
-      entity_id: sensor.sleep_mode
-      state: 'on'
-    - condition: state
-      entity_id: input_boolean.roomba_enabled
-      state: 'on'
-    - condition: state
-      entity_id: light.downstairs
-      state: 'off'
-  action:
-    service: python_script.light_turn_on
-    data:
-      entity_id: light.downstairs
-      brightness: 125
 - alias: on_home_assistant_start
   trigger:
     platform: homeassistant

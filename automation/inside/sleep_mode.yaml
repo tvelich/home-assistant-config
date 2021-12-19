@@ -75,12 +75,6 @@
           - light.downstairs
         brightness_pct: 100
         transition: "{{ states('input_number.default_light_transition_time') | float }}"
-    - service: vacuum.stop
-      data:
-        entity_id: vacuum.roomba
-    - service: vacuum.return_to_base
-      data:
-        entity_id: vacuum.roomba
 - alias: inside_sleep_mode_changed_partial_to_off
   trigger:
     platform: state
