@@ -1,4 +1,4 @@
-- alias: inside_sleep_mode_changed_off_to_partial
+- alias: sleep_mode_changed_off_to_partial
   trigger:
     platform: state
     entity_id: sensor.sleep_mode
@@ -26,7 +26,8 @@
           - light.entryway
         brightness_pct: 15
         transition: "{{ states('input_number.default_light_transition_time') | float }}"
-- alias: inside_sleep_mode_changed_partial_to_on
+
+- alias: sleep_mode_changed_partial_to_on
   trigger:
     platform: state
     entity_id: sensor.sleep_mode
@@ -50,7 +51,8 @@
           - media_player.sony_bravia_tv
           - remote.family_room
     - service: script.inside_lights_off
-- alias: inside_sleep_mode_changed_on_to_partial
+
+- alias: sleep_mode_changed_on_to_partial
   trigger:
     platform: state
     entity_id: sensor.sleep_mode
@@ -75,7 +77,7 @@
           - light.downstairs
         brightness_pct: 100
         transition: "{{ states('input_number.default_light_transition_time') | float }}"
-- alias: inside_sleep_mode_changed_partial_to_off
+- alias: sleep_mode_changed_partial_to_off
   trigger:
     platform: state
     entity_id: sensor.sleep_mode
