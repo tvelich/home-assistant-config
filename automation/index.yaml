@@ -1,23 +1,3 @@
-- alias: on_sunset
-  trigger:
-    platform: sun
-    event: sunset
-    offset: '00:15:00'
-  action:
-    service: script.outside_core_lights_on
-- alias: on_sunrise
-  trigger:
-    platform: sun
-    event: sunrise
-    offset: '-00:15:00'
-  action:
-    service: script.outside_lights_off
-- alias: on_time_11pm
-  trigger:
-    platform: time
-    at: '23:00:00'
-  action:
-    service: script.fade_to_dim_front_yard
 - alias: on_close_door
   trigger:
     - entity_id: binary_sensor.front_door_open
@@ -381,60 +361,6 @@
         {% elif trigger.entity_id == 'lock.sunroom_door' %}
           Sunroom door is still unlocked!
         {% endif %}
-- alias: on_water_detected
-  trigger:
-    - platform: time_pattern
-      seconds: '/15'
-    - entity_id: binary_sensor.downstairs_bathroom_water_detected
-      platform: state
-      to: 'on'
-    - entity_id: binary_sensor.upstairs_bathroom_water_detected
-      platform: state
-      to: 'on'
-    - entity_id: binary_sensor.main_valve_water_detected
-      platform: state
-      to: 'on'
-    - entity_id: binary_sensor.garage_sink_water_detected
-      platform: state
-      to: 'on'
-    - entity_id: binary_sensor.laundry_room_water_detected
-      platform: state
-      to: 'on'
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: 'binary_sensor.downstairs_bathroom_water_detected'
-        state: 'on'
-      - condition: state
-        entity_id: 'binary_sensor.upstairs_bathroom_water_detected'
-        state: 'on'
-      - condition: state
-        entity_id: 'binary_sensor.main_valve_water_detected'
-        state: 'on'
-      - condition: state
-        entity_id: 'binary_sensor.garage_sink_water_detected'
-        state: 'on'
-      - condition: state
-        entity_id: 'binary_sensor.laundry_room_water_detected'
-        state: 'on'
-  action:
-    service: script.post_slack_message
-    data_template:
-      message: >
-        {% if states('binary_sensor.downstairs_bathroom_water_detected') == 'on' %}
-          Water detected in downstairs bathroom!
-        {% elif states('binary_sensor.upstairs_bathroom_water_detected') == 'on' %}
-          Water detected in upstairs bathroom!
-        {% elif states('binary_sensor.main_valve_water_detected') == 'on' %}
-          Water detected at main valve!
-        {% elif states('binary_sensor.garage_sink_water_detected') == 'on' %}
-          Water detected at garage sink!
-        {% elif states('binary_sensor.laundry_room_water_detected') == 'on' %}
-          Water detected in laundry room!
-        {% else %}
-          Water detected!
-        {% endif %}
 - alias: on_mailbox_motion
   trigger:
     entity_id: binary_sensor.mailbox_motion
@@ -457,18 +383,6 @@
       {% endif %}
     data:
       entity_id: switch.fountain
-- alias: on_interval_while_sleeping
-  trigger:
-    platform: time_pattern
-    minutes: 55
-  condition:
-    condition: state
-    entity_id: sensor.sleep_mode
-    state:
-      - 'on'
-      - 'partial'
-  action:
-    service: script.play_sleep_sounds
 - alias: on_kitchen_chromecast_play_begin
   trigger:
     platform: state
@@ -487,16 +401,7 @@
     service: switch.turn_off
     data:
       entity_id: switch.kitchen_media
-- alias: on_handle_fireplace_trigger
-  trigger:
-    - platform: time_pattern
-      minutes: "/1"
-  condition:
-    condition: state
-    entity_id: input_boolean.fireplace_enabled
-    state: 'on'
-  action:
-    - service: python_script.handle_fireplace
+
 - alias: on_tom_phone_battery_level_change
   trigger:
     platform: state
