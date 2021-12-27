@@ -43,7 +43,7 @@ upstairs_lights_on:
       data:
         entity_id:
           - switch.dining_room_lights
-          - switch.christmas_tree_lights
+          - switch.holiday_lights
     - service: python_script.light_turn_on
       data:
         entity_id: light.upstairs
@@ -53,7 +53,7 @@ upstairs_lights_off:
       data:
         entity_id:
           - switch.dining_room_lights
-          - switch.christmas_tree_lights
+          - switch.holiday_lights
     - service: python_script.light_turn_off
       data:
         entity_id: light.upstairs
@@ -79,7 +79,7 @@ inside_lights_on:
         entity_id:
           - switch.dining_room_lights
           - switch.desk
-          - switch.christmas_tree_lights
+          - switch.holiday_lights
     - service: python_script.light_turn_on
       data:
         entity_id: light.inside_core
@@ -91,7 +91,7 @@ inside_lights_off:
         entity_id:
           - switch.dining_room_lights
           - switch.desk
-          - switch.christmas_tree_lights
+          - switch.holiday_lights
     - service: python_script.light_turn_off
       data:
         entity_id: light.inside

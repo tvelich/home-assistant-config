@@ -11,7 +11,7 @@
           if
           is_state('light.inside', 'on') or
           is_state('switch.dining_room_lights', 'on') or
-          is_state('switch.christmas_tree_lights', 'on') or
+          is_state('switch.holiday_lights', 'on') or
           is_state('switch.desk', 'on')
         %}
           mdi:lightbulb-on
