@@ -1,4 +1,4 @@
-- alias: sun_sunset_lights
+- alias: sun_lights_at_sunset
   trigger:
     platform: sun
     event: sunset
@@ -6,7 +6,7 @@
   action:
     service: script.outside_core_lights_on
 
-- alias: sun_sunrise_lights
+- alias: sun_lights_at_sunrise
   trigger:
     platform: sun
     event: sunrise

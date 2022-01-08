@@ -1,4 +1,4 @@
-- alias: sun_sunrise_irrigation_maintenance_frontyard
+- alias: sun_irrigation_maintenance_frontyard_sunrise
   trigger:
     platform: sun
     event: sunrise
@@ -29,7 +29,7 @@
           - 2
           - 6
 
-- alias: sun_sunrise_irrigation_maintenance_backyard
+- alias: sun_irrigation_maintenance_backyard_sunrise
   trigger:
     platform: sun
     event: sunrise
@@ -50,7 +50,7 @@
           - 4
           - 5
 
-- alias: sun_sunrise_irrigation_new_seed_phase_2_front_yard
+- alias: sun_irrigation_new_seed_phase_2_front_yard_sunrise
   trigger:
     - platform: sun
       event: sunrise
@@ -81,7 +81,7 @@
         zone: 6
         minutes: 15
 
-- alias: sun_sunrise_irrigation_new_seed_phase_2_backyard
+- alias: sun_irrigation_new_seed_phase_2_backyard_sunrise
   trigger:
     - platform: sun
       event: sunrise
