@@ -1,4 +1,4 @@
-- alias: sleep_mode_changed_off_to_partial
+- alias: state_sleep_mode_changed_off_to_partial
   trigger:
     platform: state
     entity_id: sensor.sleep_mode
@@ -27,7 +27,7 @@
         brightness_pct: 15
         transition: "{{ states('input_number.default_light_transition_time') | float }}"
 
-- alias: sleep_mode_changed_partial_to_on
+- alias: state_sleep_mode_changed_partial_to_on
   trigger:
     platform: state
     entity_id: sensor.sleep_mode
@@ -52,7 +52,7 @@
           - remote.family_room
     - service: script.inside_lights_off
 
-- alias: sleep_mode_changed_on_to_partial
+- alias: state_sleep_mode_changed_on_to_partial
   trigger:
     platform: state
     entity_id: sensor.sleep_mode
@@ -77,7 +77,8 @@
           - light.downstairs
         brightness_pct: 100
         transition: "{{ states('input_number.default_light_transition_time') | float }}"
-- alias: sleep_mode_changed_partial_to_off
+
+- alias: state_sleep_mode_changed_partial_to_off
   trigger:
     platform: state
     entity_id: sensor.sleep_mode
@@ -90,3 +91,40 @@
         entity_id: media_player.master_bedroom_home
     - service: script.reset_google_home_volumes
     - service: script.inside_lights_on
+
+- alias: state_sleep_mode_on_with_night_cleaning_enabled
+  trigger:
+    platform: state
+    entity_id: sensor.sleep_mode
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.roomba_schedule_night_cleaning
+    state: 'on'
+  action:
+    service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.roomba_infinite_clean_mode
+
+- alias: state_sleep_mode_off_with_night_cleaning_enabled
+  trigger:
+    platform: state
+    entity_id: sensor.sleep_mode
+    to: 'off'
+  condition:
+    condition: state
+    entity_id: input_boolean.roomba_schedule_night_cleaning
+    state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.roomba_infinite_clean_mode
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.roomba_schedule_night_cleaning
+    - service: vacuum.stop
+      data:
+        entity_id: vacuum.roomba
+    - service: vacuum.return_to_base
+      data:
+        entity_id: vacuum.roomba

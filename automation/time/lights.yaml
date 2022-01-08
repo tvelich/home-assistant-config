@@ -1,0 +1,6 @@
+- alias: time_lights_front_yard_night_fade
+  trigger:
+    platform: time
+    at: '23:00:00'
+  action:
+    service: script.fade_to_dim_front_yard

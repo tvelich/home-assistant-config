@@ -1,0 +1,10 @@
+- alias: time_pattern_fireplace_check
+  trigger:
+    - platform: time_pattern
+      minutes: "/1"
+  condition:
+    condition: state
+    entity_id: input_boolean.fireplace_enabled
+    state: 'on'
+  action:
+    - service: python_script.handle_fireplace

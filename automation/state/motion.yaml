@@ -1,0 +1,103 @@
+- alias: state_motion_mailbox
+  trigger:
+    entity_id: binary_sensor.mailbox_motion
+    platform: state
+    to: 'on'
+  action:
+    service: script.post_slack_message
+    data:
+      message: You've got mail!
+
+- alias: state_motion_front_yard_detected
+  trigger:
+    platform: state
+    entity_id:
+      - binary_sensor.porch_camera_motion_detected
+      - binary_sensor.garage_camera_motion_detected
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+      - condition: time
+        after: '23:00:00'
+      - condition: sun
+        before: sunrise
+        before_offset: '-00:25:00'
+  action:
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.front_yard
+        preserve_color: true
+    - service: timer.start
+      data:
+        entity_id: timer.brighten_front_yard
+        duration: '00:05:00'
+
+- alias: state_motion_backyard_detected
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.backyard_camera_person_detected
+        - binary_sensor.deck_camera_person_detected
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.backyard
+    - service: script.backyard_timer_start
+
+- alias: state_motion_downstairs_bathroom_detected
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.downstairs_bathroom_motion
+      to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.bathroom_downstairs
+        brightness_pct: >
+          {% if is_state('sensor.sleep_mode', 'on') %}
+            1
+          {% else %}
+            100
+          {% endif %}
+        transition: "{{ states('input_number.default_light_transition_time') | float }}"
+    - service: timer.start
+      data:
+        entity_id: timer.downstairs_bathroom_lights
+        duration: >
+          {% if is_state('sensor.sleep_mode', 'on') %}
+            00:01:00
+          {% else %}
+            00:15:00
+          {% endif %}
+
+- alias: state_motion_upstairs_bathroom_detected
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.upstairs_bathroom_motion
+      to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.bathroom_upstairs
+        brightness_pct: >
+          {% if is_state('sensor.sleep_mode', 'partial') or is_state('sensor.sleep_mode', 'on') %}
+            1
+          {% else %}
+            100
+          {% endif %}
+        transition: "{{ states('input_number.default_light_transition_time') | float }}"
+    - service: timer.start
+      data:
+        entity_id: timer.upstairs_bathroom_lights
+        duration: >
+          {% if is_state('sensor.sleep_mode', 'on') %}
+            00:01:00
+          {% else %}
+            00:15:00
+          {% endif %}

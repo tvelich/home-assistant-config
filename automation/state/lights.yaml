@@ -1,0 +1,39 @@
+- alias: state_lights_backyard_on
+  trigger:
+    platform: state
+    entity_id: light.backyard
+    to: 'on'
+  action:
+    service: script.backyard_timer_start
+
+- alias: state_lights_downstairs_bathroom_on
+  trigger:
+    platform: state
+    entity_id: light.bathroom_downstairs
+    to: 'on'
+  action:
+    service: timer.start
+    data:
+      entity_id: timer.downstairs_bathroom_lights
+      duration: >
+        {% if is_state('sensor.sleep_mode', 'on') %}
+          00:01:00
+        {% else %}
+          00:15:00
+        {% endif %}
+
+- alias: state_lights_upstairs_bathroom_on
+  trigger:
+    platform: state
+    entity_id: light.bathroom_upstairs
+    to: 'on'
+  action:
+    service: timer.start
+    data:
+      entity_id: timer.upstairs_bathroom_lights
+      duration: >
+        {% if is_state('sensor.sleep_mode', 'on') %}
+          00:01:00
+        {% else %}
+          00:15:00
+        {% endif %}

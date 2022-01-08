@@ -1,0 +1,32 @@
+- alias: state_roomba_infinite_clean_mode_on
+  trigger:
+    platform: state
+    entity_id: input_boolean.roomba_infinite_clean_mode
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.roomba_infinite_clean_mode
+      state: 'on'
+    - condition: state
+      entity_id: vacuum.roomba
+      state: 'docked'
+    - condition: numeric_state
+      entity_id: sensor.roomba_battery_level
+      above: 90
+  action:
+    service: vacuum.start
+    data:
+      entity_id: vacuum.roomba
+
+- alias: state_roomba_infinite_clean_mode_off
+  trigger:
+    platform: state
+    entity_id: input_boolean.roomba_infinite_clean_mode
+    to: 'off'
+  action:
+    - service: vacuum.stop
+      data:
+        entity_id: vacuum.roomba
+    - service: vacuum.return_to_base
+      data:
+        entity_id: vacuum.roomba

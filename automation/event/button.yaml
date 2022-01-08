@@ -1,0 +1,75 @@
+- alias: event_button_master_bedroom_right_pressed
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.fibaro_system_fgpb101_button
+      scene_id: 1
+      scene_data: 7680 # single tap
+  action:
+    service: input_boolean.toggle
+    data:
+      entity_id: input_boolean.katherine_sleep
+
+- alias: event_button_master_bedroom_right_double_pressed
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.fibaro_system_fgpb101_button
+      scene_id: 1
+      scene_data: 7860 # double tap
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.bathroom_upstairs
+      transition: "{{ states('input_number.default_light_transition_time') | float }}"
+
+- alias: event_button_living_room_remote_1_pressed
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7680
+        scene_id: 1
+  action:
+    service: script.inside_lights_on
+
+- alias: event_button_living_room_remote_2_pressed
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7680
+        scene_id: 2
+  action:
+    service: python_script.light_turn_on
+    data:
+      entity_id: light.inside_core
+      brightness: 125
+
+- alias: event_button_living_room_remote_3_pressed
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7680
+        scene_id: 3
+  action:
+    service: script.inside_lights_off
+
+- alias: event_button_living_room_remote_middle_pressed
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
+        scene_data: 7680
+        scene_id: 4
+  action:
+    service: media_player.media_play_pause
+    data:
+      entity_id: media_player.living_room_google_tv

@@ -1,0 +1,122 @@
+- alias: state_door_closed_10_minutes
+  trigger:
+    - entity_id: binary_sensor.front_door_open
+      platform: state
+      to: 'off'
+      for:
+        minutes: 10
+    - entity_id: binary_sensor.sunroom_door_open
+      platform: state
+      to: 'off'
+      for:
+        minutes: 10
+    - entity_id: binary_sensor.deck_door_open
+      platform: state
+      to: 'off'
+      for:
+        minutes: 10
+    - entity_id: binary_sensor.garage_door_open
+      platform: state
+      to: 'off'
+      for:
+        minutes: 10
+  action:
+    service: lock.lock
+    data_template:
+      entity_id: >
+        {% if trigger.entity_id == 'binary_sensor.deck_door_open' %}
+          lock.deck_door
+        {% elif trigger.entity_id == 'binary_sensor.front_door_open' %}
+          lock.front_door
+        {% elif trigger.entity_id == 'binary_sensor.garage_door_open' %}
+          lock.garage_door
+        {% elif trigger.entity_id == 'binary_sensor.sunroom_door_open' %}
+          lock.sunroom_door
+        {% endif %}
+
+- alias: state_door_left_open
+  trigger:
+    - entity_id: binary_sensor.front_door_open
+      platform: state
+      to: 'on'
+      for:
+        minutes: 5
+    - entity_id: binary_sensor.sunroom_door_open
+      platform: state
+      to: 'on'
+      for:
+        minutes: 5
+    - entity_id: binary_sensor.deck_door_open
+      platform: state
+      to: 'on'
+      for:
+        minutes: 5
+    - entity_id: binary_sensor.garage_door_open
+      platform: state
+      to: 'on'
+      for:
+        minutes: 5
+    - entity_id: cover.garage_lift_door
+      platform: state
+      to: 'open'
+      for:
+        minutes: 10
+  action:
+    service: script.post_slack_message
+    data_template:
+      message: >
+        {% if trigger.entity_id == 'binary_sensor.deck_door_open' %}
+          Deck door is still open!
+        {% elif trigger.entity_id == 'binary_sensor.front_door_open' %}
+          Front door is still open!
+        {% elif trigger.entity_id == 'binary_sensor.garage_door_open' %}
+          Garage door is still open!
+        {% elif trigger.entity_id == 'binary_sensor.sunroom_door_open' %}
+          Sunroom door is still open!
+        {% elif trigger.entity_id == 'cover.garage_lift_door' %}
+          Garage lift door is still open!
+        {% endif %}
+
+- alias: state_door_front_yard_opened_after_11
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door_open
+      to: 'on'
+    - platform: state
+      entity_id: cover.garage_lift_door
+      to: 'open'
+  condition:
+    condition: or
+    conditions:
+      - condition: time
+        after: '23:00:00'
+      - condition: sun
+        before: sunrise
+        before_offset: '-00:25:00'
+  action:
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.front_yard
+        preserve_color: true
+    - service: timer.start
+      data:
+        entity_id: timer.brighten_front_yard
+        duration: '00:05:00'
+
+- alias: state_door_backyard_opened
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.sunroom_door_open
+        - binary_sensor.deck_door_open
+        - binary_sensor.garage_door_open
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.backyard
+    - service: script.backyard_timer_start

@@ -1,0 +1,113 @@
+- alias: sun_sunrise_irrigation_maintenance_frontyard
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '-01:00:00'
+  condition:
+    - condition: state
+      entity_id: input_select.irrigation_front_yard
+      state: Maintenance
+    - condition: or
+      conditions:
+        - condition: time
+          weekday:
+            - sun
+            - wed
+        - condition: and
+          conditions:
+            - condition: time
+              weekday:
+                - fri
+            - condition: state
+              entity_id: binary_sensor.excessive_heat_today
+              state: 'on'
+  action:
+    - service: python_script.irrigation_run_maintenance
+      data:
+        zones:
+          - 1
+          - 2
+          - 6
+
+- alias: sun_sunrise_irrigation_maintenance_backyard
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '-01:00:00'
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - thu
+    - condition: state
+      entity_id: input_select.irrigation_backyard
+      state: Maintenance
+  action:
+    - service: python_script.irrigation_run_maintenance
+      data:
+        zones:
+          - 3
+          - 4
+          - 5
+
+- alias: sun_sunrise_irrigation_new_seed_phase_2_front_yard
+  trigger:
+    - platform: sun
+      event: sunrise
+  condition:
+    - condition: state
+      entity_id: input_select.irrigation_front_yard
+      state: New Seed (Phase 2)
+    - condition: numeric_state
+      entity_id: sensor.netatmo_home_indoor_rain_rain
+      below: .1
+    - condition: numeric_state
+      entity_id: sensor.netatmo_home_indoor_rain_rain_today
+      below: 1
+  action:
+    - service: script.post_slack_message
+      data:
+        message: Started front yard watering for new seed
+    - service: script.queue_sprinkler_zone
+      data:
+        zone: 1
+        minutes: 15
+    - service: script.queue_sprinkler_zone
+      data:
+        zone: 2
+        minutes: 15
+    - service: script.queue_sprinkler_zone
+      data:
+        zone: 6
+        minutes: 15
+
+- alias: sun_sunrise_irrigation_new_seed_phase_2_backyard
+  trigger:
+    - platform: sun
+      event: sunrise
+  condition:
+    - condition: state
+      entity_id: input_select.irrigation_backyard
+      state: New Seed (Phase 2)
+    - condition: numeric_state
+      entity_id: sensor.netatmo_home_indoor_rain_rain
+      below: .1
+    - condition: numeric_state
+      entity_id: sensor.netatmo_home_indoor_rain_rain_today
+      below: 1
+  action:
+    - service: script.post_slack_message
+      data:
+        message: Started backyard watering for new seed
+    - service: script.queue_sprinkler_zone
+      data:
+        zone: 3
+        minutes: 15
+    - service: script.queue_sprinkler_zone
+      data:
+        zone: 4
+        minutes: 15
+    - service: script.queue_sprinkler_zone
+      data:
+        zone: 5
+        minutes: 15

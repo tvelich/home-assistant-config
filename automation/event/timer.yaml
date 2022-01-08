@@ -1,0 +1,61 @@
+- alias: event_timer_downstairs_bathroom_idle
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.downstairs_bathroom_lights
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.bathroom_downstairs
+      transition: >
+        {% if is_state('sensor.sleep_mode', 'partial') or is_state('sensor.sleep_mode', 'on') %}
+          0
+        {% else %}
+          {{ states('input_number.default_light_transition_time') | float }}
+        {% endif %}
+
+- alias: event_timer_upstairs_bathroom_idle
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.upstairs_bathroom_lights
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.bathroom_upstairs
+      transition: >
+        {% if is_state('sensor.sleep_mode', 'partial') or is_state('sensor.sleep_mode', 'on') %}
+          0
+        {% else %}
+          {{ states('input_number.default_light_transition_time') | float }}
+        {% endif %}
+
+- alias: event_timer_backyard_idle
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.backyard_lights
+  action:
+    service: python_script.light_turn_off
+    data:
+      entity_id: light.backyard
+
+- alias: event_timer_front_yard_idle_at_night
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.brighten_front_yard
+  condition:
+    condition: or
+    conditions:
+      - condition: time
+        after: '23:00:00'
+      - condition: sun
+        before: sunrise
+        before_offset: '-00:25:00'
+  action:
+    service: script.fade_to_dim_front_yard

@@ -1,0 +1,18 @@
+- alias: event_home_assistant_start
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    - service: timer.start
+      data:
+        entity_id: timer.downstairs_bathroom_lights
+        duration: '00:15:00'
+    - service: timer.start
+      data:
+        entity_id: timer.upstairs_bathroom_lights
+        duration: '00:15:00'
+    - service: script.backyard_timer_start
+    - service: timer.start
+      data:
+        entity_id: timer.brighten_front_yard
+        duration: '00:05:00'

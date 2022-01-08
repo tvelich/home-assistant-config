@@ -1,0 +1,18 @@
+- alias: time_pattern_roomba_infinite_clean_mode_check
+  trigger:
+    platform: time_pattern
+    minutes: '/5'
+  condition:
+    - condition: state
+      entity_id: input_boolean.roomba_infinite_clean_mode
+      state: 'on'
+    - condition: state
+      entity_id: vacuum.roomba
+      state: 'docked'
+    - condition: numeric_state
+      entity_id: sensor.roomba_battery_level
+      above: 90
+  action:
+    service: vacuum.start
+    data:
+      entity_id: vacuum.roomba

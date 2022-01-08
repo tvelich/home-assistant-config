@@ -1,0 +1,19 @@
+- alias: state_media_player_kitchen_playing
+  trigger:
+    platform: state
+    entity_id: media_player.kitchen_chromecast
+    to: 'playing'
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.kitchen_media
+
+- alias: state_media_player_kitchen_off
+  trigger:
+    platform: state
+    entity_id: media_player.kitchen_chromecast
+    to: 'off'
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.kitchen_media

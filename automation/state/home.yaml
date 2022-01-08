@@ -1,0 +1,29 @@
+- alias: state_away_to_home
+  trigger:
+    entity_id: binary_sensor.home
+    platform: state
+    to: 'on'
+    from: 'off'
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.abode_alarm
+    - service: script.inside_lights_on
+    - service: nest.set_away_mode
+      data:
+        away_mode: home
+
+- alias: state_home_to_away
+  trigger:
+    entity_id: binary_sensor.home
+    platform: state
+    to: 'off'
+    from: 'on'
+  action:
+    - service: alarm_control_panel.alarm_arm_away
+      data:
+        entity_id: alarm_control_panel.abode_alarm
+    - service: script.inside_lights_off
+    - service: nest.set_away_mode
+      data:
+        away_mode: away
