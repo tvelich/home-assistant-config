@@ -1,12 +1,14 @@
 - platform: template
   sensors:
     near_freezing_last_two_days:
-      value_template: "{{ states('sensor.temperature_last_two_days') | float < 35 }}"
+      value_template: "{{ states('sensor.temperature_last_two_days') | float < 40 }}"
+      delay_on:
+        hours: 2
     high_winds_last_hour:
       value_template: "{{ states('sensor.netatmo_home_indoor_wind_wind_strength') | float > 5 }}"
-    poor_fountain_conditions:
-      delay_on:
+      delay_off:
         minutes: 15
+    poor_fountain_conditions:
       value_template: >
         {{
           is_state('binary_sensor.near_freezing_last_two_days', 'on') or
