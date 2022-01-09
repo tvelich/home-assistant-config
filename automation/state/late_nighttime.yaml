@@ -1,4 +1,4 @@
-- alias: time_lights_front_yard_late_night
+- alias: state_late_nighttime
   trigger:
     platform: state
     entity_id: binary_sensor.late_nighttime
