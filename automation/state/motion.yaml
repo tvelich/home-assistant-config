@@ -16,13 +16,9 @@
       - binary_sensor.garage_camera_motion_detected
     to: 'on'
   condition:
-    condition: or
-    conditions:
-      - condition: time
-        after: '23:00:00'
-      - condition: sun
-        before: sunrise
-        before_offset: '-00:25:00'
+    condition: state
+    entity_id: binary_sensor.late_nighttime
+    state: 'on'
   action:
     - service: python_script.light_turn_on
       data:
@@ -42,8 +38,8 @@
       to: 'on'
   condition:
     condition: state
-    entity_id: sun.sun
-    state: below_horizon
+    entity_id: binary_sensor.low_visibility
+    state: 'on'
   action:
     - service: python_script.light_turn_on
       data:

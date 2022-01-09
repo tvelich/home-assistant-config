@@ -77,7 +77,7 @@
           Garage lift door is still open!
         {% endif %}
 
-- alias: state_door_front_yard_opened_after_11
+- alias: state_door_front_yard_opened_late_nighttime
   trigger:
     - platform: state
       entity_id: binary_sensor.front_door_open
@@ -86,13 +86,9 @@
       entity_id: cover.garage_lift_door
       to: 'open'
   condition:
-    condition: or
-    conditions:
-      - condition: time
-        after: '23:00:00'
-      - condition: sun
-        before: sunrise
-        before_offset: '-00:25:00'
+    condition: state
+    entity_id: binary_sensor.late_nighttime
+    state: 'on'
   action:
     - service: python_script.light_turn_on
       data:
@@ -113,8 +109,8 @@
       to: 'on'
   condition:
     condition: state
-    entity_id: sun.sun
-    state: below_horizon
+    entity_id: binary_sensor.low_visibility
+    state: 'on'
   action:
     - service: python_script.light_turn_on
       data:

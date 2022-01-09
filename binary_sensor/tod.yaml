@@ -1,0 +1,12 @@
+- platform: tod
+  name: nighttime
+  after: sunset
+  after_offset: '00:15:00'
+  before: sunrise
+  before_offset: '-00:15:00'
+
+- platform: tod
+  name: late_nighttime
+  after: '11:00:00'
+  before: sunrise
+  before_offset: '-00:15:00'

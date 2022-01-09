@@ -43,19 +43,15 @@
     data:
       entity_id: light.backyard
 
-- alias: event_timer_front_yard_idle_at_night
+- alias: event_timer_front_yard_idle_late_nighttime
   trigger:
     - platform: event
       event_type: timer.finished
       event_data:
         entity_id: timer.brighten_front_yard
   condition:
-    condition: or
-    conditions:
-      - condition: time
-        after: '23:00:00'
-      - condition: sun
-        before: sunrise
-        before_offset: '-00:25:00'
+    condition: state
+    entity_id: binary_sensor.late_nighttime
+    state: 'on'
   action:
     service: script.fade_to_dim_front_yard

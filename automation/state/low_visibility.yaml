@@ -1,0 +1,15 @@
+- alias: state_lights_on_for_low_visibility
+  trigger:
+    platform: state
+    entity_id: binary_sensor.low_visibility
+    to: 'on'
+  action:
+    service: script.outside_core_lights_on
+
+- alias: state_lights_off_for_high_visibility
+  trigger:
+    platform: state
+    entity_id: binary_sensor.low_visibility
+    to: 'off'
+  action:
+    service: script.outside_lights_off

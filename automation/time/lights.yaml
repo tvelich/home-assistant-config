@@ -1,6 +1,7 @@
-- alias: time_lights_front_yard_night_fade
+- alias: time_lights_front_yard_late_night
   trigger:
-    platform: time
-    at: '23:00:00'
+    platform: state
+    entity_id: binary_sensor.late_nighttime
+    to: 'on'
   action:
     service: script.fade_to_dim_front_yard
