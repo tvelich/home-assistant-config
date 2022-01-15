@@ -92,6 +92,38 @@
     - service: script.reset_google_home_volumes
     - service: script.inside_lights_on
 
+- alias: state_sleep_mode_changed_on_to_off
+  trigger:
+    platform: state
+    entity_id: sensor.sleep_mode
+    from: 'on'
+    to: 'off'
+  mode: restart
+  action:
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.master_bedroom_home
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.abode_alarm
+    - service: script.reset_google_home_volumes
+    - service: script.inside_lights_on
+
+- alias: state_sleep_mode_changed_off_to_on
+  trigger:
+    platform: state
+    entity_id: sensor.sleep_mode
+    from: 'off'
+    to: 'on'
+  mode: restart
+  action:
+    - service: script.media_devices_off
+    - service: alarm_control_panel.alarm_arm_home
+      data:
+        entity_id: alarm_control_panel.abode_alarm
+    - service: script.play_sleep_sounds
+    - service: script.inside_lights_off
+
 - alias: state_sleep_mode_on_with_night_cleaning_enabled
   trigger:
     platform: state

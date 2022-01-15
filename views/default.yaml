@@ -9,8 +9,12 @@ cards:
         cards:
           - type: entity
             entity: device_tracker.tom_phone
-          - type: entity
-            entity: device_tracker.katherine_phone
+          - type: entity-button
+            entity: input_boolean.tom_sleep
+            icon_height: 50px
+            name: Tom
+            icon: 'mdi:sleep'
+            show_name: false
       - type: horizontal-stack
         cards:
           - type: entity-button
@@ -29,18 +33,6 @@ cards:
             entity: switch.outside_lights
             name: Outside
             icon_height: 50px
-      - type: horizontal-stack
-        cards:
-          - type: entity-button
-            entity: input_boolean.tom_sleep
-            icon_height: 50px
-            name: Tom
-            icon: 'mdi:sleep'
-          - type: entity-button
-            entity: input_boolean.katherine_sleep
-            icon_height: 50px
-            name: Katherine
-            icon: 'mdi:sleep'
       - type: horizontal-stack
         cards:
           - type: picture-glance

@@ -9,7 +9,7 @@
   action:
     service: input_boolean.toggle
     data:
-      entity_id: input_boolean.katherine_sleep
+      entity_id: input_boolean.tom_sleep
 
 - alias: event_button_master_bedroom_right_double_pressed
   trigger:

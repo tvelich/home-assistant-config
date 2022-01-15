@@ -39,4 +39,4 @@
     laundry_room_water_detected:
       value_template: "{{ is_state('sensor.laundry_room_flood', '2') }}"
     home:
-      value_template: "{{ states('device_tracker.tom_phone') == 'home' or states('device_tracker.katherine_phone') == 'home' }}"
+      value_template: "{{ states('device_tracker.tom_phone') == 'home' }}"
