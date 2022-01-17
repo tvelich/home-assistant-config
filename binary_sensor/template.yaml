@@ -12,11 +12,21 @@
       delay_off:
         minutes: 15
     near_freezing_last_two_days:
-      value_template: "{{ states('sensor.temperature_last_two_days') | float < 40 }}"
+      value_template: >
+        {% if is_state('sensor.sleep_mode', 'unavailable') %}
+          unavailable
+        {% else %}
+          states('sensor.temperature_last_two_days') | float < 40
+        {% endif %}
       delay_on:
         hours: 2
     high_winds_last_hour:
-      value_template: "{{ states('sensor.netatmo_home_indoor_wind_wind_strength') | float > 5 }}"
+      value_template: >
+        {% if is_state('sensor.sleep_mode', 'unavailable') %}
+          unavailable
+        {% else %}
+          states('sensor.netatmo_home_indoor_wind_wind_strength') | float > 5
+        {% endif %}
       delay_off:
         minutes: 15
     poor_fountain_conditions:
