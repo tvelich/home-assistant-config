@@ -5,4 +5,11 @@ downstairs_lights_on:
         entity_id:
           - light.downstairs
           - switch.desk
-    - service: script.colorloop_bar_lights
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_bloom_1
+        color_name: green
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.hue_lightstrip_plus_1
+        color_name: blue

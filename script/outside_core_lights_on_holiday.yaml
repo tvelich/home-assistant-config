@@ -5,72 +5,9 @@ outside_core_lights_on_holiday:
         entity_id: switch.outdoor_string_holiday_lights
     - service: python_script.light_turn_on
       data:
-        entity_id:
-          - light.front_yard
-          - light.landscape_spot
-        color_name: blue
-    - delay: '00:00:03'
+        entity_id: light.holiday_outside_color_1
+        color_name: green
     - service: python_script.light_turn_on
       data:
-        entity_id: light.hue_outdoor_spot_4
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_outdoor_spot_2
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_outdoor_spot_3
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_outdoor_bollard_1
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_outdoor_bollard_2
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_color_lamp_1
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_outdoor_spot_1
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_outdoor_spot_5
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_color_candle_1
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_color_candle_2
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_color_candle_3
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_color_lamp_3
-        effect: colorloop
-    - delay: '00:00:03'
-    - service: python_script.light_turn_on
-      data:
-        entity_id: light.hue_color_lamp_2
-        effect: colorloop
+        entity_id: light.holiday_outside_color_2
+        color_name: red

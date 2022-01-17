@@ -9,4 +9,16 @@ outside_core_lights_on_default:
       data:
         entity_id: light.landscape_path
         brightness: 85
-    - service: script.colorloop_landscape_lights
+    - service: python_script.light_turn_on
+      data:
+        entity_id:
+          - light.hue_outdoor_spot_1
+          - light.hue_outdoor_spot_5
+        color_name: green
+    - service: python_script.light_turn_on
+      data:
+        entity_id:
+          - light.hue_outdoor_spot_2
+          - light.hue_outdoor_spot_3
+          - light.hue_outdoor_spot_4
+        color_name: blue
