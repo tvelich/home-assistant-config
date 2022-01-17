@@ -1,0 +1,10 @@
+outside_lights_on:
+  sequence:
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.outside
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.landscape_path
+        brightness: 85
+    - service: script.colorloop_landscape_lights

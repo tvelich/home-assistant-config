@@ -1,0 +1,8 @@
+downstairs_lights_on:
+  sequence:
+    - service: python_script.light_turn_on
+      data:
+        entity_id:
+          - light.downstairs
+          - switch.desk
+    - service: script.colorloop_bar_lights

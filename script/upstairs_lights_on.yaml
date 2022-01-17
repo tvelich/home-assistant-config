@@ -1,0 +1,10 @@
+upstairs_lights_on:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id:
+          - switch.dining_room_lights
+          - switch.holiday_lights
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.upstairs

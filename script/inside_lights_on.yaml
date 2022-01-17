@@ -1,0 +1,12 @@
+inside_lights_on:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id:
+          - switch.dining_room_lights
+          - switch.desk
+          - switch.holiday_lights
+    - service: python_script.light_turn_on
+      data:
+        entity_id: light.inside_core
+    - service: script.colorloop_bar_lights

@@ -17,7 +17,7 @@ python_script:
 recorder: !include recorder.yaml
 rest_command: !include rest_command.yaml
 roomba: !include roomba.yaml
-script: !include script.yaml
+script: !include_dir_list script
 sun:
 system_health:
 timer: !include timer.yaml

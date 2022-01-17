@@ -1,0 +1,10 @@
+post_slack_message:
+  sequence:
+    - service: rest_command.slack_api
+      data_template:
+        endpoint: chat.postMessage
+        payload: >
+          {
+            "channel": "{{ states('sensor.slack_home_assistant_channel_id') }}",
+            "text": "{{ message }}"
+          }
