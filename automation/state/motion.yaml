@@ -1,4 +1,4 @@
-- alias: state_motion_mailbox
+- alias: state_motion_mailbox_detected
   trigger:
     entity_id: binary_sensor.mailbox_motion
     platform: state

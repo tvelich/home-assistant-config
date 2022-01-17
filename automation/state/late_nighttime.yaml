@@ -1,4 +1,4 @@
-- alias: state_late_nighttime
+- alias: state_late_nighttime_on
   trigger:
     platform: state
     entity_id: binary_sensor.late_nighttime

@@ -1,4 +1,4 @@
-- alias: state_away_to_home
+- alias: state_home_off
   trigger:
     entity_id: binary_sensor.home
     platform: state
@@ -13,7 +13,7 @@
       data:
         away_mode: home
 
-- alias: state_home_to_away
+- alias: state_home_on
   trigger:
     entity_id: binary_sensor.home
     platform: state
