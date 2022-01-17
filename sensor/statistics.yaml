@@ -1,5 +1,6 @@
 - platform: statistics
   name: Temperature Last Two Days
+  state_characteristic: mean
   entity_id: sensor.netatmo_home_indoor_outdoor_temperature
   sampling_size: 1500
   max_age:
