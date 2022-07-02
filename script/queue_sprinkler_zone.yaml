@@ -15,7 +15,6 @@ queue_sprinkler_zone:
       target:
         entity_id: "switch.zone_{{ zone }}"
       data:
-        zone_id: "{{ zone | int }}"
         zone_run_time: "{{ minutes | int * 60}}"
     - delay:
         seconds: "{{ [0, (minutes * 60) - 15] | max }}"
