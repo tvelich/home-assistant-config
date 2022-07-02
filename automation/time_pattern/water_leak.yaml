@@ -14,26 +14,32 @@
     - entity_id: binary_sensor.garage_sink_water_detected
       platform: state
       to: 'on'
-    - entity_id: binary_sensor.laundry_room_water_detected
+    - entity_id: binary_sensor.water_heater_water_detected
+      platform: state
+      to: 'on'
+    - entity_id: binary_sensor.washing_machine_water_detected
       platform: state
       to: 'on'
   condition:
     condition: or
     conditions:
       - condition: state
-        entity_id: 'binary_sensor.downstairs_bathroom_water_detected'
+        entity_id: binary_sensor.downstairs_bathroom_water_detected
         state: 'on'
       - condition: state
-        entity_id: 'binary_sensor.upstairs_bathroom_water_detected'
+        entity_id: binary_sensor.upstairs_bathroom_water_detected
         state: 'on'
       - condition: state
-        entity_id: 'binary_sensor.main_valve_water_detected'
+        entity_id: binary_sensor.main_valve_water_detected
         state: 'on'
       - condition: state
-        entity_id: 'binary_sensor.garage_sink_water_detected'
+        entity_id: binary_sensor.garage_sink_water_detected
         state: 'on'
       - condition: state
-        entity_id: 'binary_sensor.laundry_room_water_detected'
+        entity_id: binary_sensor.water_heater_water_detected
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.washing_machine_water_detected
         state: 'on'
   action:
     service: script.post_slack_message
@@ -47,8 +53,10 @@
           Water detected at main valve!
         {% elif states('binary_sensor.garage_sink_water_detected') == 'on' %}
           Water detected at garage sink!
-        {% elif states('binary_sensor.laundry_room_water_detected') == 'on' %}
-          Water detected in laundry room!
+        {% elif states('binary_sensor.water_heater_water_detected') == 'on' %}
+          Water detected at water heater!
+        {% elif states('binary_sensor.washing_machine_water_detected') == 'on' %}
+          Water detected at washing machine!
         {% else %}
           Water detected!
         {% endif %}

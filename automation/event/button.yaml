@@ -1,11 +1,10 @@
 - alias: event_button_master_bedroom_right_pressed
   trigger:
     platform: event
-    event_type: zwave.scene_activated
+    event_type: zwave_js_value_notification
     event_data:
-      entity_id: zwave.fibaro_system_fgpb101_button
-      scene_id: 1
-      scene_data: 7680 # single tap
+      node_id: 31
+      value: KeyPressed
   action:
     service: input_boolean.toggle
     data:
@@ -14,11 +13,10 @@
 - alias: event_button_master_bedroom_right_double_pressed
   trigger:
     platform: event
-    event_type: zwave.scene_activated
+    event_type: zwave_js_value_notification
     event_data:
-      entity_id: zwave.fibaro_system_fgpb101_button
-      scene_id: 1
-      scene_data: 7860 # double tap
+      node_id: 31
+      value: KeyPressed2x
   action:
     service: light.turn_off
     data:
@@ -28,22 +26,20 @@
 - alias: event_button_living_room_remote_1_pressed
   trigger:
     - platform: event
-      event_type: zwave.scene_activated
+      event_type: zwave_js_value_notification
       event_data:
-        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
-        scene_data: 7680
-        scene_id: 1
+        node_id: 5
+        property_key: "001"
   action:
     service: script.inside_lights_on
 
 - alias: event_button_living_room_remote_2_pressed
   trigger:
     - platform: event
-      event_type: zwave.scene_activated
+      event_type: zwave_js_value_notification
       event_data:
-        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
-        scene_data: 7680
-        scene_id: 2
+        node_id: 5
+        property_key: "002"
   action:
     service: python_script.light_turn_on
     data:
@@ -53,23 +49,22 @@
 - alias: event_button_living_room_remote_3_pressed
   trigger:
     - platform: event
-      event_type: zwave.scene_activated
+      event_type: zwave_js_value_notification
       event_data:
-        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
-        scene_data: 7680
-        scene_id: 3
+        node_id: 5
+        property_key: "003"
   action:
     service: script.inside_lights_off
 
 - alias: event_button_living_room_remote_middle_pressed
   trigger:
     - platform: event
-      event_type: zwave.scene_activated
+      event_type: zwave_js_value_notification
       event_data:
-        entity_id: zwave.aeotec_limited_zwa003_nanomote_quad
-        scene_data: 7680
-        scene_id: 4
+        node_id: 5
+        property_key: "004"
   action:
-    service: media_player.media_play_pause
+    service: light.turn_on
     data:
-      entity_id: media_player.living_room_google_tv
+      entity_id: light.living_room
+      flash: short

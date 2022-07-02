@@ -21,7 +21,6 @@ script: !include_dir_list script
 sun:
 system_health:
 timer: !include timer.yaml
-zwave: !include zwave.yaml
 
 # Platforms
 binary_sensor: !include_dir_merge_list binary_sensor
