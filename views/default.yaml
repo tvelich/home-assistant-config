@@ -51,9 +51,9 @@ cards:
           - type: picture-glance
             camera_image: camera.garage
             entities:
-              - lock.garage_door
-              - cover.garage_lift_door
-              - binary_sensor.garage_door_open
+              - lock.garage_back_door
+              - cover.garage_door
+              - binary_sensor.garage_back_door_open
           - type: picture-glance
             camera_image: camera.sunroom
             entities:

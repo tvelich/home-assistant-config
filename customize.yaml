@@ -6,9 +6,9 @@ lock.front_door:
   friendly_name: Front Door Lock
 lock.deck_door:
   friendly_name: Deck Door Lock
-lock.garage_door:
-  friendly_name: Garage Door Lock
+lock.garage_back_door:
+  friendly_name: Garage Back Door Lock
 lock.sunroom_door:
   friendly_name: Sunroom Door Lock
-cover.garage_lift_door:
-  friendly_name: Garage Lift Door
+cover.garage_door:
+  friendly_name: Garage Door

@@ -15,7 +15,7 @@
       to: 'unlocked'
       for:
         minutes: 20
-    - entity_id: lock.garage_door
+    - entity_id: lock.garage_back_door
       platform: state
       to: 'unlocked'
       for:
@@ -28,8 +28,8 @@
           Deck door is still unlocked!
         {% elif trigger.entity_id == 'lock.front_door' %}
           Front door is still unlocked!
-        {% elif trigger.entity_id == 'lock.garage_door' %}
-          Garage door is still unlocked!
+        {% elif trigger.entity_id == 'lock.garage_back_door' %}
+          Garage back door is still unlocked!
         {% elif trigger.entity_id == 'lock.sunroom_door' %}
           Sunroom door is still unlocked!
         {% endif %}
