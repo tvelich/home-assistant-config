@@ -2,7 +2,7 @@ outside_lights_on:
   sequence:
     - service: python_script.light_turn_on
       data:
-        entity_id: light.outside
+        entity_id: light.hue_outside
     - service: python_script.light_turn_on
       data:
         entity_id: light.landscape_path

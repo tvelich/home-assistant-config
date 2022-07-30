@@ -1,0 +1,3 @@
+- platform: switch
+  name: Dining Room
+  entity_id: switch.dining_room_lights

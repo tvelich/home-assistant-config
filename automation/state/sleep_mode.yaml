@@ -74,7 +74,7 @@
     - service: light.turn_on
       data:
         entity_id:
-          - light.downstairs
+          - light.hue_downstairs
         brightness_pct: 100
         transition: "{{ states('input_number.default_light_transition_time') | float }}"
 

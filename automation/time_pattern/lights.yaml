@@ -10,10 +10,10 @@
       entity_id: input_boolean.roomba_schedule_night_cleaning
       state: 'on'
     - condition: state
-      entity_id: light.downstairs
+      entity_id: light.hue_downstairs
       state: 'off'
   action:
     service: python_script.light_turn_on
     data:
-      entity_id: light.downstairs
+      entity_id: light.hue_downstairs
       brightness: 125

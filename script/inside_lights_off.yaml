@@ -8,4 +8,4 @@ inside_lights_off:
           - switch.holiday_lights
     - service: python_script.light_turn_off
       data:
-        entity_id: light.inside
+        entity_id: light.hue_inside

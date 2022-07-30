@@ -7,4 +7,4 @@ upstairs_lights_on:
           - switch.holiday_lights
     - service: python_script.light_turn_on
       data:
-        entity_id: light.upstairs
+        entity_id: light.hue_upstairs

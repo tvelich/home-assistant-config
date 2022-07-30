@@ -18,19 +18,19 @@ cards:
       - type: horizontal-stack
         cards:
           - type: entity-button
-            entity: switch.inside_lights
+            entity: light.inside
             name: Inside
             icon_height: 50px
           - type: entity-button
-            entity: switch.upstairs_lights
+            entity: light.upstairs
             name: Upstairs
             icon_height: 50px
           - type: entity-button
-            entity: switch.downstairs_lights
+            entity: light.downstairs
             name: Downstairs
             icon_height: 50px
           - type: entity-button
-            entity: switch.outside_lights
+            entity: light.outside
             name: Outside
             icon_height: 50px
       - type: horizontal-stack

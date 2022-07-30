@@ -1,0 +1,18 @@
+- platform: group
+  name: "Inside"
+  entities:
+    - light.hue_inside
+    - light.dining_room
+- platform: group
+  name: "Outside"
+  entities:
+    - light.hue_outside
+- platform: group
+  name: "Upstairs"
+  entities:
+    - light.hue_upstairs
+    - light.dining_room
+- platform: group
+  name: "Downstairs"
+  entities:
+    - light.hue_downstairs
