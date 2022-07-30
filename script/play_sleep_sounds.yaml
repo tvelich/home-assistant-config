@@ -3,7 +3,7 @@ play_sleep_sounds:
     - service: media_player.volume_set
       data:
         entity_id: media_player.master_bedroom_home
-        volume_level: 0.35
+        volume_level: 0.60
     - service: media_player.play_media
       data:
         entity_id: media_player.master_bedroom_home
