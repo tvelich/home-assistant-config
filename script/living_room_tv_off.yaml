@@ -1,5 +1,0 @@
-living_room_tv_off:
-  sequence:
-    - service: remote.turn_off
-      data:
-        entity_id: remote.living_room

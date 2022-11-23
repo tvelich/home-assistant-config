@@ -1,108 +1,7 @@
-- alias: state_sleep_mode_changed_off_to_partial
-  trigger:
-    platform: state
-    entity_id: sensor.sleep_mode
-    from: 'off'
-    to: partial
-  mode: restart
-  action:
-    - service: script.play_sleep_sounds
-    - service: switch.turn_off
-      data:
-        entity_id: switch.dining_room_lights
-    - service: light.turn_off
-      data:
-        entity_id:
-          - light.master_bedroom
-          - light.hallway_upstairs
-          - light.guest_room
-          - light.bathroom_upstairs
-        transition: "{{ states('input_number.light_transition') | float }}"
-    - service: light.turn_on
-      data:
-        entity_id:
-          - light.kitchen
-          - light.family_room
-          - light.entryway
-        brightness_pct: 15
-        transition: "{{ states('input_number.light_transition') | float }}"
-
-- alias: state_sleep_mode_changed_partial_to_on
-  trigger:
-    platform: state
-    entity_id: sensor.sleep_mode
-    from: partial
-    to: 'on'
-  mode: restart
-  action:
-    - service: alarm_control_panel.alarm_arm_home
-      data:
-        entity_id: alarm_control_panel.abode_alarm
-    - service: homeassistant.turn_off
-      data:
-        entity_id:
-          - media_player.dining_room_home
-          - media_player.family_room_home
-          - media_player.kitchen_chromecast
-          - media_player.living_room_home
-          - media_player.garage_home
-          - media_player.sunroom_home
-          - media_player.living_room_desk_home
-          - media_player.sony_bravia_tv
-          - remote.family_room
-    - service: light.turn_off
-      data:
-        entity_id: light.inside
-        transition: "{{ states('input_number.light_transition') | float }}"
-
-- alias: state_sleep_mode_changed_on_to_partial
-  trigger:
-    platform: state
-    entity_id: sensor.sleep_mode
-    from: 'on'
-    to: partial
-  mode: restart
-  action:
-    - service: alarm_control_panel.alarm_disarm
-      data:
-        entity_id: alarm_control_panel.abode_alarm
-    - service: light.turn_on
-      data:
-        entity_id:
-          - light.kitchen
-          - light.family_room
-          - light.entryway
-        brightness_pct: 15
-        transition: "{{ states('input_number.light_transition') | float }}"
-    - service: light.turn_on
-      data:
-        entity_id:
-          - light.hue_downstairs
-        brightness_pct: "{{ states('input_number.light_brightness') | float }}"
-        transition: "{{ states('input_number.light_transition') | float }}"
-
-- alias: state_sleep_mode_changed_partial_to_off
-  trigger:
-    platform: state
-    entity_id: sensor.sleep_mode
-    from: partial
-    to: 'off'
-  mode: restart
-  action:
-    - service: media_player.turn_off
-      data:
-        entity_id: media_player.master_bedroom_home
-    - service: script.reset_google_home_volumes
-    - service: light.turn_on
-      data:
-        entity_id: light.inside
-        brightness_pct: "{{ states('input_number.light_brightness') | float }}"
-        transition: "{{ states('input_number.light_transition') | float }}"
-
 - alias: state_sleep_mode_changed_on_to_off
   trigger:
     platform: state
-    entity_id: sensor.sleep_mode
+    entity_id: input_boolean.sleep_mode_enabled
     from: 'on'
     to: 'off'
   mode: restart
@@ -123,7 +22,7 @@
 - alias: state_sleep_mode_changed_off_to_on
   trigger:
     platform: state
-    entity_id: sensor.sleep_mode
+    entity_id: input_boolean.sleep_mode_enabled
     from: 'off'
     to: 'on'
   mode: restart
@@ -137,40 +36,3 @@
       data:
         entity_id: light.inside
         transition: "{{ states('input_number.light_transition') | float }}"
-
-- alias: state_sleep_mode_on_with_night_cleaning_enabled
-  trigger:
-    platform: state
-    entity_id: sensor.sleep_mode
-    to: 'on'
-  condition:
-    condition: state
-    entity_id: input_boolean.roomba_schedule_night_cleaning
-    state: 'on'
-  action:
-    service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.roomba_infinite_clean_mode
-
-- alias: state_sleep_mode_off_with_night_cleaning_enabled
-  trigger:
-    platform: state
-    entity_id: sensor.sleep_mode
-    to: 'off'
-  condition:
-    condition: state
-    entity_id: input_boolean.roomba_schedule_night_cleaning
-    state: 'on'
-  action:
-    - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.roomba_infinite_clean_mode
-    - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.roomba_schedule_night_cleaning
-    - service: vacuum.stop
-      data:
-        entity_id: vacuum.roomba
-    - service: vacuum.return_to_base
-      data:
-        entity_id: vacuum.roomba

@@ -1,12 +1,10 @@
 - alias: time_pattern_sleep_sounds_check
   trigger:
     platform: time_pattern
-    minutes: 55
+    minutes: "/55"
   condition:
     condition: state
-    entity_id: sensor.sleep_mode
-    state:
-      - 'on'
-      - 'partial'
+    entity_id: input_boolean.sleep_mode_enabled
+    state: 'on'
   action:
     service: script.play_sleep_sounds

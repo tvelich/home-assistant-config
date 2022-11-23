@@ -4,8 +4,7 @@ backyard_timer_start:
       data_template:
         entity_id: timer.backyard_lights
         duration: >
-          {% set hour=states("sensor.time").split(':')[0] | int %}
-          {% if hour >= 22 or hour <= 8 %}
+          {% if is_state('binary_sensor.late_nighttime', 'on') %}
             00:05:00
           {% else %}
             00:15:00

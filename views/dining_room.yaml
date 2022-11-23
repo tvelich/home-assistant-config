@@ -1,6 +1,0 @@
-path: dining_room_view
-title: Dining Room
-badges: []
-cards:
-  - type: media-control
-    entity: media_player.dining_room_home

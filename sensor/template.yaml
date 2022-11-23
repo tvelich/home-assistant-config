@@ -2,10 +2,3 @@
   sensors:
     slack_home_assistant_channel_id:
       value_template: !secret slack_home_assistant_channel_id
-    sleep_mode:
-      value_template: >
-        {% if is_state('input_boolean.tom_sleep', 'off') %}
-          off
-        {% elif is_state('input_boolean.tom_sleep', 'on') %}
-          on
-        {% endif %}

@@ -1,9 +1,0 @@
-path: garage_view
-title: Garage
-badges: []
-cards:
-  - type: entities
-    entities:
-      - switch.irrigation_controller
-    title: Switch
-    show_header_toggle: false

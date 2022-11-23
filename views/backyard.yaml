@@ -1,8 +1,0 @@
-path: backyard_view
-title: Backyard
-badges: []
-cards:
-  - type: entities
-    entities:
-      - light.backyard
-    title: Light

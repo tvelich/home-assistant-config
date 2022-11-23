@@ -1,8 +1,0 @@
-path: front_yard_view
-title: Front Yard
-badges: []
-cards:
-  - type: entities
-    entities:
-      - light.front_yard
-    title: Light

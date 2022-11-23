@@ -16,7 +16,7 @@
     data:
       entity_id: timer.downstairs_bathroom_lights
       duration: >
-        {% if is_state('sensor.sleep_mode', 'on') %}
+        {% if is_state('input_boolean.sleep_mode_enabled', 'on') %}
           00:01:00
         {% else %}
           00:15:00
@@ -32,7 +32,7 @@
     data:
       entity_id: timer.upstairs_bathroom_lights
       duration: >
-        {% if is_state('sensor.sleep_mode', 'on') %}
+        {% if is_state('input_boolean.sleep_mode_enabled', 'on') %}
           00:01:00
         {% else %}
           00:15:00

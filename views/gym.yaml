@@ -1,8 +1,0 @@
-path: gym_view
-title: Gym
-badges: []
-cards:
-  - type: entities
-    entities:
-      - light.gym
-    title: Light

@@ -5,7 +5,6 @@ media_devices_off:
         entity_id:
           - media_player.dining_room_home
           - media_player.family_room_home
-          - media_player.kitchen_chromecast
           - media_player.living_room_google_tv
           - media_player.living_room_home
           - media_player.garage_home

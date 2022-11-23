@@ -10,9 +10,8 @@ cards:
           - type: entity
             entity: device_tracker.tom_phone
           - type: entity-button
-            entity: input_boolean.tom_sleep
+            entity: input_boolean.sleep_mode_enabled
             icon_height: 50px
-            name: Tom
             icon: 'mdi:sleep'
             show_name: false
       - type: horizontal-stack

@@ -1,8 +1,0 @@
-path: office_view
-title: Office
-badges: []
-cards:
-  - type: entities
-    entities:
-      - light.office
-    title: Light

@@ -1,7 +1,7 @@
 - alias: time_pattern_fireplace_check
   trigger:
     - platform: time_pattern
-      minutes: "/1"
+      minutes: "/10"
   condition:
     condition: state
     entity_id: input_boolean.fireplace_enabled

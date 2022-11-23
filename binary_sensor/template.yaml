@@ -35,16 +35,5 @@
           is_state('binary_sensor.near_freezing_last_two_days', 'on') or
           is_state('binary_sensor.high_winds_last_hour', 'on')
         }}
-    excessive_heat_today_already:
-      value_template: "{{ states('sensor.netatmo_home_indoor_outdoor_temperature') | float > 85 }}"
-    excessive_heat_today_predicted:
-      value_template: "{{ state_attr('weather.openweathermap', 'forecast')[0].temperature > 85 }}"
-    excessive_heat_today:
-      value_template: "{{ is_state('binary_sensor.excessive_heat_today_already', 'on') or is_state('binary_sensor.excessive_heat_today_predicted', 'on') }}"
-    is_holiday_season:
-      value_template: >
-        {% set month = now().month %}
-        {% set day = now().day %}
-        {{ (month == 11 and day > 26) or (month == 12 and day < 31) }}
     home:
       value_template: "{{ states('device_tracker.tom_phone') == 'home' }}"

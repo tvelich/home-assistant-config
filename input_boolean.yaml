@@ -1,11 +1,2 @@
-roomba_schedule_night_cleaning:
-roomba_infinite_clean_mode:
 fireplace_enabled:
-irrigation_zone_1:
-irrigation_zone_2:
-irrigation_zone_3:
-irrigation_zone_4:
-irrigation_zone_5:
-irrigation_zone_6:
-snooze_circadian_lighting:
-tom_sleep:
+sleep_mode_enabled:
