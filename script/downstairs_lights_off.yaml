@@ -1,7 +1,0 @@
-downstairs_lights_off:
-  sequence:
-    service: python_script.light_turn_off
-    data:
-      entity_id:
-        - light.hue_downstairs
-        - switch.desk

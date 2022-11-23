@@ -4,7 +4,11 @@
     entity_id: binary_sensor.low_visibility
     to: 'on'
   action:
-    service: script.outside_core_lights_on
+    service: light.turn_on
+    data:
+      entity_id: light.outside_core
+      brightness_pct: 100
+      transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: state_lights_off_for_high_visibility
   trigger:
@@ -12,4 +16,7 @@
     entity_id: binary_sensor.low_visibility
     to: 'off'
   action:
-    service: script.outside_lights_off
+    - service: light.turn_off
+      data:
+        entity_id: light.outside_core
+        transition: "{{ states('input_number.light_transition') | float }}"

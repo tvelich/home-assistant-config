@@ -1,8 +1,0 @@
-outside_core_lights_on:
-  sequence:
-    - service_template: >
-        {% if states('binary_sensor.is_holiday_season') == 'on' %}
-          script.outside_core_lights_on_holiday
-        {% else %}
-          script.outside_core_lights_on_default
-        {% endif %}

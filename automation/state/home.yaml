@@ -8,7 +8,11 @@
     - service: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.abode_alarm
-    - service: script.inside_lights_on
+    - service: light.turn_on
+      data:
+        entity_id: light.inside
+        brightness_pct: "{{ states('input_number.light_brightness') | float }}"
+        transition: "{{ states('input_number.light_transition') | float }}"
     - service: nest.set_away_mode
       data:
         away_mode: home
@@ -23,7 +27,10 @@
     - service: alarm_control_panel.alarm_arm_away
       data:
         entity_id: alarm_control_panel.abode_alarm
-    - service: script.inside_lights_off
+    - service: light.turn_off
+      data:
+        entity_id: light.inside
+        transition: "{{ states('input_number.light_transition') | float }}"
     - service: nest.set_away_mode
       data:
         away_mode: away

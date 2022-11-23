@@ -21,7 +21,7 @@
     service: light.turn_off
     data:
       entity_id: light.bathroom_upstairs
-      transition: "{{ states('input_number.default_light_transition_time') | float }}"
+      transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: event_button_living_room_remote_1_pressed
   trigger:
@@ -31,7 +31,11 @@
         node_id: 5
         property_key: "001"
   action:
-    service: script.inside_lights_on
+    service: light.turn_on
+    data:
+      entity_id: light.inside_core
+      brightness_pct: "{{ states('input_number.light_brightness') | float }}"
+      transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: event_button_living_room_remote_2_pressed
   trigger:
@@ -41,10 +45,11 @@
         node_id: 5
         property_key: "002"
   action:
-    service: python_script.light_turn_on
+    service: light.turn_on
     data:
       entity_id: light.inside_core
-      brightness: 125
+      brightness_pct: "{{ states('input_number.light_brightness') | float / 2 }}"
+      transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: event_button_living_room_remote_3_pressed
   trigger:
@@ -54,7 +59,10 @@
         node_id: 5
         property_key: "003"
   action:
-    service: script.inside_lights_off
+    service: light.turn_off
+    data:
+      entity_id: light.inside_core
+      transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: event_button_living_room_remote_middle_pressed
   trigger:

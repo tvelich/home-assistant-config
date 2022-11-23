@@ -13,7 +13,8 @@
       entity_id: light.hue_downstairs
       state: 'off'
   action:
-    service: python_script.light_turn_on
+    service: light.turn_on
     data:
       entity_id: light.hue_downstairs
-      brightness: 125
+      brightness_pct: 50
+      transition: "{{ states('input_number.light_transition') | float }}"

@@ -17,7 +17,7 @@
           - light.hallway_upstairs
           - light.guest_room
           - light.bathroom_upstairs
-        transition: "{{ states('input_number.default_light_transition_time') | float }}"
+        transition: "{{ states('input_number.light_transition') | float }}"
     - service: light.turn_on
       data:
         entity_id:
@@ -25,7 +25,7 @@
           - light.family_room
           - light.entryway
         brightness_pct: 15
-        transition: "{{ states('input_number.default_light_transition_time') | float }}"
+        transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: state_sleep_mode_changed_partial_to_on
   trigger:
@@ -50,7 +50,10 @@
           - media_player.living_room_desk_home
           - media_player.sony_bravia_tv
           - remote.family_room
-    - service: script.inside_lights_off
+    - service: light.turn_off
+      data:
+        entity_id: light.inside
+        transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: state_sleep_mode_changed_on_to_partial
   trigger:
@@ -70,13 +73,13 @@
           - light.family_room
           - light.entryway
         brightness_pct: 15
-        transition: "{{ states('input_number.default_light_transition_time') | float }}"
+        transition: "{{ states('input_number.light_transition') | float }}"
     - service: light.turn_on
       data:
         entity_id:
           - light.hue_downstairs
-        brightness_pct: 100
-        transition: "{{ states('input_number.default_light_transition_time') | float }}"
+        brightness_pct: "{{ states('input_number.light_brightness') | float }}"
+        transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: state_sleep_mode_changed_partial_to_off
   trigger:
@@ -90,7 +93,11 @@
       data:
         entity_id: media_player.master_bedroom_home
     - service: script.reset_google_home_volumes
-    - service: script.inside_lights_on
+    - service: light.turn_on
+      data:
+        entity_id: light.inside
+        brightness_pct: "{{ states('input_number.light_brightness') | float }}"
+        transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: state_sleep_mode_changed_on_to_off
   trigger:
@@ -107,7 +114,11 @@
       data:
         entity_id: alarm_control_panel.abode_alarm
     - service: script.reset_google_home_volumes
-    - service: script.inside_lights_on
+    - service: light.turn_on
+      data:
+        entity_id: light.inside
+        brightness_pct: "{{ states('input_number.light_brightness') | float }}"
+        transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: state_sleep_mode_changed_off_to_on
   trigger:
@@ -122,7 +133,10 @@
       data:
         entity_id: alarm_control_panel.abode_alarm
     - service: script.play_sleep_sounds
-    - service: script.inside_lights_off
+    - service: light.turn_off
+      data:
+        entity_id: light.inside
+        transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: state_sleep_mode_on_with_night_cleaning_enabled
   trigger:

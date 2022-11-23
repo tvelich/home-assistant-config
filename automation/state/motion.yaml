@@ -20,10 +20,11 @@
     entity_id: binary_sensor.late_nighttime
     state: 'on'
   action:
-    - service: python_script.light_turn_on
+    - service: light.turn_on
       data:
         entity_id: light.front_yard
-        preserve_color: true
+        brightness_pct: 100
+        transition: "{{ states('input_number.light_transition') | float }}"
     - service: timer.start
       data:
         entity_id: timer.brighten_front_yard
@@ -41,9 +42,11 @@
     entity_id: binary_sensor.low_visibility
     state: 'on'
   action:
-    - service: python_script.light_turn_on
+    - service: light.turn_on
       data:
         entity_id: light.backyard
+        brightness_pct: 100
+        transition: "{{ states('input_number.light_transition') | float }}"
     - service: script.backyard_timer_start
 
 - alias: state_motion_downstairs_bathroom_detected
@@ -59,9 +62,9 @@
           {% if is_state('sensor.sleep_mode', 'on') %}
             1
           {% else %}
-            100
+            {{ states('input_number.light_brightness') | float }}
           {% endif %}
-        transition: "{{ states('input_number.default_light_transition_time') | float }}"
+        transition: "{{ states('input_number.light_transition') | float }}"
     - service: timer.start
       data:
         entity_id: timer.downstairs_bathroom_lights
@@ -85,9 +88,9 @@
           {% if is_state('sensor.sleep_mode', 'partial') or is_state('sensor.sleep_mode', 'on') %}
             1
           {% else %}
-            100
+            {{ states('input_number.light_brightness') | float }}
           {% endif %}
-        transition: "{{ states('input_number.default_light_transition_time') | float }}"
+        transition: "{{ states('input_number.light_transition') | float }}"
     - service: timer.start
       data:
         entity_id: timer.upstairs_bathroom_lights

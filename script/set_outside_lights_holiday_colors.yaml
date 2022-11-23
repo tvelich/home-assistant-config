@@ -1,0 +1,12 @@
+set_outside_lights_holiday_colors:
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.holiday_outside_color_1
+        color_name: green
+        transition: "{{ states('input_number.light_transition') | float }}"
+    - service: light.turn_on
+      data:
+        entity_id: light.holiday_outside_color_2
+        color_name: red
+        transition: "{{ states('input_number.light_transition') | float }}"

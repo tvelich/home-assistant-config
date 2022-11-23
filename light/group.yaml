@@ -4,9 +4,20 @@
     - light.hue_inside
     - light.dining_room
 - platform: group
+  name: "Inside Core"
+  entities:
+    - light.hue_inside_core
+    - light.dining_room
+- platform: group
   name: "Outside"
   entities:
     - light.hue_outside
+    - light.outdoor_string_holiday_lights
+- platform: group
+  name: "Outside Core"
+  entities:
+    - light.front_yard
+    - light.landscape_spot
 - platform: group
   name: "Upstairs"
   entities:

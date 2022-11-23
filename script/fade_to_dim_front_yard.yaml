@@ -1,9 +1,7 @@
 fade_to_dim_front_yard:
   sequence:
-    - service: python_script.light_turn_on
+    - service: light.turn_on
       data:
         entity_id: light.front_yard
-        preserve_color: true
-        brightness: 50
+        brightness_pct: 20
         transition: 60
-        replay: false
