@@ -6,7 +6,7 @@
           is_state('binary_sensor.nighttime', 'on') or
           (
             states('sensor.openweathermap_cloud_coverage') | float > 75 and
-            states('sensor.netatmo_home_indoor_rain_rain') | float > 0
+            states('sensor.openweathermap_rain') | float > 0
           )
         }}
       delay_off:
