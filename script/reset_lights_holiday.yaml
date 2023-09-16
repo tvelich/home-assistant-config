@@ -1,0 +1,15 @@
+reset_lights_holiday:
+  sequence:
+    - service: light.turn_on
+      continue_on_error: true
+      data:
+        entity_id:
+          - light.hue_holiday_outside_color_1
+          - light.hue_bloom_1
+        color_name: green
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.hue_holiday_outside_color_2
+          - light.hue_lightstrip_plus_1
+        color_name: red

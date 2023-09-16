@@ -1,29 +1,100 @@
 - platform: group
-  name: "Inside"
+  name: "Bathroom Downstairs"
   entities:
-    - light.hue_inside
-    - light.dining_room
+    - light.lutron_downstairs_bathroom_main_lights
 - platform: group
-  name: "Inside Core"
+  name: "Bathroom Upstairs"
   entities:
-    - light.hue_inside_core
-    - light.dining_room
+    - light.hue_bathroom_upstairs
 - platform: group
-  name: "Outside"
+  name: "Guest Room"
   entities:
-    - light.hue_outside
-    - light.outdoor_string_holiday_lights
+    - light.lutron_guest_room_main_lights
 - platform: group
-  name: "Outside Core"
+  name: "Den"
   entities:
-    - light.front_yard
-    - light.landscape_spot
+    - light.hue_den
 - platform: group
-  name: "Upstairs"
+  name: "Dining Room"
   entities:
-    - light.hue_upstairs
-    - light.dining_room
+    - light.lutron_dining_room_main_lights
+- platform: group
+  name: "Entryway"
+  entities:
+    - light.lutron_front_foyer_chandelier
+- platform: group
+  name: "Family Room"
+  entities:
+    - light.hue_family_room
+- platform: group
+  name: "Hallway"
+  entities:
+    - light.lutron_upstairs_hallway_main_lights
+- platform: group
+  name: "Kitchen"
+  entities:
+    - light.hue_kitchen
+- platform: group
+  name: "Laundry Room"
+  entities:
+    - light.hue_laundry_room
+- platform: group
+  name: "Living Room"
+  entities:
+    - light.hue_living_room
+    - light.lutron_living_room_main_lights_1
+    - light.lutron_living_room_main_lights_2
+    - light.lutron_living_room_main_lights_3
+    - light.lutron_living_room_main_lights_4
+- platform: group
+  name: "Master Bedroom"
+  entities:
+    - light.hue_master_bedroom
+- platform: group
+  name: "Office"
+  entities:
+    - light.hue_office
+- platform: group
+  name: "Sunroom"
+  entities:
+    - light.lutron_sunroom_main_lights
+
+# Groups of groups
 - platform: group
   name: "Downstairs"
   entities:
-    - light.hue_downstairs
+    - light.bathroom_downstairs
+    - light.guest_room
+    - light.den
+    - light.living_room
+    - light.sunroom
+- platform: group
+  name: "Upstairs"
+  entities:
+    - light.bathroom_upstairs
+    - light.dining_room
+    - light.entryway
+    - light.family_room
+    - light.hallway
+    - light.kitchen
+    - light.laundry_room
+    - light.master_bedroom
+    - light.office
+- platform: group
+  name: "Inside"
+  entities:
+    - light.downstairs
+    - light.upstairs
+- platform: group
+  name: "Backyard"
+  entities:
+    - light.hue_backyard
+- platform: group
+  name: "Front Yard"
+  entities:
+    - light.hue_front_yard
+- platform: group
+  name: "Outside"
+  entities:
+    - light.front_yard
+    - light.backyard

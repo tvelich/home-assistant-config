@@ -6,9 +6,8 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.outside_core
+      entity_id: light.outside
       brightness_pct: 100
-      transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: state_lights_off_for_high_visibility
   trigger:
@@ -18,5 +17,4 @@
   action:
     - service: light.turn_off
       data:
-        entity_id: light.outside_core
-        transition: "{{ states('input_number.light_transition') | float }}"
+        entity_id: light.outside

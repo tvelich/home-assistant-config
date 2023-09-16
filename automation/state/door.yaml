@@ -94,7 +94,6 @@
       data:
         entity_id: light.front_yard
         brightness_pct: 100
-        transition: "{{ states('input_number.light_transition') | float }}"
     - service: timer.start
       data:
         entity_id: timer.brighten_front_yard
@@ -117,5 +116,4 @@
       data:
         entity_id: light.backyard
         brightness_pct: 100
-        transition: "{{ states('input_number.light_transition') | float }}"
     - service: script.backyard_timer_start

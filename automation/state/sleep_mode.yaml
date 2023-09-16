@@ -16,8 +16,14 @@
     - service: light.turn_on
       data:
         entity_id: light.inside
-        brightness_pct: "{{ states('input_number.light_brightness') | float }}"
-        transition: "{{ states('input_number.light_transition') | float }}"
+        brightness_pct: 25
+        transition: 30
+    - delay: 30
+    - service: light.turn_on
+      data:
+        entity_id: light.inside
+        brightness_pct: 100
+        transition: 3600
 
 - alias: state_sleep_mode_changed_off_to_on
   trigger:
@@ -32,7 +38,10 @@
       data:
         entity_id: alarm_control_panel.abode_alarm
     - service: script.play_sleep_sounds
+    - service: light.turn_on
+      data:
+        entity_id: light.inside
+        brightness_pct: 1
     - service: light.turn_off
       data:
         entity_id: light.inside
-        transition: "{{ states('input_number.light_transition') | float }}"

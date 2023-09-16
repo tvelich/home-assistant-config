@@ -8,7 +8,6 @@
     service: light.turn_off
     data:
       entity_id: light.bathroom_downstairs
-      transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: event_timer_upstairs_bathroom_idle
   trigger:
@@ -20,7 +19,6 @@
     service: light.turn_off
     data:
       entity_id: light.bathroom_upstairs
-      transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: event_timer_backyard_idle
   trigger:
@@ -32,7 +30,6 @@
     service: light.turn_off
     data:
       entity_id: light.backyard
-      transition: "{{ states('input_number.light_transition') | float }}"
 
 - alias: event_timer_front_yard_idle_late_nighttime
   trigger:

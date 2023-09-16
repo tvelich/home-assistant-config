@@ -24,7 +24,6 @@
       data:
         entity_id: light.front_yard
         brightness_pct: 100
-        transition: "{{ states('input_number.light_transition') | float }}"
     - service: timer.start
       data:
         entity_id: timer.brighten_front_yard
@@ -46,7 +45,6 @@
       data:
         entity_id: light.backyard
         brightness_pct: 100
-        transition: "{{ states('input_number.light_transition') | float }}"
     - service: script.backyard_timer_start
 
 - alias: state_motion_downstairs_bathroom_detected
@@ -55,25 +53,37 @@
       entity_id: binary_sensor.downstairs_bathroom_motion
       to: 'on'
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.bathroom_downstairs
-        brightness_pct: >
-          {% if is_state('input_boolean.sleep_mode_enabled', 'on') %}
-            1
-          {% else %}
-            {{ states('input_number.light_brightness') | float }}
-          {% endif %}
-        transition: "{{ states('input_number.light_transition') | float }}"
-    - service: timer.start
-      data:
-        entity_id: timer.downstairs_bathroom_lights
-        duration: >
-          {% if is_state('input_boolean.sleep_mode_enabled', 'on') %}
-            00:01:00
-          {% else %}
-            00:15:00
-          {% endif %}
+    - choose:
+        - conditions:
+            condition: state
+            entity_id: input_boolean.sleep_mode_enabled
+            state: 'on'
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.bathroom_downstairs
+                brightness_pct: 1
+      default:
+        - service: light.turn_on
+          data:
+            entity_id: light.bathroom_downstairs
+    - choose:
+        - conditions:
+            condition: state
+            entity_id: input_boolean.sleep_mode_enabled
+            state: 'on'
+          sequence:
+            - service: timer.start
+              data:
+                entity_id: timer.downstairs_bathroom_lights
+                duration:
+                  seconds: 60
+      default:
+        - service: timer.start
+          data:
+            entity_id: timer.downstairs_bathroom_lights
+            duration:
+              minutes: 15
 
 - alias: state_motion_upstairs_bathroom_detected
   trigger:
@@ -81,22 +91,34 @@
       entity_id: binary_sensor.upstairs_bathroom_motion
       to: 'on'
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.bathroom_upstairs
-        brightness_pct: >
-          {% if is_state('input_boolean.sleep_mode_enabled', 'on') %}
-            1
-          {% else %}
-            {{ states('input_number.light_brightness') | float }}
-          {% endif %}
-        transition: "{{ states('input_number.light_transition') | float }}"
-    - service: timer.start
-      data:
-        entity_id: timer.upstairs_bathroom_lights
-        duration: >
-          {% if is_state('input_boolean.sleep_mode_enabled', 'on') %}
-            00:01:00
-          {% else %}
-            00:15:00
-          {% endif %}
+    - choose:
+        - conditions:
+            condition: state
+            entity_id: input_boolean.sleep_mode_enabled
+            state: 'on'
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.bathroom_upstairs
+                brightness_pct: 1
+      default:
+        - service: light.turn_on
+          data:
+            entity_id: light.bathroom_upstairs
+    - choose:
+        - conditions:
+            condition: state
+            entity_id: input_boolean.sleep_mode_enabled
+            state: 'on'
+          sequence:
+            - service: timer.start
+              data:
+                entity_id: timer.upstairs_bathroom_lights
+                duration:
+                  seconds: 60
+      default:
+        - service: timer.start
+          data:
+            entity_id: timer.upstairs_bathroom_lights
+            duration:
+              minutes: 15

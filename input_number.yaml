@@ -1,9 +1,3 @@
-light_brightness:
-  min: 1
-  max: 100
-light_transition:
-  min: 0
-  max: 10
 fireplace_temp:
   min: 65
   max: 75
