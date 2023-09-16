@@ -36,4 +36,4 @@
           is_state('binary_sensor.high_winds_last_hour', 'on')
         }}
     home:
-      value_template: "{{ states('device_tracker.tom_phone') == 'home' }}"
+      value_template: "{{ states('device_tracker.phone_1') == 'home' or states('device_tracker.phone_2') == 'home' }}"

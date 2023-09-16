@@ -8,7 +8,9 @@ cards:
       - type: horizontal-stack
         cards:
           - type: entity
-            entity: device_tracker.tom_phone
+            entity: device_tracker.phone_1
+          - type: entity
+            entity: device_tracker.phone_2
           - type: entity-button
             entity: input_boolean.sleep_mode_enabled
             icon_height: 50px

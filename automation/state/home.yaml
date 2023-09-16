@@ -1,9 +1,9 @@
-- alias: state_home_off
+- alias: state_home_on
   trigger:
     entity_id: binary_sensor.home
     platform: state
-    to: 'on'
     from: 'off'
+    to: 'on'
   action:
     - service: alarm_control_panel.alarm_disarm
       data:
@@ -15,12 +15,12 @@
       data:
         away_mode: home
 
-- alias: state_home_on
+- alias: state_home_off
   trigger:
     entity_id: binary_sensor.home
     platform: state
-    to: 'off'
     from: 'on'
+    to: 'off'
   action:
     - service: alarm_control_panel.alarm_arm_away
       data:
