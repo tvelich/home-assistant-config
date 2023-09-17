@@ -42,7 +42,7 @@
         entity_id: binary_sensor.washing_machine_water_detected
         state: 'on'
   action:
-    service: script.post_slack_message
+    service: notify.notify
     data_template:
       message: >
         {% if states('binary_sensor.downstairs_bathroom_water_detected') == 'on' %}
@@ -60,3 +60,6 @@
         {% else %}
           Water detected!
         {% endif %}
+      data:
+        push:
+          badge: 1

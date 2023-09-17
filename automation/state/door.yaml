@@ -62,7 +62,7 @@
       for:
         minutes: 10
   action:
-    service: script.post_slack_message
+    service: notify.notify
     data_template:
       message: >
         {% if trigger.entity_id == 'binary_sensor.deck_door_open' %}
@@ -75,7 +75,12 @@
           Sunroom door is still open!
         {% elif trigger.entity_id == 'cover.garage_door' %}
           Garage door is still open!
+        {% else %}
+          A door is still open!
         {% endif %}
+      data:
+        push:
+          badge: 1
 
 - alias: state_door_front_yard_opened_late_nighttime
   trigger:

@@ -1,9 +1,0 @@
-slack_api:
-  url: https://slack.com/api/{{ endpoint }}
-  content_type: application/json
-  verify_ssl: true
-  method: post
-  timeout: 20
-  headers:
-    Authorization: !secret slack_bot_token
-  payload: '{{ payload }}'

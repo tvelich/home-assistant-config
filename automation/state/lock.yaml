@@ -21,7 +21,7 @@
       for:
         minutes: 20
   action:
-    service: script.post_slack_message
+    service: notify.notify
     data_template:
       message: >
         {% if trigger.entity_id == 'lock.deck_door' %}
@@ -32,4 +32,9 @@
           Garage back door is still unlocked!
         {% elif trigger.entity_id == 'lock.sunroom_door' %}
           Sunroom door is still unlocked!
+        {% else %}
+          A door is still unlocked!
         {% endif %}
+      data:
+        push:
+          badge: 1

@@ -4,9 +4,12 @@
     platform: state
     to: 'on'
   action:
-    service: script.post_slack_message
+    service: notify.notify
     data:
       message: You've got mail!
+      data:
+        push:
+          badge: 1
 
 - alias: state_motion_front_yard_detected
   trigger:

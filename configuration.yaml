@@ -1,6 +1,7 @@
 cloud:
 homeassistant: !include homeassistant.yaml
 lovelace: !include lovelace.yaml
+mobile_app:
 
 # Components
 automation: !include_dir_merge_list automation
@@ -14,7 +15,6 @@ logbook: !include logbook.yaml
 nest: !include nest.yaml
 python_script:
 recorder: !include recorder.yaml
-rest_command: !include rest_command.yaml
 roomba: !include roomba.yaml
 script: !include_dir_list script
 system_health:

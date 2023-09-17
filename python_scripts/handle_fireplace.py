@@ -25,7 +25,14 @@ def main():
 
     if is_target_temp_exceeded:
         logger.warn('turning off fireplace due to excessive heat')
-        hass.services.call('script', 'post_slack_message', { 'message':  'Fireplace turning off due to excessive heat' }, False)
+        hass.services.call('notify', 'notify', {
+            'message': 'Fireplace turning off due to excessive heat',
+            'data': {
+                'push': {
+                    'badge': 1
+                }
+            }
+        }, False)
         call_service_repeat('turn_off')
     elif is_fireplace_probably_on:
         if is_cool_mode:
