@@ -4,5 +4,3 @@ longitude: !secret longitude
 unit_system: imperial
 time_zone: !secret time_zone
 customize: !include customize.yaml
-auth_providers:
-  - type: homeassistant

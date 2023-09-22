@@ -6,7 +6,6 @@ mobile_app:
 # Components
 automation: !include_dir_merge_list automation
 config:
-discovery:
 frontend: !include frontend.yaml
 history:
 input_boolean: !include input_boolean.yaml
