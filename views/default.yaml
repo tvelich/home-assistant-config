@@ -34,45 +34,6 @@ cards:
             entity: light.outside
             name: Outside
             icon_height: 50px
-      - type: horizontal-stack
-        cards:
-          - type: picture-glance
-            camera_image: camera.porch
-            entities:
-              - light.front_yard
-              - lock.front_door
-              - binary_sensor.front_door_open
-            aspect_ratio: '16:9'
-          - type: picture-glance
-            camera_image: camera.office
-            entities:
-              - light.office
-      - type: horizontal-stack
-        cards:
-          - type: picture-glance
-            camera_image: camera.garage
-            entities:
-              - lock.garage_back_door
-              - cover.garage_door
-              - binary_sensor.garage_back_door_open
-          - type: picture-glance
-            camera_image: camera.sunroom
-            entities:
-              - light.sunroom
-              - lock.sunroom_door
-              - binary_sensor.sunroom_door_open
-      - type: horizontal-stack
-        cards:
-          - type: picture-glance
-            entities:
-              - light.backyard
-              - lock.deck_door
-              - binary_sensor.deck_door_open
-            camera_image: camera.deck
-          - type: picture-glance
-            camera_image: camera.backyard
-            entities:
-              - light.backyard
       - type: alarm-panel
         entity: alarm_control_panel.abode_alarm
       - type: thermostat

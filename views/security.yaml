@@ -14,19 +14,6 @@ cards:
         - entity_id: "binary_sensor.*door_open"
         - entity_id: "binary_sensor.*glass*"
         - entity_id: "binary_sensor.*siren"
-        - entity_id: "camera.*"
   - type: alarm-panel
     entity: alarm_control_panel.abode_alarm
-  - type: picture-entity
-    entity: camera.deck
-  - type: picture-entity
-    entity: camera.backyard
-  - type: picture-entity
-    entity: camera.garage
-  - type: picture-entity
-    entity: camera.office
-  - type: picture-entity
-    entity: camera.porch
-  - type: picture-entity
-    entity: camera.sunroom
 icon: 'mdi:security'

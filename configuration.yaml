@@ -12,7 +12,6 @@ history:
 input_boolean: !include input_boolean.yaml
 input_number: !include input_number.yaml
 logbook: !include logbook.yaml
-nest: !include nest.yaml
 python_script:
 recorder: !include recorder.yaml
 script: !include_dir_list script
