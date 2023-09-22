@@ -3,5 +3,3 @@ exclude:
     - zwave
   entity_globs:
     - light.hue_*
-    - binary_sensor.*_camera_person_detected
-    - binary_sensor.*_camera_sound_detected
