@@ -15,7 +15,6 @@ logbook: !include logbook.yaml
 nest: !include nest.yaml
 python_script:
 recorder: !include recorder.yaml
-roomba: !include roomba.yaml
 script: !include_dir_list script
 system_health:
 timer: !include timer.yaml
