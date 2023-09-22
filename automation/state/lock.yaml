@@ -4,22 +4,22 @@
       platform: state
       to: 'unlocked'
       for:
-        minutes: 20
+        minutes: 30
     - entity_id: lock.deck_door
       platform: state
       to: 'unlocked'
       for:
-        minutes: 20
+        minutes: 120
     - entity_id: lock.sunroom_door
       platform: state
       to: 'unlocked'
       for:
-        minutes: 20
+        minutes: 120
     - entity_id: lock.garage_back_door
       platform: state
       to: 'unlocked'
       for:
-        minutes: 20
+        minutes: 120
   action:
     service: notify.notify
     data_template:
