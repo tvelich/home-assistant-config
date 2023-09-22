@@ -36,6 +36,4 @@ cards:
             icon_height: 50px
       - type: alarm-panel
         entity: alarm_control_panel.abode_alarm
-      - type: thermostat
-        entity: climate.hallway
 icon: 'mdi:home'
