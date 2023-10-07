@@ -1,7 +1,7 @@
 - platform: group
   name: "Bathroom Downstairs"
   entities:
-    - light.lutron_downstairs_bathroom_main_lights
+    - light.bathroom_downstairs_vanity_lights
 - platform: group
   name: "Bathroom Upstairs"
   entities:
@@ -9,7 +9,7 @@
 - platform: group
   name: "Guest Room"
   entities:
-    - light.lutron_guest_room_main_lights
+    - light.guest_room_main_lights
 - platform: group
   name: "Den"
   entities:
@@ -17,11 +17,11 @@
 - platform: group
   name: "Dining Room"
   entities:
-    - light.lutron_dining_room_main_lights
+    - light.dining_room_main_lights
 - platform: group
   name: "Entryway"
   entities:
-    - light.lutron_front_foyer_chandelier
+    - light.entryway_chandelier
 - platform: group
   name: "Family Room"
   entities:
@@ -29,7 +29,7 @@
 - platform: group
   name: "Hallway"
   entities:
-    - light.lutron_upstairs_hallway_main_lights
+    - light.hallway_main_lights
 - platform: group
   name: "Kitchen"
   entities:
@@ -42,14 +42,14 @@
   name: "Living Room"
   entities:
     - light.hue_living_room
-    - light.lutron_living_room_main_lights_1
-    - light.lutron_living_room_main_lights_2
-    - light.lutron_living_room_main_lights_3
-    - light.lutron_living_room_main_lights_4
+    - light.living_room_main_lights_1
+    - light.living_room_main_lights_2
+    - light.living_room_main_lights_3
+    - light.living_room_main_lights_4
 - platform: group
-  name: "Master Bedroom"
+  name: "Main Bedroom"
   entities:
-    - light.hue_master_bedroom
+    - light.hue_main_bedroom
 - platform: group
   name: "Office"
   entities:
@@ -57,7 +57,7 @@
 - platform: group
   name: "Sunroom"
   entities:
-    - light.lutron_sunroom_main_lights
+    - light.sunroom_main_lights
 
 # Groups of groups
 - platform: group
@@ -78,7 +78,7 @@
     - light.hallway
     - light.kitchen
     - light.laundry_room
-    - light.master_bedroom
+    - light.main_bedroom
     - light.office
 - platform: group
   name: "Inside"
