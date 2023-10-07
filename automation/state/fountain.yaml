@@ -10,4 +10,4 @@
         switch.turn_on
       {% endif %}
     data:
-      entity_id: switch.fountain
+      entity_id: switch.fountain_switch

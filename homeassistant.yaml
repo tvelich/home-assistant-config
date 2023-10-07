@@ -4,4 +4,3 @@ longitude: !secret longitude
 unit_system: imperial
 time_zone: !secret time_zone
 country: !secret country
-customize: !include customize.yaml

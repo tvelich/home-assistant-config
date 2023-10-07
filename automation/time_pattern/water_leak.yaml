@@ -2,60 +2,60 @@
   trigger:
     - platform: time_pattern
       seconds: '/15'
-    - entity_id: binary_sensor.downstairs_bathroom_water_detected
+    - entity_id: binary_sensor.bathroom_downstairs_water_sensor_water_leak_detected
       platform: state
       to: 'on'
-    - entity_id: binary_sensor.upstairs_bathroom_water_detected
+    - entity_id: binary_sensor.bathroom_upstairs_water_sensor_water_leak_detected
       platform: state
       to: 'on'
-    - entity_id: binary_sensor.main_valve_water_detected
+    - entity_id: binary_sensor.main_line_water_sensor_water_leak_detected
       platform: state
       to: 'on'
-    - entity_id: binary_sensor.garage_sink_water_detected
+    - entity_id: binary_sensor.garage_water_sensor_water_leak_detected
       platform: state
       to: 'on'
-    - entity_id: binary_sensor.water_heater_water_detected
+    - entity_id: binary_sensor.main_line_water_sensor_water_leak_detected
       platform: state
       to: 'on'
-    - entity_id: binary_sensor.washing_machine_water_detected
+    - entity_id: binary_sensor.laundry_room_water_sensor_water_leak_detected_2
       platform: state
       to: 'on'
   condition:
     condition: or
     conditions:
       - condition: state
-        entity_id: binary_sensor.downstairs_bathroom_water_detected
+        entity_id: binary_sensor.bathroom_downstairs_water_sensor_water_leak_detected
         state: 'on'
       - condition: state
-        entity_id: binary_sensor.upstairs_bathroom_water_detected
+        entity_id: binary_sensor.bathroom_upstairs_water_sensor_water_leak_detected
         state: 'on'
       - condition: state
-        entity_id: binary_sensor.main_valve_water_detected
+        entity_id: binary_sensor.main_line_water_sensor_water_leak_detected
         state: 'on'
       - condition: state
-        entity_id: binary_sensor.garage_sink_water_detected
+        entity_id: binary_sensor.garage_water_sensor_water_leak_detected
         state: 'on'
       - condition: state
-        entity_id: binary_sensor.water_heater_water_detected
+        entity_id: binary_sensor.main_line_water_sensor_water_leak_detected
         state: 'on'
       - condition: state
-        entity_id: binary_sensor.washing_machine_water_detected
+        entity_id: binary_sensor.laundry_room_water_sensor_water_leak_detected_2
         state: 'on'
   action:
     service: notify.notify
     data_template:
       message: >
-        {% if states('binary_sensor.downstairs_bathroom_water_detected') == 'on' %}
+        {% if states('binary_sensor.bathroom_downstairs_water_sensor_water_leak_detected') == 'on' %}
           Water detected in downstairs bathroom!
-        {% elif states('binary_sensor.upstairs_bathroom_water_detected') == 'on' %}
+        {% elif states('binary_sensor.bathroom_upstairs_water_sensor_water_leak_detected') == 'on' %}
           Water detected in upstairs bathroom!
-        {% elif states('binary_sensor.main_valve_water_detected') == 'on' %}
+        {% elif states('binary_sensor.main_line_water_sensor_water_leak_detected') == 'on' %}
           Water detected at main valve!
-        {% elif states('binary_sensor.garage_sink_water_detected') == 'on' %}
+        {% elif states('binary_sensor.garage_water_sensor_water_leak_detected') == 'on' %}
           Water detected at garage sink!
-        {% elif states('binary_sensor.water_heater_water_detected') == 'on' %}
+        {% elif states('binary_sensor.main_line_water_sensor_water_leak_detected') == 'on' %}
           Water detected at water heater!
-        {% elif states('binary_sensor.washing_machine_water_detected') == 'on' %}
+        {% elif states('binary_sensor.laundry_room_water_sensor_water_leak_detected_2') == 'on' %}
           Water detected at washing machine!
         {% else %}
           Water detected!
