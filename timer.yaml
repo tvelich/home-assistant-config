@@ -1,4 +1,5 @@
 backyard_lights:
-downstairs_bathroom_lights:
-upstairs_bathroom_lights:
+bathroom_downstairs_lights:
+bathroom_upstairs_lights:
+laundry_room_lights:
 brighten_front_yard:

@@ -5,11 +5,15 @@
   action:
     - service: timer.start
       data:
-        entity_id: timer.downstairs_bathroom_lights
+        entity_id: timer.bathroom_downstairs_lights
         duration: '00:15:00'
     - service: timer.start
       data:
-        entity_id: timer.upstairs_bathroom_lights
+        entity_id: timer.bathroom_upstairs_lights
+        duration: '00:15:00'
+    - service: timer.start
+      data:
+        entity_id: timer.laundry_room_lights
         duration: '00:15:00'
     - service: script.backyard_timer_start
     - service: timer.start

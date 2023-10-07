@@ -11,10 +11,10 @@
         push:
           badge: 1
 
-- alias: state_motion_downstairs_bathroom_detected
+- alias: state_motion_bathroom_downstairs_detected
   trigger:
     - platform: state
-      entity_id: binary_sensor.downstairs_bathroom_motion
+      entity_id: binary_sensor.bathroom_downstairs_motion
       to: 'on'
   action:
     - choose:
@@ -39,20 +39,20 @@
           sequence:
             - service: timer.start
               data:
-                entity_id: timer.downstairs_bathroom_lights
+                entity_id: timer.bathroom_downstairs_lights
                 duration:
                   seconds: 60
       default:
         - service: timer.start
           data:
-            entity_id: timer.downstairs_bathroom_lights
+            entity_id: timer.bathroom_downstairs_lights
             duration:
               minutes: 15
 
-- alias: state_motion_upstairs_bathroom_detected
+- alias: state_motion_bathroom_upstairs_detected
   trigger:
     - platform: state
-      entity_id: binary_sensor.upstairs_bathroom_motion
+      entity_id: binary_sensor.bathroom_upstairs_motion
       to: 'on'
   action:
     - choose:
@@ -77,12 +77,50 @@
           sequence:
             - service: timer.start
               data:
-                entity_id: timer.upstairs_bathroom_lights
+                entity_id: timer.bathroom_upstairs_lights
                 duration:
                   seconds: 60
       default:
         - service: timer.start
           data:
-            entity_id: timer.upstairs_bathroom_lights
+            entity_id: timer.bathroom_upstairs_lights
+            duration:
+              minutes: 15
+
+- alias: state_motion_laundry_room_detected
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.laundry_room_sensor_motion_detection
+      to: 'on'
+  action:
+    - choose:
+        - conditions:
+            condition: state
+            entity_id: input_boolean.sleep_mode_enabled
+            state: 'on'
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id: light.laundry_room
+                brightness_pct: 1
+      default:
+        - service: light.turn_on
+          data:
+            entity_id: light.laundry_room
+    - choose:
+        - conditions:
+            condition: state
+            entity_id: input_boolean.sleep_mode_enabled
+            state: 'on'
+          sequence:
+            - service: timer.start
+              data:
+                entity_id: timer.laundry_room_lights
+                duration:
+                  seconds: 60
+      default:
+        - service: timer.start
+          data:
+            entity_id: timer.laundry_room_lights
             duration:
               minutes: 15

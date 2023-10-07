@@ -1,24 +1,35 @@
-- alias: event_timer_downstairs_bathroom_idle
+- alias: event_timer_bathroom_downstairs_idle
   trigger:
     - platform: event
       event_type: timer.finished
       event_data:
-        entity_id: timer.downstairs_bathroom_lights
+        entity_id: timer.bathroom_downstairs_lights
   action:
     service: light.turn_off
     data:
       entity_id: light.bathroom_downstairs
 
-- alias: event_timer_upstairs_bathroom_idle
+- alias: event_timer_bathroom_upstairs_idle
   trigger:
     - platform: event
       event_type: timer.finished
       event_data:
-        entity_id: timer.upstairs_bathroom_lights
+        entity_id: timer.bathroom_upstairs_lights
   action:
     service: light.turn_off
     data:
       entity_id: light.bathroom_upstairs
+
+- alias: event_timer_laundry_room_idle
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.laundry_room_lights
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.laundry_room
 
 - alias: event_timer_backyard_idle
   trigger:
