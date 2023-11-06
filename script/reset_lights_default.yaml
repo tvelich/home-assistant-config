@@ -1,25 +1,8 @@
 reset_lights_default:
   sequence:
     - service: light.turn_on
-      continue_on_error: true
       data:
         entity_id:
           - light.hue_outside
           - light.hue_inside
-        color_temp_kelvin: 4000
-    - service: light.turn_on
-      continue_on_error: true
-      data:
-        entity_id:
-          - light.hue_outdoor_spot_1
-          - light.hue_outdoor_spot_5
-          - light.hue_bloom_1
-        color_name: turquoise
-    - service: light.turn_on
-      data:
-        entity_id:
-          - light.hue_outdoor_spot_2
-          - light.hue_outdoor_spot_3
-          - light.hue_outdoor_spot_4
-          - light.hue_lightstrip_plus_1
-        color_name: blue
+        color_temp_kelvin: 2600
