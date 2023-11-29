@@ -1,0 +1,12 @@
+christmas_lights:
+  sequence:
+    - service: light.turn_on
+      continue_on_error: true
+      data:
+        entity_id: light.hue_color_group_1
+        color_name: green
+    - service: light.turn_on
+      continue_on_error: true
+      data:
+        entity_id: light.hue_color_group_2
+        color_name: red

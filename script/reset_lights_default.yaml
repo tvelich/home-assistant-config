@@ -1,8 +1,0 @@
-reset_lights_default:
-  sequence:
-    - service: light.turn_on
-      data:
-        entity_id:
-          - light.hue_outside
-          - light.hue_inside
-        color_temp_kelvin: 2600
