@@ -7,10 +7,7 @@
       data:
         entity_id: timer.bathroom_downstairs_lights
         duration: '00:15:00'
-    - service: timer.start
-      data:
-        entity_id: timer.bathroom_upstairs_lights
-        duration: '00:15:00'
+    - service: script.upstairs_bathroom_timer_start
     - service: timer.start
       data:
         entity_id: timer.laundry_room_lights

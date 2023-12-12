@@ -69,23 +69,7 @@
         - service: light.turn_on
           data:
             entity_id: light.bathroom_upstairs
-    - choose:
-        - conditions:
-            condition: state
-            entity_id: input_boolean.sleep_mode_enabled
-            state: 'on'
-          sequence:
-            - service: timer.start
-              data:
-                entity_id: timer.bathroom_upstairs_lights
-                duration:
-                  seconds: 60
-      default:
-        - service: timer.start
-          data:
-            entity_id: timer.bathroom_upstairs_lights
-            duration:
-              minutes: 15
+    - service: script.upstairs_bathroom_timer_start
 
 - alias: state_motion_laundry_room_detected
   trigger:
