@@ -1,6 +1,6 @@
 - platform: switch
   name: Front Yard Holiday Lights
-  entity_id: switch.front_yard_outlet
+  entity_id: switch.front_yard_string_light_switch
 
 - platform: switch
   name: Dining Room Holiday Lights

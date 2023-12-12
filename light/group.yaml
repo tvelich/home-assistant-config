@@ -93,6 +93,7 @@
   name: "Front Yard"
   entities:
     - light.hue_front_yard
+    - light.front_yard_holiday_lights
 - platform: group
   name: "Outside"
   entities:
