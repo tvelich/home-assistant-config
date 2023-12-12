@@ -1,4 +1,0 @@
-fireplace_temp:
-  min: 65
-  max: 75
-  step: 0.1

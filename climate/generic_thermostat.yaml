@@ -1,0 +1,15 @@
+- platform: generic_thermostat
+  name: Living Room Fireplace
+  heater: switch.fireplace
+  target_sensor: sensor.indoor_temperature
+  min_temp: 60
+  max_temp: 80
+  ac_mode: false
+  comfort_temp: 65
+  activity_temp: 68
+  cold_tolerance: 0.5
+  hot_tolerance: 0
+  keep_alive:
+    minutes: 90
+  initial_hvac_mode: "off"
+  precision: 0.1

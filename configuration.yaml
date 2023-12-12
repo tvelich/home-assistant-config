@@ -8,9 +8,7 @@ automation: !include_dir_merge_list automation
 config:
 history:
 input_boolean: !include input_boolean.yaml
-input_number: !include input_number.yaml
 logbook:
-python_script:
 recorder: !include recorder.yaml
 script: !include_dir_list script
 system_health:
@@ -18,6 +16,7 @@ timer: !include timer.yaml
 
 # Platforms
 binary_sensor: !include_dir_merge_list binary_sensor
+climate: !include_dir_merge_list climate
 device_tracker: !include_dir_merge_list device_tracker
 light: !include_dir_merge_list light
 sensor: !include_dir_merge_list sensor
