@@ -108,3 +108,75 @@
             entity_id: timer.laundry_room_lights
             duration:
               minutes: 15
+
+- alias: state_motion_living_room_detected
+  trigger:
+    entity_id: binary_sensor.living_room_sensor_motion_detection
+    platform: state
+    to: 'on'
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id: climate.living_room_fireplace
+      preset_mode: activity
+
+- alias: state_motion_living_room_idle
+  trigger:
+    entity_id: binary_sensor.living_room_sensor_motion_detection
+    platform: state
+    to: 'off'
+    for:
+      minutes: 60
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id: climate.living_room_fireplace
+      preset_mode: comfort
+
+- alias: state_motion_family_room_detected
+  trigger:
+    entity_id: binary_sensor.family_room_motion
+    platform: state
+    to: 'on'
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id: climate.family_room_heater
+      preset_mode: activity
+
+- alias: state_motion_family_room_idle
+  trigger:
+    entity_id: binary_sensor.family_room_motion
+    platform: state
+    to: 'off'
+    for:
+      minutes: 60
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id: climate.family_room_heater
+      preset_mode: comfort
+
+- alias: state_motion_office_detected
+  trigger:
+    entity_id: binary_sensor.office_sensor_motion_detection
+    platform: state
+    to: 'on'
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id: climate.office_heater
+      preset_mode: activity
+
+- alias: state_motion_office_idle
+  trigger:
+    entity_id: binary_sensor.office_sensor_motion_detection
+    platform: state
+    to: 'off'
+    for:
+      minutes: 60
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id: climate.office_heater
+      preset_mode: comfort

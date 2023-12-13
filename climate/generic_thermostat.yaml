@@ -13,3 +13,31 @@
     minutes: 90
   initial_hvac_mode: "off"
   precision: 0.1
+
+- platform: generic_thermostat
+  name: Family Room Heater
+  heater: switch.family_room_heater
+  target_sensor: sensor.family_room_temperature
+  min_temp: 60
+  max_temp: 80
+  ac_mode: false
+  comfort_temp: 65
+  activity_temp: 68
+  cold_tolerance: 0.5
+  hot_tolerance: 0
+  initial_hvac_mode: "off"
+  precision: 0.1
+
+- platform: generic_thermostat
+  name: Office Heater
+  heater: switch.office_heater
+  target_sensor: sensor.office_sensor_air_temperature
+  min_temp: 60
+  max_temp: 80
+  ac_mode: false
+  comfort_temp: 65
+  activity_temp: 68
+  cold_tolerance: 0.5
+  hot_tolerance: 0
+  initial_hvac_mode: "off"
+  precision: 0.1

@@ -6,11 +6,20 @@
     to: 'on'
   action:
     - service: alarm_control_panel.alarm_disarm
+      continue_on_error: true
       data:
         entity_id: alarm_control_panel.abode_alarm
     - service: light.turn_on
+      continue_on_error: true
       data:
         entity_id: light.inside
+    - service: climate.turn_on
+      continue_on_error: true
+      data:
+        entity_id:
+            - climate.living_room_fireplace
+            - climate.family_room_heater
+            - climate.office_heater
 
 - alias: state_home_off
   trigger:
@@ -20,8 +29,18 @@
     to: 'off'
   action:
     - service: alarm_control_panel.alarm_arm_away
+      continue_on_error: true
       data:
         entity_id: alarm_control_panel.abode_alarm
     - service: light.turn_off
+      continue_on_error: true
       data:
         entity_id: light.inside
+    - service: climate.turn_off
+      continue_on_error: true
+      data:
+        entity_id:
+          - climate.living_room_fireplace
+          - climate.family_room_heater
+          - climate.office_heater
+
