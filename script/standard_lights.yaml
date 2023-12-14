@@ -3,10 +3,14 @@ standard_lights:
     - service: light.turn_on
       continue_on_error: true
       data:
-        entity_id: light.hue_outside
+        entity_id:
+          - light.outside
+          - light.outside_accent
         color_temp_kelvin: 2600
     - service: light.turn_on
       continue_on_error: true
       data:
-        entity_id: light.hue_inside
+        entity_id:
+          - light.inside
+          - light.inside_accent
         color_temp_kelvin: 4000

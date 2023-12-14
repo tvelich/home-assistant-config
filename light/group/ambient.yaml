@@ -41,7 +41,6 @@
 - platform: group
   name: "Living Room"
   entities:
-    - light.hue_living_room
     - light.living_room_main_lights_1
     - light.living_room_main_lights_2
     - light.living_room_main_lights_3
@@ -58,6 +57,14 @@
   name: "Sunroom"
   entities:
     - light.sunroom_main_lights
+- platform: group
+  name: "Front Yard"
+  entities:
+    - light.hue_front_yard
+- platform: group
+  name: "Backyard"
+  entities:
+    - light.hue_backyard
 
 # Groups of groups
 - platform: group
@@ -85,15 +92,6 @@
   entities:
     - light.downstairs
     - light.upstairs
-- platform: group
-  name: "Backyard"
-  entities:
-    - light.hue_backyard
-- platform: group
-  name: "Front Yard"
-  entities:
-    - light.hue_front_yard
-    - light.front_yard_holiday_lights
 - platform: group
   name: "Outside"
   entities:

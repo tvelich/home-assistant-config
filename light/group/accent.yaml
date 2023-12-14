@@ -1,0 +1,39 @@
+- platform: group
+  name: "Family Room Accent"
+  entities:
+    - light.hue_family_room_accent
+    - light.family_room_tree_lights
+    - light.family_room_window_lights
+- platform: group
+  name: "Living Room Accent"
+  entities:
+    - light.hue_living_room_accent
+- platform: group
+  name: "Front Yard Accent"
+  entities:
+    - light.hue_front_yard_accent
+    - light.front_yard_holiday_lights
+- platform: group
+  name: "Backyard Accent"
+  entities:
+    - light.hue_backyard_accent
+
+# Groups of groups
+- platform: group
+  name: "Downstairs Accent"
+  entities:
+    - light.living_room_accent
+- platform: group
+  name: "Upstairs Accent"
+  entities:
+    - light.family_room_accent
+- platform: group
+  name: "Inside Accent"
+  entities:
+    - light.upstairs_accent
+    - light.downstairs_accent
+- platform: group
+  name: "Outside Accent"
+  entities:
+    - light.front_yard_accent
+    - light.backyard_accent

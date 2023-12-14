@@ -3,13 +3,9 @@
   entity_id: switch.front_yard_string_light_switch
 
 - platform: switch
-  name: Dining Room Holiday Lights
-  entity_id: switch.dining_room_outlet
+  name: Family Room Window Lights
+  entity_id: switch.family_room_window_lights
 
 - platform: switch
-  name: Living Room Holiday Lights
-  entity_id: switch.living_room_outlet
-
-- platform: switch
-  name: Family Room Holiday Lights
-  entity_id: switch.family_room_outlet_1
+  name: Family Room Tree Lights
+  entity_id: switch.family_room_tree_lights
