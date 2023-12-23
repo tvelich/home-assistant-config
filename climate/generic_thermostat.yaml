@@ -15,8 +15,8 @@
   precision: 0.1
 
 - platform: generic_thermostat
-  name: Family Room Heater
-  heater: switch.family_room_heater
+  name: Family Room Heaters
+  heater: switch.family_room_heaters
   target_sensor: sensor.family_room_temperature
   min_temp: 60
   max_temp: 80
