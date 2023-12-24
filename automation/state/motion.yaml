@@ -117,7 +117,7 @@
   action:
     service: climate.set_preset_mode
     data:
-      entity_id: climate.living_room_fireplace
+      entity_id: climate.living_room_heat
       preset_mode: activity
 
 - alias: state_motion_living_room_idle
@@ -130,7 +130,7 @@
   action:
     service: climate.set_preset_mode
     data:
-      entity_id: climate.living_room_fireplace
+      entity_id: climate.living_room_heat
       preset_mode: comfort
 
 - alias: state_motion_family_room_detected
@@ -141,7 +141,7 @@
   action:
     service: climate.set_preset_mode
     data:
-      entity_id: climate.family_room_heater
+      entity_id: climate.family_room_heat
       preset_mode: activity
 
 - alias: state_motion_family_room_idle
@@ -154,7 +154,7 @@
   action:
     service: climate.set_preset_mode
     data:
-      entity_id: climate.family_room_heater
+      entity_id: climate.family_room_heat
       preset_mode: comfort
 
 - alias: state_motion_office_detected
@@ -165,7 +165,7 @@
   action:
     service: climate.set_preset_mode
     data:
-      entity_id: climate.office_heater
+      entity_id: climate.office_heat
       preset_mode: activity
 
 - alias: state_motion_office_idle
@@ -178,5 +178,5 @@
   action:
     service: climate.set_preset_mode
     data:
-      entity_id: climate.office_heater
+      entity_id: climate.office_heat
       preset_mode: comfort

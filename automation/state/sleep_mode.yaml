@@ -32,9 +32,9 @@
       continue_on_error: true
       data:
         entity_id:
-          - climate.living_room_fireplace
-          - climate.family_room_heater
-          - climate.office_heater
+          - climate.living_room_heat
+          - climate.family_room_heat
+          - climate.office_heat
 
 - alias: state_sleep_mode_changed_off_to_on
   trigger:
@@ -64,6 +64,6 @@
       continue_on_error: true
       data:
         entity_id:
-          - climate.living_room_fireplace
-          - climate.family_room_heater
-          - climate.office_heater
+          - climate.living_room_heat
+          - climate.family_room_heat
+          - climate.office_heat

@@ -1,5 +1,5 @@
 - platform: generic_thermostat
-  name: Living Room Fireplace
+  name: Living Room Heat
   heater: switch.fireplace
   target_sensor: sensor.netatmo_home_indoor_temperature
   min_temp: 60
@@ -15,7 +15,7 @@
   precision: 0.1
 
 - platform: generic_thermostat
-  name: Family Room Heaters
+  name: Family Room Heat
   heater: switch.family_room_heaters
   target_sensor: sensor.family_room_temperature
   min_temp: 60
@@ -29,7 +29,7 @@
   precision: 0.1
 
 - platform: generic_thermostat
-  name: Office Heater
+  name: Office Heat
   heater: switch.office_heater
   target_sensor: sensor.office_sensor_air_temperature
   min_temp: 60
