@@ -4,9 +4,17 @@
       friendly_name: Fireplace
       value_template: "{{ is_state('light.fireplace', 'on') }}"
       turn_on:
-        service: script.fireplace_on
+        repeat:
+          count: 5
+          sequence:
+            service: light.turn_on
+            entity_id: light.fireplace
       turn_off:
-        service: script.fireplace_off
+        repeat:
+          count: 5
+          sequence:
+            service: light.turn_off
+            entity_id: light.fireplace
       icon_template: >
         {% if is_state('light.fireplace', 'on') %}
           mdi:fireplace

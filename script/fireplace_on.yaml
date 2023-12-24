@@ -1,8 +1,0 @@
-fireplace_on:
-  sequence:
-    - repeat:
-        count: 5
-        sequence:
-          - service: light.turn_on
-            data:
-              entity_id: light.fireplace
