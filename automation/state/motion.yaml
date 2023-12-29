@@ -126,7 +126,7 @@
     platform: state
     to: 'off'
     for:
-      minutes: 60
+      minutes: 30
   action:
     service: climate.set_preset_mode
     data:
@@ -150,7 +150,7 @@
     platform: state
     to: 'off'
     for:
-      minutes: 60
+      minutes: 15
   action:
     service: climate.set_preset_mode
     data:
@@ -174,7 +174,7 @@
     platform: state
     to: 'off'
     for:
-      minutes: 60
+      minutes: 15
   action:
     service: climate.set_preset_mode
     data:
