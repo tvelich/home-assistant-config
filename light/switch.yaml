@@ -1,10 +1,6 @@
 - platform: switch
-  name: Front Yard Holiday Lights
+  name: Front Yard String Lights
   entity_id: switch.front_yard_string_light_switch
-
-- platform: switch
-  name: Family Room Window Lights
-  entity_id: switch.family_room_window_lights
 
 - platform: switch
   name: Family Room Tree Lights

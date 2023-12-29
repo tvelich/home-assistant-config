@@ -3,7 +3,6 @@
   entities:
     - light.hue_family_room_accent
     - light.family_room_tree_lights
-    - light.family_room_window_lights
 - platform: group
   name: "Living Room Accent"
   entities:
@@ -12,7 +11,7 @@
   name: "Front Yard Accent"
   entities:
     - light.hue_front_yard_accent
-    - light.front_yard_holiday_lights
+    - light.front_yard_string_lights
 - platform: group
   name: "Backyard Accent"
   entities:
