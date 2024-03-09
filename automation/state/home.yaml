@@ -13,6 +13,7 @@
       continue_on_error: true
       data:
         entity_id: light.inside
+        brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
     - service: climate.turn_on
       continue_on_error: true
       data:

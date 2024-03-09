@@ -25,8 +25,8 @@
       - service: light.turn_on
         data:
           entity_id: light.inside
-          brightness_pct: 100
-          transition: 3600
+          brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
+          transition: 300
       - service: climate.turn_on
         data:
           entity_id:

@@ -17,20 +17,10 @@
       entity_id: binary_sensor.bathroom_downstairs_motion
       to: 'on'
   action:
-    - choose:
-        - conditions:
-            condition: state
-            entity_id: input_boolean.sleep_mode_enabled
-            state: 'on'
-          sequence:
-            - service: light.turn_on
-              data:
-                entity_id: light.bathroom_downstairs
-                brightness_pct: 1
-      default:
-        - service: light.turn_on
-          data:
-            entity_id: light.bathroom_downstairs
+    - service: light.turn_on
+      data:
+        entity_id: light.bathroom_downstairs
+        brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
     - choose:
         - conditions:
             condition: state
@@ -55,20 +45,10 @@
       entity_id: binary_sensor.bathroom_upstairs_motion
       to: 'on'
   action:
-    - choose:
-        - conditions:
-            condition: state
-            entity_id: input_boolean.sleep_mode_enabled
-            state: 'on'
-          sequence:
-            - service: light.turn_on
-              data:
-                entity_id: light.bathroom_upstairs
-                brightness_pct: 1
-      default:
-        - service: light.turn_on
-          data:
-            entity_id: light.bathroom_upstairs
+    - service: light.turn_on
+      data:
+        entity_id: light.bathroom_upstairs
+        brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
     - service: script.upstairs_bathroom_timer_start
 
 - alias: state_motion_laundry_room_detected
@@ -77,20 +57,10 @@
       entity_id: binary_sensor.laundry_room_sensor_motion_detection
       to: 'on'
   action:
-    - choose:
-        - conditions:
-            condition: state
-            entity_id: input_boolean.sleep_mode_enabled
-            state: 'on'
-          sequence:
-            - service: light.turn_on
-              data:
-                entity_id: light.laundry_room
-                brightness_pct: 1
-      default:
-        - service: light.turn_on
-          data:
-            entity_id: light.laundry_room
+    - service: light.turn_on
+      data:
+        entity_id: light.laundry_room
+        brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
     - choose:
         - conditions:
             condition: state
