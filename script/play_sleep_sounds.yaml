@@ -4,8 +4,17 @@ play_sleep_sounds:
       data:
         entity_id: media_player.main_bedroom_home
         volume_level: 0.60
-    - service: media_player.play_media
-      data:
-        entity_id: media_player.main_bedroom_home
-        media_content_id: https://www.gstatic.com/voice_delight/sounds/long/pink_noise.mp3
-        media_content_type: audio/mp3
+    - repeat:
+        until:
+          - condition: state
+            entity_id: input_boolean.sleep_mode_enabled
+            state: 'off'
+        sequence:
+        - service: media_player.play_media
+          data:
+            entity_id: media_player.main_bedroom_home
+            media_content_id: https://www.gstatic.com/voice_delight/sounds/long/pink_noise.mp3
+            media_content_type: audio/mp3
+        - delay:
+            minutes: 60
+  mode: single

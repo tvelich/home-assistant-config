@@ -5,36 +5,34 @@
     from: 'on'
     to: 'off'
   action:
-    - service: media_player.turn_off
-      continue_on_error: true
-      data:
-        entity_id: media_player.main_bedroom_home
-    - service: alarm_control_panel.alarm_disarm
-      continue_on_error: true
-      data:
-        entity_id: alarm_control_panel.abode_alarm
-    - service: script.reset_google_home_volumes
-      continue_on_error: true
-    - service: light.turn_on
-      continue_on_error: true
-      data:
-        entity_id: light.inside
-        brightness_pct: 25
-        transition: 30
-    - delay: 30
-    - service: light.turn_on
-      continue_on_error: true
-      data:
-        entity_id: light.inside
-        brightness_pct: 100
-        transition: 3600
-    - service: climate.turn_on
-      continue_on_error: true
-      data:
-        entity_id:
-          - climate.living_room_heat
-          - climate.family_room_heat
-          - climate.office_heat
+    - parallel:
+      - service: media_player.turn_off
+        data:
+          entity_id: media_player.main_bedroom_home
+      - service: alarm_control_panel.alarm_disarm
+        data:
+          entity_id: alarm_control_panel.abode_alarm
+      - service: script.turn_off
+        data:
+          entity_id: script.play_sleep_sounds
+      - service: script.reset_google_home_volumes
+      - service: light.turn_on
+        data:
+          entity_id: light.inside
+          brightness_pct: 25
+          transition: 30
+      - delay: 30
+      - service: light.turn_on
+        data:
+          entity_id: light.inside
+          brightness_pct: 100
+          transition: 3600
+      - service: climate.turn_on
+        data:
+          entity_id:
+            - climate.living_room_heat
+            - climate.family_room_heat
+            - climate.office_heat
 
 - alias: state_sleep_mode_changed_off_to_on
   trigger:
@@ -43,27 +41,22 @@
     from: 'off'
     to: 'on'
   action:
-    - service: script.media_devices_off
-      continue_on_error: true
-    - service: alarm_control_panel.alarm_arm_home
-      continue_on_error: true
-      data:
-        entity_id: alarm_control_panel.abode_alarm
-    - service: script.play_sleep_sounds
-      continue_on_error: true
-    - service: light.turn_on
-      continue_on_error: true
-      data:
-        entity_id: light.inside
-        brightness_pct: 1
-    - service: light.turn_off
-      continue_on_error: true
-      data:
-        entity_id: light.inside
-    - service: climate.turn_off
-      continue_on_error: true
-      data:
-        entity_id:
-          - climate.living_room_heat
-          - climate.family_room_heat
-          - climate.office_heat
+    - parallel:
+      - service: script.media_devices_off
+      - service: alarm_control_panel.alarm_arm_home
+        data:
+          entity_id: alarm_control_panel.abode_alarm
+      - service: script.play_sleep_sounds
+      - service: light.turn_on
+        data:
+          entity_id: light.inside
+          brightness_pct: 1
+      - service: light.turn_off
+        data:
+          entity_id: light.inside
+      - service: climate.turn_off
+        data:
+          entity_id:
+            - climate.living_room_heat
+            - climate.family_room_heat
+            - climate.office_heat
