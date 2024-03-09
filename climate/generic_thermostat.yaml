@@ -5,7 +5,7 @@
   min_temp: 60
   max_temp: 80
   ac_mode: false
-  comfort_temp: 65
+  comfort_temp: 63
   activity_temp: 68
   cold_tolerance: 0.5
   hot_tolerance: 0
@@ -21,7 +21,7 @@
   min_temp: 60
   max_temp: 80
   ac_mode: false
-  comfort_temp: 65
+  comfort_temp: 63
   activity_temp: 68
   cold_tolerance: 0.5
   hot_tolerance: 0
@@ -35,7 +35,7 @@
   min_temp: 60
   max_temp: 80
   ac_mode: false
-  comfort_temp: 65
+  comfort_temp: 63
   activity_temp: 68
   cold_tolerance: 0.5
   hot_tolerance: 0
