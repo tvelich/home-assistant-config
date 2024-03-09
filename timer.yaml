@@ -1,5 +1,10 @@
 backyard_lights:
+  restore: true
 bathroom_downstairs_lights:
+  restore: true
 bathroom_upstairs_lights:
+  restore: true
 laundry_room_lights:
+  restore: true
 brighten_front_yard:
+  restore: true
