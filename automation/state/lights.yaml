@@ -4,7 +4,10 @@
     entity_id: light.backyard
     to: 'on'
   action:
-    service: script.backyard_timer_start
+    service: timer.start
+    data:
+      entity_id: timer.backyard_lights
+      duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
 
 - alias: state_lights_bathroom_downstairs_on
   trigger:
@@ -15,12 +18,7 @@
     service: timer.start
     data:
       entity_id: timer.bathroom_downstairs_lights
-      duration: >
-        {% if is_state('input_boolean.sleep_mode_enabled', 'on') %}
-          00:01:00
-        {% else %}
-          00:15:00
-        {% endif %}
+      duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
 
 - alias: state_lights_bathroom_upstairs_on
   trigger:
@@ -28,7 +26,10 @@
     entity_id: light.bathroom_upstairs
     to: 'on'
   action:
-    service: script.upstairs_bathroom_timer_start
+    service: timer.start
+    data:
+      entity_id: timer.bathroom_upstairs_lights
+      duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
 
 - alias: state_lights_laundry_room_on
   trigger:
@@ -39,9 +40,4 @@
     service: timer.start
     data:
       entity_id: timer.laundry_room_lights
-      duration: >
-        {% if is_state('input_boolean.sleep_mode_enabled', 'on') %}
-          00:01:00
-        {% else %}
-          00:15:00
-        {% endif %}
+      duration: "{{ states('sensor.dynamic_light_timer_duration') }}"

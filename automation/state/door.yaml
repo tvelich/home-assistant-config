@@ -121,4 +121,7 @@
       data:
         entity_id: light.backyard
         brightness_pct: 100
-    - service: script.backyard_timer_start
+    - service: timer.start
+      data:
+        entity_id: timer.backyard_lights
+        duration: "{{ states('sensor.dynamic_light_timer_duration') }}"

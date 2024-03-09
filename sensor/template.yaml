@@ -10,3 +10,12 @@
         {% else %}
           100
         {% endif %}
+- platform: template
+  sensors:
+    dynamic_light_timer_duration:
+      value_template: >
+        {% if is_state('input_boolean.sleep_mode_enabled', 'on') %}
+          00:05:00
+        {% else %}
+          00:15:00
+        {% endif %}

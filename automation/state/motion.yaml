@@ -21,23 +21,10 @@
       data:
         entity_id: light.bathroom_downstairs
         brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
-    - choose:
-        - conditions:
-            condition: state
-            entity_id: input_boolean.sleep_mode_enabled
-            state: 'on'
-          sequence:
-            - service: timer.start
-              data:
-                entity_id: timer.bathroom_downstairs_lights
-                duration:
-                  seconds: 60
-      default:
-        - service: timer.start
-          data:
-            entity_id: timer.bathroom_downstairs_lights
-            duration:
-              minutes: 15
+    - service: timer.start
+      data:
+        entity_id: timer.bathroom_downstairs_lights
+        duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
 
 - alias: state_motion_bathroom_upstairs_detected
   trigger:
@@ -49,7 +36,10 @@
       data:
         entity_id: light.bathroom_upstairs
         brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
-    - service: script.upstairs_bathroom_timer_start
+    - service: timer.start
+      data:
+        entity_id: timer.bathroom_upstairs_lights
+        duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
 
 - alias: state_motion_laundry_room_detected
   trigger:
@@ -61,23 +51,10 @@
       data:
         entity_id: light.laundry_room
         brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
-    - choose:
-        - conditions:
-            condition: state
-            entity_id: input_boolean.sleep_mode_enabled
-            state: 'on'
-          sequence:
-            - service: timer.start
-              data:
-                entity_id: timer.laundry_room_lights
-                duration:
-                  seconds: 60
-      default:
-        - service: timer.start
-          data:
-            entity_id: timer.laundry_room_lights
-            duration:
-              minutes: 15
+    - service: timer.start
+      data:
+        entity_id: timer.laundry_room_lights
+        duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
 
 - alias: state_motion_living_room_detected
   trigger:
