@@ -16,17 +16,6 @@
         data:
           entity_id: script.play_sleep_sounds
       - service: script.reset_google_home_volumes
-      - service: light.turn_on
-        data:
-          entity_id: light.inside
-          brightness_pct: 25
-          transition: 30
-      - delay: 30
-      - service: light.turn_on
-        data:
-          entity_id: light.inside
-          brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
-          transition: 300
       - service: climate.turn_on
         data:
           entity_id:
@@ -47,13 +36,6 @@
         data:
           entity_id: alarm_control_panel.abode_alarm
       - service: script.play_sleep_sounds
-      - service: light.turn_on
-        data:
-          entity_id: light.inside
-          brightness_pct: 1
-      - service: light.turn_off
-        data:
-          entity_id: light.inside
       - service: climate.turn_off
         data:
           entity_id:

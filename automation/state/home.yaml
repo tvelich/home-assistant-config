@@ -9,11 +9,6 @@
       continue_on_error: true
       data:
         entity_id: alarm_control_panel.abode_alarm
-    - service: light.turn_on
-      continue_on_error: true
-      data:
-        entity_id: light.inside
-        brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
     - service: climate.turn_on
       continue_on_error: true
       data:
@@ -33,10 +28,6 @@
       continue_on_error: true
       data:
         entity_id: alarm_control_panel.abode_alarm
-    - service: light.turn_off
-      continue_on_error: true
-      data:
-        entity_id: light.inside
     - service: climate.turn_off
       continue_on_error: true
       data:
@@ -44,4 +35,3 @@
           - climate.living_room_heat
           - climate.family_room_heat
           - climate.office_heat
-
