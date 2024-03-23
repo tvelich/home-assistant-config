@@ -1,0 +1,23 @@
+- alias: main_bedroom_button_pressed
+  trigger:
+    platform: event
+    event_type: zwave_js_value_notification
+    event_data:
+      node_id: 31
+      value: KeyPressed
+  action:
+    service: input_boolean.toggle
+    data:
+      entity_id: input_boolean.sleep_mode_enabled
+
+- alias: main_bedroom_button_double_pressed
+  trigger:
+    platform: event
+    event_type: zwave_js_value_notification
+    event_data:
+      node_id: 31
+      value: KeyPressed2x
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.bathroom_upstairs
