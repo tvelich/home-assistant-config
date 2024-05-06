@@ -15,6 +15,7 @@
         entity_id:
             - climate.living_room_heat
             - climate.family_room_heat
+            - climate.family_room_ac
             - climate.office_heat
 
 - alias: state_home_off
@@ -34,4 +35,5 @@
         entity_id:
           - climate.living_room_heat
           - climate.family_room_heat
+          - climate.family_room_ac
           - climate.office_heat

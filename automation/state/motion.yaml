@@ -88,7 +88,9 @@
   action:
     service: climate.set_preset_mode
     data:
-      entity_id: climate.family_room_heat
+      entity_id:
+        - climate.family_room_heat
+        - climate.family_room_ac
       preset_mode: activity
 
 - alias: state_motion_family_room_idle
@@ -101,7 +103,9 @@
   action:
     service: climate.set_preset_mode
     data:
-      entity_id: climate.family_room_heat
+      entity_id:
+        - climate.family_room_heat
+        - climate.family_room_ac
       preset_mode: comfort
 
 - alias: state_motion_office_detected

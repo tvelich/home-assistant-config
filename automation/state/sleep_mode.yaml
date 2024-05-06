@@ -21,6 +21,7 @@
           entity_id:
             - climate.living_room_heat
             - climate.family_room_heat
+            - climate.family_room_ac
             - climate.office_heat
 
 - alias: state_sleep_mode_changed_off_to_on
@@ -40,5 +41,5 @@
         data:
           entity_id:
             - climate.living_room_heat
-            - climate.family_room_heat
+            - climate.family_room_ac
             - climate.office_heat

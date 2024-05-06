@@ -16,7 +16,7 @@
 
 - platform: generic_thermostat
   name: Family Room Heat
-  heater: switch.family_room_heaters
+  heater: switch.family_room_heat
   target_sensor: sensor.family_room_temperature
   min_temp: 60
   max_temp: 80
@@ -25,6 +25,20 @@
   activity_temp: 68
   cold_tolerance: 0.5
   hot_tolerance: 0
+  initial_hvac_mode: "off"
+  precision: 0.1
+
+- platform: generic_thermostat
+  name: Family Room AC
+  heater: switch.family_room_ac
+  target_sensor: sensor.family_room_temperature
+  min_temp: 60
+  max_temp: 80
+  ac_mode: true
+  comfort_temp: 75
+  activity_temp: 71
+  cold_tolerance: 0
+  hot_tolerance: 0.5
   initial_hvac_mode: "off"
   precision: 0.1
 
