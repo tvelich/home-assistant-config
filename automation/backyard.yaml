@@ -1,0 +1,67 @@
+- alias: backyard_timer_lights_finished
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.backyard_lights
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.backyard
+
+- alias: backyard_lights_on
+  trigger:
+    platform: state
+    entity_id: light.backyard
+    to: 'on'
+  action:
+    service: timer.start
+    data:
+      entity_id: timer.backyard_lights
+      duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
+
+- alias: backyard_lights_back_door_opened
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.sunroom_door_open
+        - binary_sensor.deck_door_open
+        - binary_sensor.garage_back_door_open
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: binary_sensor.low_visibility
+    state: 'on'
+  action:
+    - service: timer.start
+      data:
+        entity_id: timer.backyard_lights
+        duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
+    - condition: state
+      entity_id: light.backyard
+      state: 'off'
+    - service: light.turn_on
+      data:
+        entity_id: light.backyard
+        brightness_pct: 100
+
+- alias: backyard_lights_low_visibility_on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.low_visibility
+    to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.backyard_accent
+        brightness_pct: 100
+
+- alias: backyard_lights_low_visibility_off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.low_visibility
+    to: 'off'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.backyard_accent

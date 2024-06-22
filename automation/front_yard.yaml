@@ -1,0 +1,78 @@
+- alias: front_yard_timer_brighten_finished
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.brighten_front_yard
+  condition:
+    condition: state
+    entity_id: binary_sensor.late_nighttime
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.front_yard
+      brightness_pct: 25
+      transition: 60
+
+- alias: front_yard_lights_late_nighttime_on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.late_nighttime
+    to: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.front_yard
+      brightness_pct: 25
+      transition: 60
+
+- alias: front_yard_door_opened
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door_open
+      to: 'on'
+    - platform: state
+      entity_id: cover.garage_door_opener
+      to: 'open'
+  condition:
+    condition: state
+    entity_id: binary_sensor.late_nighttime
+    state: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.front_yard
+        brightness_pct: 100
+    - service: timer.start
+      data:
+        entity_id: timer.brighten_front_yard
+        duration: '00:05:00'
+
+- alias: front_yard_lights_low_visibility_on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.low_visibility
+    to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.front_yard
+        brightness_pct: 100
+    - service: light.turn_on
+      data:
+        entity_id: light.front_yard_accent
+        brightness_pct: 100
+
+- alias: front_yard_lights_low_visibility_off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.low_visibility
+    to: 'off'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.front_yard
+    - service: light.turn_off
+      data:
+        entity_id: light.front_yard_accent

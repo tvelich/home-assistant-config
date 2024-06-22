@@ -1,7 +1,0 @@
-fade_to_dim_front_yard:
-  sequence:
-    - service: light.turn_on
-      data:
-        entity_id: light.front_yard
-        brightness_pct: 25
-        transition: 60

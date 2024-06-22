@@ -1,7 +1,0 @@
-- alias: state_late_nighttime_on
-  trigger:
-    platform: state
-    entity_id: binary_sensor.late_nighttime
-    to: 'on'
-  action:
-    service: script.fade_to_dim_front_yard

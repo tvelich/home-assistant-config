@@ -1,0 +1,39 @@
+- alias: bathroom_downstairs_timer_lights_finished
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.bathroom_downstairs_lights
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.bathroom_downstairs
+
+- alias: bathroom_downstairs_lights_on
+  trigger:
+    platform: state
+    entity_id: light.bathroom_downstairs
+    to: 'on'
+  action:
+    service: timer.start
+    data:
+      entity_id: timer.bathroom_downstairs_lights
+      duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
+
+- alias: bathroom_downstairs_motion_detected
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bathroom_downstairs_motion
+    to: 'on'
+  action:
+    - service: timer.start
+      data:
+        entity_id: timer.bathroom_downstairs_lights
+        duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
+    - condition: state
+      entity_id: light.bathroom_downstairs
+      state: 'off'
+    - service: light.turn_on
+      data:
+        entity_id: light.bathroom_downstairs
+        brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
