@@ -1,0 +1,19 @@
+- alias: living_room_check_heat_fireplace
+  trigger:
+    - platform: time_pattern
+      minutes: "/10"
+  condition:
+    condition: template
+    value_template: "{{ state_attr('climate.living_room_heat', 'current_temperature') | float > 75 }}"
+  action:
+    - service: notify.notify
+      continue_on_error: true
+      data:
+        message: Fireplace turning off due to excessive heat
+        data:
+          push:
+            badge: 1
+    - service: climate.turn_off
+      continue_on_error: true
+      data:
+        entity_id: climate.living_room_heat
