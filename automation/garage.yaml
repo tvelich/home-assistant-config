@@ -16,3 +16,33 @@
       data:
         push:
           badge: 1
+
+- alias: garage_back_door_left_open
+  trigger:
+    entity_id: binary_sensor.garage_back_door_open
+    platform: state
+    to: 'on'
+    for:
+      minutes: 15
+  action:
+    service: notify.notify
+    data_template:
+      message: Garage back door is still open!
+      data:
+        push:
+          badge: 1
+
+- alias: garage_lift_door_left_open
+  trigger:
+    entity_id: cover.garage_door_opener
+    platform: state
+    to: 'open'
+    for:
+      minutes: 15
+  action:
+    service: notify.notify
+    data_template:
+      message: Garage lift door is still open!
+      data:
+        push:
+          badge: 1
