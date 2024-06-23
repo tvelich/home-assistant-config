@@ -9,9 +9,6 @@
       - service: media_player.turn_off
         data:
           entity_id: media_player.main_bedroom_home
-      - service: alarm_control_panel.alarm_disarm
-        data:
-          entity_id: alarm_control_panel.abode_alarm
       - service: script.turn_off
         data:
           entity_id: script.play_sleep_sounds
@@ -26,7 +23,4 @@
   action:
     - parallel:
       - service: script.media_devices_off
-      - service: alarm_control_panel.alarm_arm_home
-        data:
-          entity_id: alarm_control_panel.abode_alarm
       - service: script.play_sleep_sounds
