@@ -76,3 +76,16 @@
     - service: light.turn_off
       data:
         entity_id: light.front_yard_accent
+
+- alias: front_yard_mailbox_motion
+  trigger:
+    entity_id: binary_sensor.mailbox_motion
+    platform: state
+    to: 'on'
+  action:
+    service: notify.notify
+    data:
+      message: You've got mail!
+      data:
+        push:
+          badge: 1

@@ -1,0 +1,23 @@
+- alias: office_climate_motion_detected
+  trigger:
+    entity_id: binary_sensor.office_sensor_motion_detection
+    platform: state
+    to: 'on'
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id: climate.office_heat
+      preset_mode: activity
+
+- alias: office_climate_motion_idle
+  trigger:
+    entity_id: binary_sensor.office_sensor_motion_detection
+    platform: state
+    to: 'off'
+    for:
+      minutes: 15
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id: climate.office_heat
+      preset_mode: comfort

@@ -1,0 +1,27 @@
+- alias: family_room_climate_motion_detected
+  trigger:
+    entity_id: binary_sensor.family_room_motion
+    platform: state
+    to: 'on'
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id:
+        - climate.family_room_heat
+        - climate.family_room_ac
+      preset_mode: activity
+
+- alias: family_room_climate_motion_idle
+  trigger:
+    entity_id: binary_sensor.family_room_motion
+    platform: state
+    to: 'off'
+    for:
+      minutes: 15
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id:
+        - climate.family_room_heat
+        - climate.family_room_ac
+      preset_mode: comfort
