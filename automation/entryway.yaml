@@ -12,3 +12,15 @@
       data:
         push:
           badge: 1
+
+- alias: entryway_front_door_left_unlocked
+  trigger:
+    entity_id: binary_sensor.front_door_open
+    platform: state
+    to: 'off'
+    for:
+      minutes: 15
+  action:
+    service: lock.lock
+    data:
+      entity_id: lock.front_door_lock
