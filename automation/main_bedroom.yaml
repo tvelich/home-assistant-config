@@ -21,3 +21,30 @@
     service: light.turn_off
     data:
       entity_id: light.bathroom_upstairs
+
+- alias: main_bedroom_google_home_sleep_mode_on
+  trigger:
+    platform: state
+    entity_id: input_boolean.sleep_mode_enabled
+    from: 'off'
+    to: 'on'
+  action:
+    - service: script.play_sleep_sounds
+
+- alias: main_bedroom_google_home_sleep_mode_off
+  trigger:
+    platform: state
+    entity_id: input_boolean.sleep_mode_enabled
+    from: 'on'
+    to: 'off'
+  action:
+    - service: script.turn_off
+      data:
+        entity_id: script.play_sleep_sounds
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.main_bedroom_home
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.main_bedroom_home
+        volume_level: 0.50
