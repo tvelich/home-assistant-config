@@ -21,3 +21,25 @@
     data:
       entity_id: climate.office_heat
       preset_mode: comfort
+
+- alias: office_climate_arrive_home
+  trigger:
+    entity_id: binary_sensor.home
+    platform: state
+    from: 'off'
+    to: 'on'
+  action:
+    service: climate.turn_on
+    data:
+      entity_id: climate.office_heat
+
+- alias: office_climate_depart_home
+  trigger:
+    entity_id: binary_sensor.home
+    platform: state
+    from: 'on'
+    to: 'off'
+  action:
+    service: climate.turn_off
+    data:
+      entity_id: climate.office_heat

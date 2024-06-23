@@ -54,3 +54,25 @@
       entity_id:
         - light.inside
         - light.inside_accent
+
+- alias: inside_arrive_home
+  trigger:
+    entity_id: binary_sensor.home
+    platform: state
+    from: 'off'
+    to: 'on'
+  action:
+    service: alarm_control_panel.alarm_disarm
+    data:
+      entity_id: alarm_control_panel.abode_alarm
+
+- alias: inside_depart_home
+  trigger:
+    entity_id: binary_sensor.home
+    platform: state
+    from: 'on'
+    to: 'off'
+  action:
+    service: alarm_control_panel.alarm_arm_away
+    data:
+      entity_id: alarm_control_panel.abode_alarm
