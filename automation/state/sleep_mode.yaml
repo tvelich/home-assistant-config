@@ -16,13 +16,6 @@
         data:
           entity_id: script.play_sleep_sounds
       - service: script.reset_google_home_volumes
-      - service: climate.turn_on
-        data:
-          entity_id:
-            - climate.living_room_heat
-            - climate.family_room_heat
-            - climate.family_room_ac
-            - climate.office_heat
 
 - alias: state_sleep_mode_changed_off_to_on
   trigger:
@@ -37,9 +30,3 @@
         data:
           entity_id: alarm_control_panel.abode_alarm
       - service: script.play_sleep_sounds
-      - service: climate.turn_off
-        data:
-          entity_id:
-            - climate.living_room_heat
-            - climate.family_room_ac
-            - climate.office_heat

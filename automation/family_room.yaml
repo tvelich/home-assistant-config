@@ -51,3 +51,29 @@
       entity_id:
         - climate.family_room_heat
         - climate.family_room_ac
+
+- alias: family_room_climate_sleep_mode_on
+  trigger:
+    entity_id: input_boolean.sleep_mode_enabled
+    platform: state
+    from: 'off'
+    to: 'on'
+  action:
+    service: climate.turn_off
+    data:
+      entity_id:
+        - climate.family_room_heat
+        - climate.family_room_ac
+
+- alias: family_room_climate_sleep_mode_off
+  trigger:
+    entity_id: input_boolean.sleep_mode_enabled
+    platform: state
+    from: 'on'
+    to: 'off'
+  action:
+    service: climate.turn_on
+    data:
+      entity_id:
+        - climate.family_room_heat
+        - climate.family_room_ac
