@@ -80,7 +80,7 @@
         push:
           badge: 1
 
-- alias: laundry_room_deck_door_left_unlocked
+- alias: laundry_room_deck_door_relock
   trigger:
     entity_id: binary_sensor.deck_door_open
     platform: state
@@ -91,3 +91,18 @@
     service: lock.lock
     data:
       entity_id: lock.deck_door_lock
+
+- alias: laundry_room_deck_door_notify_unlocked
+  trigger:
+    entity_id: lock.deck_door_lock
+    platform: state
+    to: 'unlocked'
+    for:
+      minutes: 120
+  action:
+    service: notify.notify
+    data:
+      message: Deck door is still unlocked!
+      data:
+        push:
+          badge: 1

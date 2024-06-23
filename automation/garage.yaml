@@ -47,7 +47,7 @@
         push:
           badge: 1
 
-- alias: garage_door_left_unlocked
+- alias: garage_door_relock
   trigger:
     entity_id: binary_sensor.garage_back_door_open
     platform: state
@@ -58,3 +58,18 @@
     service: lock.lock
     data:
       entity_id: lock.garage_door_lock
+
+- alias: garage_back_door_notify_unlocked
+  trigger:
+    entity_id: lock.garage_door_lock
+    platform: state
+    to: 'unlocked'
+    for:
+      minutes: 120
+  action:
+    service: notify.notify
+    data:
+      message: Garage back door is still unlocked!
+      data:
+        push:
+          badge: 1
