@@ -65,3 +65,17 @@
     - service: light.turn_off
       data:
         entity_id: light.backyard_accent
+
+- alias: backyard_fountain_poor_conditions_changed
+  trigger:
+    platform: state
+    entity_id: binary_sensor.poor_fountain_conditions
+  action:
+    service_template: >
+      {% if trigger.to_state.state == 'on' %}
+        switch.turn_off
+      {% else %}
+        switch.turn_on
+      {% endif %}
+    data:
+      entity_id: switch.fountain_switch
