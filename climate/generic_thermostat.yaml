@@ -36,7 +36,7 @@
   max_temp: 80
   ac_mode: true
   comfort_temp: 75
-  activity_temp: 71
+  activity_temp: 73
   cold_tolerance: 0
   hot_tolerance: 0.5
   initial_hvac_mode: "off"
