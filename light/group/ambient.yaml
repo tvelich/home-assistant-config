@@ -26,6 +26,7 @@
   name: "Family Room"
   entities:
     - light.hue_family_room
+    - light.family_room_main_lights
 - platform: group
   name: "Hallway"
   entities:
