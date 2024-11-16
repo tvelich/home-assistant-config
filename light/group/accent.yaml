@@ -1,12 +1,19 @@
 - platform: group
+  name: "Dining Room Accent"
+  entities:
+    - light.hue_dining_room_accent
+- platform: group
   name: "Family Room Accent"
   entities:
     - light.hue_family_room_accent
-    - light.family_room_tree_lights
 - platform: group
   name: "Living Room Accent"
   entities:
     - light.hue_living_room_accent
+- platform: group
+  name: "Main Bedroom Accent"
+  entities:
+    - light.hue_main_bedroom_accent
 - platform: group
   name: "Front Yard Accent"
   entities:
@@ -25,7 +32,9 @@
 - platform: group
   name: "Upstairs Accent"
   entities:
+    - light.dining_room_accent
     - light.family_room_accent
+    - light.main_bedroom_accent
 - platform: group
   name: "Inside Accent"
   entities:
