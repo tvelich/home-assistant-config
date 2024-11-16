@@ -21,12 +21,10 @@
     to: 'on'
   action:
     service: light.turn_off
-    continue_on_error: true
     data:
       entity_id:
         - light.inside
         - light.inside_accent
-      transition: 5
 
 - alias: inside_lights_home_on
   trigger:
