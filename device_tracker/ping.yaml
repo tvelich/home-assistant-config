@@ -1,6 +1,0 @@
-- platform: ping
-  hosts:
-    phone_1: !secret ip_phone_1
-    phone_2: !secret ip_phone_2
-  interval_seconds: 5
-  consider_home: 1800

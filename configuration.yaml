@@ -16,7 +16,6 @@ timer: !include timer.yaml
 # Platforms
 binary_sensor: !include_dir_merge_list binary_sensor
 climate: !include_dir_merge_list climate
-device_tracker: !include_dir_merge_list device_tracker
 light: !include_dir_merge_list light
 sensor: !include_dir_merge_list sensor
 switch: !include_dir_merge_list switch
