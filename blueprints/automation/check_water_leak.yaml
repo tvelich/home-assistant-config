@@ -7,6 +7,7 @@ blueprint:
 
 variables:
   area: !input area
+  binary_sensor: !input binary_sensor
 trigger:
   - platform: time_pattern
     minutes: '/5'
@@ -18,9 +19,15 @@ condition:
   entity_id: !input binary_sensor
   state: 'on'
 action:
-  service: notify.notify
-  data:
-    message: "Water detected: {{ area }}"
-    data:
-      push:
-        badge: 1
+  - parallel:
+    - service: notify.notify
+      data:
+        message: "Water detected: {{ area }}"
+        data:
+          push:
+            badge: 1
+    - service: persistent_notification.create
+      data:
+        title: Water detected
+        message: "Water detected: {{ area }}"
+        notification_id: check_water_leak_{{ binary_sensor }}
