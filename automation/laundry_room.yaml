@@ -38,32 +38,12 @@
         entity_id: light.laundry_room
         brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
 
-- alias: laundry_room_check_water_leak
-  trigger:
-    - platform: time_pattern
-      minutes: '/5'
-    - entity_id: binary_sensor.laundry_room_water_sensor_water_leak_detected
-      platform: state
-      to: 'on'
-    - entity_id: binary_sensor.laundry_room_water_sensor_water_leak_detected_2
-      platform: state
-      to: 'on'
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: binary_sensor.laundry_room_water_sensor_water_leak_detected
-        state: 'on'
-      - condition: state
-        entity_id: binary_sensor.laundry_room_water_sensor_water_leak_detected_2
-        state: 'on'
-  action:
-    service: notify.notify
-    data:
-      message: Water detected in laundry room!
-      data:
-        push:
-          badge: 1
+- alias: laundry_room_washing_machine_check_water_leak
+  use_blueprint:
+    path: check_water_leak.yaml
+    input:
+      binary_sensor: binary_sensor.laundry_room_washing_machine_water_sensor_water_leak_detected
+      area: Laundry Room Washing Machine
 
 - alias: laundry_room_deck_door_left_open
   trigger:

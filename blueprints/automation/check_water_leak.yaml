@@ -1,0 +1,26 @@
+blueprint:
+  name: Check Water Leak
+  domain: automation
+  input:
+    binary_sensor:
+    area:
+
+variables:
+  area: !input area
+trigger:
+  - platform: time_pattern
+    minutes: '/5'
+  - entity_id: !input binary_sensor
+    platform: state
+    to: 'on'
+condition:
+  condition: state
+  entity_id: !input binary_sensor
+  state: 'on'
+action:
+  service: notify.notify
+  data:
+    message: "Water detected: {{ area }}"
+    data:
+      push:
+        badge: 1

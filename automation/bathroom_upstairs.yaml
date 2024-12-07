@@ -38,21 +38,16 @@
         entity_id: light.bathroom_upstairs
         brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
 
-- alias: bathroom_upstairs_check_water_leak
-  trigger:
-    - platform: time_pattern
-      minutes: '/5'
-    - entity_id: binary_sensor.bathroom_upstairs_water_sensor_water_leak_detected
-      platform: state
-      to: 'on'
-  condition:
-    condition: state
-    entity_id: binary_sensor.bathroom_upstairs_water_sensor_water_leak_detected
-    state: 'on'
-  action:
-    service: notify.notify
-    data:
-      message: Water detected in upstairs bathroom!
-      data:
-        push:
-          badge: 1
+- alias: bathroom_upstairs_toilet_check_water_leak
+  use_blueprint:
+    path: check_water_leak.yaml
+    input:
+      binary_sensor: binary_sensor.bathroom_upstairs_toilet_water_sensor_water_leak_detected
+      area: Upstairs Bathroom Toilet
+
+- alias: bathroom_upstairs_sink_check_water_leak
+  use_blueprint:
+    path: check_water_leak.yaml
+    input:
+      binary_sensor: binary_sensor.bathroom_upstairs_sink_water_sensor_water_leak_detected
+      area: Upstairs Bathroom Sink

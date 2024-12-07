@@ -1,0 +1,20 @@
+- alias: kitchen_sink_check_water_leak
+  use_blueprint:
+    path: check_water_leak.yaml
+    input:
+      binary_sensor: binary_sensor.kitchen_sink_water_sensor_water_leak_detected
+      area: Kitchen Sink
+
+- alias: kitchen_dishwasher_check_water_leak
+  use_blueprint:
+    path: check_water_leak.yaml
+    input:
+      binary_sensor: binary_sensor.kitchen_dishwasher_water_sensor_water_leak_detected
+      area: Kitchen Dishwasher
+
+- alias: kitchen_refrigerator_check_water_leak
+  use_blueprint:
+    path: check_water_leak.yaml
+    input:
+      binary_sensor: binary_sensor.kitchen_refrigerator_water_sensor_water_leak_detected
+      area: Kitchen Refrigerator

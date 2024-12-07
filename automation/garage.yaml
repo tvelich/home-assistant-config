@@ -1,21 +1,9 @@
-- alias: garage_check_water_leak
-  trigger:
-    - platform: time_pattern
-      minutes: '/5'
-    - entity_id: binary_sensor.garage_water_sensor_water_leak_detected
-      platform: state
-      to: 'on'
-  condition:
-    condition: state
-    entity_id: binary_sensor.garage_water_sensor_water_leak_detected
-    state: 'on'
-  action:
-    service: notify.notify
-    data:
-      message: Water detected in garage!
-      data:
-        push:
-          badge: 1
+- alias: garage_sink_check_water_leak
+  use_blueprint:
+    path: check_water_leak.yaml
+    input:
+      binary_sensor: binary_sensor.garage_sink_water_sensor_water_leak_detected
+      area: Garage Sink
 
 - alias: garage_back_door_left_open
   trigger:
