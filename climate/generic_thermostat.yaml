@@ -16,7 +16,7 @@
 
 - platform: generic_thermostat
   name: Family Room Heat
-  heater: switch.family_room_heater
+  heater: switch.family_room_heaters
   target_sensor: sensor.family_room_temperature
   min_temp: 60
   max_temp: 80
