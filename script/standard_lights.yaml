@@ -7,13 +7,14 @@ standard_lights:
             - light.outside
             - light.outside_accent
           color_temp_kelvin: 2600
-      - service: light.turn_on
-        data:
-          entity_id:
-            - light.inside
-            - light.family_room_accent
-          color_temp_kelvin: 4000
+          brightness_pct: 100
       - service: light.turn_on
         data:
           entity_id: light.living_room_accent
-          color_name: violet
+          brightness_pct: 100
+          color_temp_kelvin: 2000
+      - service: light.turn_on
+        data:
+          entity_id: light.inside
+          brightness_pct: "{{ states('sensor.time_of_day_brightness') | int }}"
+          color_temp_kelvin: 4000
