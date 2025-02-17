@@ -44,7 +44,7 @@
 
 - platform: generic_thermostat
   name: Office Heat
-  heater: switch.office_heater
+  heater: switch.office_heaters
   target_sensor: sensor.office_sensor_air_temperature
   min_temp: 60
   max_temp: 80
