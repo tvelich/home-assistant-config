@@ -45,6 +45,13 @@
       binary_sensor: binary_sensor.laundry_room_washing_machine_water_sensor_water_leak_detected
       area: Laundry Room Washing Machine
 
+- alias: laundry_room_water_heater_check_water_leak
+  use_blueprint:
+    path: check_water_leak.yaml
+    input:
+      binary_sensor: binary_sensor.laundry_room_water_heater_water_sensor_water_leak_detected
+      area: Laundry Room Water Heater
+
 - alias: laundry_room_deck_door_left_open
   trigger:
     entity_id: binary_sensor.deck_door_open
