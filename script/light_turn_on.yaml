@@ -1,0 +1,17 @@
+light_turn_on:
+  mode: queued
+  max: 100
+  fields:
+    entity_id:
+      required: true
+    transition:
+      required: false
+    brightness_pct:
+      required: false
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: "{{ entity_id }}"
+        transition: "{{ transition | default(3) }}"
+        brightness_pct: "{{ brightness_pct | default(states('sensor.time_of_day_brightness')) | int }}"
+    - delay: "00:00:00.100"

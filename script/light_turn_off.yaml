@@ -1,0 +1,14 @@
+light_turn_off:
+  mode: queued
+  max: 100
+  fields:
+    entity_id:
+      required: true
+    transition:
+      required: false
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id: "{{ entity_id }}"
+        transition: "{{ transition | default(3) }}"
+    - delay: "00:00:00.100"
