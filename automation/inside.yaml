@@ -10,7 +10,7 @@
       entity_id:
         - light.inside
         - light.inside_accent
-      brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
+      brightness_pct: "{{ states('sensor.time_of_day_brightness') | float }}"
       transition: 300
 
 - alias: inside_lights_sleep_mode_on
@@ -38,7 +38,7 @@
       entity_id:
         - light.inside
         - light.inside_accent
-      brightness_pct: "{{ states('sensor.default_indoor_brightness') | float }}"
+      brightness_pct: "{{ states('sensor.sleep_mode_brightness') | float }}"
 
 - alias: inside_lights_home_off
   trigger:
