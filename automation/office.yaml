@@ -10,6 +10,18 @@
     input:
       light_entity: light.office
 
+- alias: office_lights_home_on
+  use_blueprint:
+    path: lights_on_home_on.yaml
+    input:
+      light_entity: light.office
+
+- alias: office_lights_home_off
+  use_blueprint:
+    path: lights_off_home_off.yaml
+    input:
+      light_entity: light.office
+
 - alias: office_climate_motion_detected
   trigger:
     entity_id: binary_sensor.office_sensor_motion_detection
