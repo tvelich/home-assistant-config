@@ -10,6 +10,12 @@
     input:
       light_entity: light.bathroom_downstairs
 
+- alias: bathroom_downstairs_lights_time_of_day_change
+  use_blueprint:
+    path: lights_dim_time_of_day_brightness_change.yaml
+    input:
+      light_entity: light.bathroom_downstairs
+
 - alias: bathroom_downstairs_timer_lights_finished
   trigger:
     - platform: event

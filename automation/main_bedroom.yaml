@@ -23,6 +23,12 @@
     input:
       light_entity: light.main_bedroom
 
+- alias: main_bedroom_lights_time_of_day_change
+  use_blueprint:
+    path: lights_dim_time_of_day_brightness_change.yaml
+    input:
+      light_entity: light.main_bedroom
+
 - alias: main_bedroom_button_pressed
   trigger:
     platform: event

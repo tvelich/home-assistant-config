@@ -16,6 +16,12 @@
     input:
       light_entity: light.entryway
 
+- alias: entryway_lights_time_of_day_change
+  use_blueprint:
+    path: lights_dim_time_of_day_brightness_change.yaml
+    input:
+      light_entity: light.entryway
+
 - alias: entryway_front_door_left_open
   trigger:
     entity_id: binary_sensor.front_door_open

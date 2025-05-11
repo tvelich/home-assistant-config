@@ -22,6 +22,12 @@
     input:
       light_entity: light.kitchen
 
+- alias: kitchen_lights_time_of_day_change
+  use_blueprint:
+    path: lights_dim_time_of_day_brightness_change.yaml
+    input:
+      light_entity: light.kitchen
+
 - alias: kitchen_sink_check_water_leak
   use_blueprint:
     path: check_water_leak.yaml

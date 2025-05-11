@@ -1,0 +1,28 @@
+blueprint:
+  name: lights_dim_time_of_day_brightness_change
+  domain: automation
+  input:
+    light_entity:
+    transition:
+      default: 3
+
+variables:
+  light_entity: !input light_entity
+
+trigger:
+  entity_id: sensor.time_of_day_brightness
+  platform: state
+
+conditions:
+  - condition: state
+    entity_id: !input light_entity
+    state: 'on'
+  - condition: template
+    value_template: "{{ (state_attr(light_entity, 'brightness') | int * 100 / 255) | round > states('sensor.time_of_day_brightness') | int }}"
+
+action:
+  service: script.light_turn_on
+  data:
+    entity_id: !input light_entity
+    brightness_pct: "{{ states('sensor.time_of_day_brightness') | int }}"
+    transition: !input transition
