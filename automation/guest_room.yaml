@@ -1,0 +1,5 @@
+- alias: guest_room_lights_sleep_mode_on
+  use_blueprint:
+    path: lights_off_sleep_mode_on.yaml
+    input:
+      light_entity: light.guest_room

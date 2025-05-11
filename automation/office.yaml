@@ -1,3 +1,15 @@
+- alias: office_lights_sleep_mode_off
+  use_blueprint:
+    path: lights_on_sleep_mode_off.yaml
+    input:
+      light_entity: light.office
+
+- alias: office_lights_sleep_mode_on
+  use_blueprint:
+    path: lights_off_sleep_mode_on.yaml
+    input:
+      light_entity: light.office
+
 - alias: office_climate_motion_detected
   trigger:
     entity_id: binary_sensor.office_sensor_motion_detection

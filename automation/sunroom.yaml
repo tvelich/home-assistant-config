@@ -1,3 +1,9 @@
+- alias: sunroom_lights_sleep_mode_on
+  use_blueprint:
+    path: lights_off_sleep_mode_on.yaml
+    input:
+      light_entity: light.sunroom
+
 - alias: sunroom_door_left_open
   trigger:
     entity_id: binary_sensor.sunroom_door_open

@@ -1,0 +1,22 @@
+blueprint:
+  name: lights_on_sleep_mode_off
+  domain: automation
+  input:
+    light_entity:
+    brightness_pct:
+      default: "{{ states('sensor.time_of_day_brightness') | int }}"
+    transition:
+      default: 3
+
+trigger:
+  entity_id: input_boolean.sleep_mode_enabled
+  platform: state
+  from: 'on'
+  to: 'off'
+
+action:
+  service: script.light_turn_on
+  data:
+    entity_id: !input light_entity
+    brightness_pct: !input brightness_pct
+    transition: !input transition

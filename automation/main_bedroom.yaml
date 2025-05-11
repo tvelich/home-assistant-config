@@ -1,3 +1,16 @@
+- alias: main_bedroom_lights_sleep_mode_off
+  use_blueprint:
+    path: lights_on_sleep_mode_off.yaml
+    input:
+      light_entity: light.main_bedroom
+      transition: 300
+
+- alias: main_bedroom_lights_sleep_mode_on
+  use_blueprint:
+    path: lights_off_sleep_mode_on.yaml
+    input:
+      light_entity: light.main_bedroom
+
 - alias: main_bedroom_button_pressed
   trigger:
     platform: event
