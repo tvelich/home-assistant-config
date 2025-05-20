@@ -11,6 +11,12 @@
     input:
       light_entity: light.main_bedroom
 
+- alias: main_bedroom_accent_lights_sleep_mode_on
+  use_blueprint:
+    path: lights_off_sleep_mode_on.yaml
+    input:
+      light_entity: light.main_bedroom_accent
+
 - alias: main_bedroom_lights_home_on
   use_blueprint:
     path: lights_on_home_on.yaml
@@ -28,6 +34,19 @@
     path: lights_dim_time_of_day_brightness_change.yaml
     input:
       light_entity: light.main_bedroom
+
+- alias: main_bedroom_accent_lights_nighttime_on
+  use_blueprint:
+    path: lights_on_nighttime_on.yaml
+    input:
+      light_entity: light.main_bedroom_accent
+      brightness_pct: 100
+
+- alias: main_bedroom_accent_lights_nighttime_off
+  use_blueprint:
+    path: lights_off_nighttime_off.yaml
+    input:
+      light_entity: light.main_bedroom_accent
 
 - alias: main_bedroom_button_pressed
   trigger:

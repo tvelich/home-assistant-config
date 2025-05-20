@@ -28,6 +28,19 @@
     input:
       light_entity: light.living_room
 
+- alias: living_room_accent_lights_nighttime_on
+  use_blueprint:
+    path: lights_on_nighttime_on.yaml
+    input:
+      light_entity: light.living_room_accent
+      brightness_pct: 100
+
+- alias: living_room_accent_lights_nighttime_off
+  use_blueprint:
+    path: lights_off_nighttime_off.yaml
+    input:
+      light_entity: light.living_room_accent
+
 - alias: living_room_check_heat_fireplace
   trigger:
     - platform: time_pattern

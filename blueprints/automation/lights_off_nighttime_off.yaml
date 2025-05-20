@@ -1,0 +1,24 @@
+blueprint:
+  name: lights_off_nighttime_off
+  domain: automation
+  input:
+    light_entity:
+    transition:
+      default: 3
+
+trigger:
+  entity_id: binary_sensor.nighttime
+  platform: state
+  from: 'on'
+  to: 'off'
+
+condition:
+  condition: state
+  entity_id: !input light_entity
+  state: 'on'
+
+action:
+  service: script.light_turn_off
+  data:
+    entity_id: !input light_entity
+    transition: !input transition
