@@ -1,6 +1,6 @@
 name: Home
 latitude: !secret latitude
 longitude: !secret longitude
-unit_system: imperial
+unit_system: us_customary
 time_zone: !secret time_zone
 country: !secret country
