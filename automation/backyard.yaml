@@ -1,13 +1,9 @@
-- alias: backyard_timer_lights_finished
-  trigger:
-    - platform: event
-      event_type: timer.finished
-      event_data:
-        entity_id: timer.backyard_lights
-  action:
-    service: light.turn_off
-    data:
-      entity_id: light.backyard
+- alias: backyard_lights_off_timer_finished
+  use_blueprint:
+    path: lights_off_timer_finished.yaml
+    input:
+      light_entity: light.backyard
+      timer_entity: timer.backyard_lights
 
 - alias: backyard_lights_on
   trigger:

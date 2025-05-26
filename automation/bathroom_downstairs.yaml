@@ -16,16 +16,12 @@
     input:
       light_entity: light.bathroom_downstairs
 
-- alias: bathroom_downstairs_timer_lights_finished
-  trigger:
-    - platform: event
-      event_type: timer.finished
-      event_data:
-        entity_id: timer.bathroom_downstairs_lights
-  action:
-    service: light.turn_off
-    data:
-      entity_id: light.bathroom_downstairs
+- alias: bathroom_downstairs_lights_off_timer_finished
+  use_blueprint:
+    path: lights_off_timer_finished.yaml
+    input:
+      light_entity: light.bathroom_downstairs
+      timer_entity: timer.bathroom_downstairs_lights
 
 - alias: bathroom_downstairs_lights_on
   trigger:

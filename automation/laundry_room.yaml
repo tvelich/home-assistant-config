@@ -16,16 +16,12 @@
     input:
       light_entity: light.laundry_room
 
-- alias: laundry_room_timer_lights_finished
-  trigger:
-    - platform: event
-      event_type: timer.finished
-      event_data:
-        entity_id: timer.laundry_room_lights
-  action:
-    service: light.turn_off
-    data:
-      entity_id: light.laundry_room
+- alias: laundry_room_lights_off_timer_finished
+  use_blueprint:
+    path: lights_off_timer_finished.yaml
+    input:
+      light_entity: light.laundry_room
+      timer_entity: timer.laundry_room_lights
 
 - alias: laundry_room_lights_on
   trigger:
