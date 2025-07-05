@@ -85,3 +85,4 @@
       motion: binary_sensor.backyard_sensor_motion_detection
       condition_entity: binary_sensor.nighttime
       condition_state: 'on'
+      brightness_pct: 100

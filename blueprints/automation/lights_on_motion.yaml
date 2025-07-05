@@ -4,7 +4,7 @@ blueprint:
   input:
     light_entity:
     brightness_pct:
-      default: "{{ states('sensor.sleep_mode_brightness') | int }}"
+      default: "{{ states('sensor.time_of_day_brightness') | int }}"
     transition:
       default: 3
     motion:

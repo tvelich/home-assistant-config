@@ -47,6 +47,7 @@
       light_entity: light.bathroom_upstairs
       timer: timer.bathroom_upstairs_lights
       motion: binary_sensor.bathroom_upstairs_motion
+      brightness_pct: "{{ states('sensor.sleep_mode_brightness') }}"
 
 - alias: bathroom_upstairs_toilet_check_water_leak
   use_blueprint:
