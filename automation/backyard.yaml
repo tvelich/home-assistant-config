@@ -75,3 +75,13 @@
       {% endif %}
     data:
       entity_id: switch.fountain_switch
+
+- alias: backyard_lights_on_motion
+  use_blueprint:
+    path: lights_on_motion.yaml
+    input:
+      light_entity: light.backyard
+      timer: timer.backyard_lights
+      motion: binary_sensor.backyard_sensor_motion_detection
+      condition_entity: binary_sensor.nighttime
+      condition_state: 'on'

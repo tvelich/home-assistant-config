@@ -40,23 +40,13 @@
       entity_id: timer.bathroom_upstairs_lights
       duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
 
-- alias: bathroom_upstairs_motion_detected
-  trigger:
-    platform: state
-    entity_id: binary_sensor.bathroom_upstairs_motion
-    to: 'on'
-  action:
-    - service: timer.start
-      data:
-        entity_id: timer.bathroom_upstairs_lights
-        duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
-    - condition: state
-      entity_id: light.bathroom_upstairs
-      state: 'off'
-    - service: light.turn_on
-      data:
-        entity_id: light.bathroom_upstairs
-        brightness_pct: "{{ states('sensor.sleep_mode_brightness') | float }}"
+- alias: bathroom_upstairs_lights_on_motion
+  use_blueprint:
+    path: lights_on_motion.yaml
+    input:
+      light_entity: light.bathroom_upstairs
+      timer: timer.bathroom_upstairs_lights
+      motion: binary_sensor.bathroom_upstairs_motion
 
 - alias: bathroom_upstairs_toilet_check_water_leak
   use_blueprint:

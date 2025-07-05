@@ -1,0 +1,48 @@
+blueprint:
+  name: lights_on_motion
+  domain: automation
+  input:
+    light_entity:
+    brightness_pct:
+      default: "{{ states('sensor.sleep_mode_brightness') | int }}"
+    transition:
+      default: 3
+    motion:
+    timer:
+    condition_entity:
+      default: ''
+    condition_state:
+      default: ''
+
+variables:
+  condition_entity: !input condition_entity
+  condition_state: !input condition_state
+
+trigger:
+  platform: state
+  entity_id: !input motion
+  from: 'off'
+  to: 'on'
+
+condition:
+  condition: template
+  value_template: >
+    {% if condition_entity != '' and condition_state != '' %}
+      {{ is_state(condition_entity, condition_state) }}
+    {% else %}
+      true
+    {% endif %}
+
+action:
+  - service: timer.start
+    data:
+      entity_id: !input timer
+      duration: "{{ states('sensor.dynamic_light_timer_duration') }}"
+  - condition: state
+    entity_id: !input light_entity
+    state: 'off'
+  - service: script.light_turn_on
+    data:
+      entity_id: !input light_entity
+      brightness_pct: !input brightness_pct
+      transition: !input transition
