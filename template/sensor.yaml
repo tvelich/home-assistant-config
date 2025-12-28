@@ -1,8 +1,7 @@
-- platform: template
-  sensors:
-    time_of_day_brightness:
+- sensor:
+    - default_entity_id: sensor.time_of_day_brightness
       unit_of_measurement: '%'
-      value_template: >
+      state: >
         {% set next_sunset_ts     = as_timestamp(state_attr('sun.sun','next_setting')) %}
         {% set now_ts             = as_timestamp(now()) %}
         {% set minimum_brightness = 20 %}
@@ -25,19 +24,17 @@
           {{ minimum_brightness }}
         {% endif %}
 
-    sleep_mode_brightness:
+    - default_entity_id: sensor.sleep_mode_brightness
       unit_of_measurement: '%'
-      value_template: >
+      state: >
         {% if is_state('input_boolean.sleep_mode_enabled', 'on') %}
           1
         {% else %}
           {{ states('sensor.time_of_day_brightness') | int }}
         {% endif %}
 
-- platform: template
-  sensors:
-    dynamic_light_timer_duration:
-      value_template: >
+    - default_entity_id: sensor.dynamic_light_timer_duration
+      state: >
         {% if is_state('input_boolean.sleep_mode_enabled', 'on') %}
           00:05:00
         {% else %}

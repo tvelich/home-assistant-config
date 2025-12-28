@@ -1,27 +1,26 @@
-- platform: template
-  sensors:
-    raining:
-      availability_template: "{{ states('sensor.netatmo_home_rain_rain') | is_number }}"
-      value_template: "{{ states('sensor.netatmo_home_rain_rain') | float > 0 }}"
-    low_visibility:
-      value_template: >
+- binary_sensor:
+    - default_entity_id: binary_sensor.raining
+      availability: "{{ states('sensor.netatmo_home_rain_rain') | is_number }}"
+      state: "{{ states('sensor.netatmo_home_rain_rain') | float > 0 }}"
+    - default_entity_id: binary_sensor.low_visibility
+      state: >
         {{
           is_state('binary_sensor.nighttime', 'on') or 
           is_state('binary_sensor.raining', 'on') 
         }}
-    near_freezing_last_two_days:
-      availability_template: "{{ states('sensor.temperature_last_two_days') | is_number }}"
-      value_template: "{{ states('sensor.temperature_last_two_days') | float < 40 }}"
-    high_winds_last_hour:
-      availability_template: "{{ states('sensor.netatmo_home_wind_gust_strength') | is_number }}"
-      value_template: "{{ states('sensor.netatmo_home_wind_gust_strength') | float > 5 }}"
-    poor_fountain_conditions:
-      value_template: >
+    - default_entity_id: binary_sensor.near_freezing_last_two_days
+      availability: "{{ states('sensor.temperature_last_two_days') | is_number }}"
+      state: "{{ states('sensor.temperature_last_two_days') | float < 40 }}"
+    - default_entity_id: binary_sensor.high_winds_last_hour
+      availability: "{{ states('sensor.netatmo_home_wind_gust_strength') | is_number }}"
+      state: "{{ states('sensor.netatmo_home_wind_gust_strength') | float > 5 }}"
+    - default_entity_id: binary_sensor.poor_fountain_conditions
+      state: >
         {{
           is_state('binary_sensor.near_freezing_last_two_days', 'on') or
           is_state('binary_sensor.high_winds_last_hour', 'on')
         }}
       delay_off:
         minutes: 15
-    home:
-      value_template: "{{ states('device_tracker.phone_1') == 'home' or states('device_tracker.phone_2') == 'home' }}"
+    - default_entity_id: binary_sensor.home
+      state: "{{ states('device_tracker.phone_1') == 'home' or states('device_tracker.phone_2') == 'home' }}"
