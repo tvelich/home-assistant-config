@@ -5,8 +5,8 @@
   min_temp: 60
   max_temp: 80
   ac_mode: false
-  comfort_temp: 63
-  activity_temp: 68
+  comfort_temp: 65
+  activity_temp: 70
   cold_tolerance: 0.5
   hot_tolerance: 0
   keep_alive:
@@ -21,8 +21,8 @@
   min_temp: 60
   max_temp: 80
   ac_mode: false
-  comfort_temp: 63
-  activity_temp: 68
+  comfort_temp: 65
+  activity_temp: 70
   cold_tolerance: 0.5
   hot_tolerance: 0
   initial_hvac_mode: "off"
@@ -35,8 +35,8 @@
   min_temp: 60
   max_temp: 80
   ac_mode: true
-  comfort_temp: 75
-  activity_temp: 73
+  comfort_temp: 73
+  activity_temp: 75
   cold_tolerance: 0
   hot_tolerance: 0.5
   initial_hvac_mode: "off"
@@ -45,12 +45,12 @@
 - platform: generic_thermostat
   name: Office Heat
   heater: switch.office_heaters
-  target_sensor: sensor.office_sensor_air_temperature
+  target_sensor: sensor.office_temperature
   min_temp: 60
   max_temp: 80
   ac_mode: false
-  comfort_temp: 63
-  activity_temp: 68
+  comfort_temp: 65
+  activity_temp: 70
   cold_tolerance: 0.5
   hot_tolerance: 0
   initial_hvac_mode: "off"
