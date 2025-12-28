@@ -1,4 +1,8 @@
 - platform: group
+  name: "Dining Room Accent"
+  entities:
+    - light.hue_dining_room_accent
+- platform: group
   name: "Family Room Accent"
   entities:
     - light.hue_family_room_accent
