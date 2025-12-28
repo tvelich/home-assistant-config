@@ -60,7 +60,7 @@
     platform: state
     to: 'off'
     for:
-      minutes: 15
+      minutes: 30
   action:
     service: climate.set_preset_mode
     data:

@@ -30,7 +30,7 @@
 
 - alias: office_climate_motion_detected
   trigger:
-    entity_id: binary_sensor.office_sensor_motion_detection
+    entity_id: binary_sensor.office_motion
     platform: state
     to: 'on'
   action:
@@ -41,11 +41,11 @@
 
 - alias: office_climate_motion_idle
   trigger:
-    entity_id: binary_sensor.office_sensor_motion_detection
+    entity_id: binary_sensor.office_motion
     platform: state
     to: 'off'
     for:
-      minutes: 15
+      minutes: 30
   action:
     service: climate.set_preset_mode
     data:
