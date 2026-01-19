@@ -44,12 +44,26 @@
 
 - platform: generic_thermostat
   name: Office Heat
-  heater: switch.office_heaters
+  heater: switch.office_heater
   target_sensor: sensor.office_temperature
   min_temp: 60
   max_temp: 80
   ac_mode: false
   comfort_temp: 65
+  activity_temp: 70
+  cold_tolerance: 0.5
+  hot_tolerance: 0
+  initial_hvac_mode: "off"
+  precision: 0.1
+
+- platform: generic_thermostat
+  name: Sunroom Heat
+  heater: switch.sunroom_heater
+  target_sensor: sensor.sunroom_sensor_air_temperature
+  min_temp: 50
+  max_temp: 80
+  ac_mode: false
+  comfort_temp: 50
   activity_temp: 70
   cold_tolerance: 0.5
   hot_tolerance: 0

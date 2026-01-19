@@ -32,16 +32,3 @@
           entity_id:
             - switch.family_room_heater_1
             - switch.family_room_heater_2
-
-    - default_entity_id: switch.office_heaters
-      state: "{{ is_state('switch.office_heater_1', 'on') or is_state('switch.office_heater_2', 'on') }}"
-      turn_on:
-        - service: switch.turn_on
-          entity_id:
-            - switch.office_heater_1
-            - switch.office_heater_2
-      turn_off:
-        - service: switch.turn_off
-          entity_id:
-            - switch.office_heater_1
-            - switch.office_heater_2
