@@ -28,4 +28,4 @@
         minutes: 15
 
     - default_entity_id: binary_sensor.home
-      state: "{{ states('device_tracker.phone_1') == 'home' or states('device_tracker.phone_2') == 'home' }}"
+      state: "{{ states('person.tom') == 'home' }}"
