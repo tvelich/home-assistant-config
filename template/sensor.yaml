@@ -40,3 +40,7 @@
         {% else %}
           00:15:00
         {% endif %}
+
+    - default_entity_id: sensor.outdoor_temperature_average
+      unit_of_measurement: °F
+      state: "{{ [states('sensor.front_yard_sensor_air_temperature'), states('sensor.backyard_sensor_air_temperature')] | select('is_number') | map('float') | average }}"
