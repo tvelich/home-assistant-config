@@ -148,3 +148,47 @@
     service: climate.turn_on
     data:
       entity_id: climate.sunroom_heat
+
+- alias: sunroom_lights_sleep_mode_on
+  use_blueprint:
+    path: lights_off_sleep_mode_on.yaml
+    input:
+      light_entity: light.sunroom
+
+- alias: sunroom_lights_home_off
+  use_blueprint:
+    path: lights_off_home_off.yaml
+    input:
+      light_entity: light.sunroom
+
+- alias: sunroom_lights_time_of_day_change
+  use_blueprint:
+    path: lights_dim_time_of_day_brightness_change.yaml
+    input:
+      light_entity: light.sunroom
+
+- alias: sunroom_lights_off_timer_finished
+  use_blueprint:
+    path: lights_off_timer_finished.yaml
+    input:
+      light_entity: light.sunroom
+      timer_entity: timer.sunroom_lights
+
+- alias: sunroom_lights_on
+  trigger:
+    platform: state
+    entity_id: light.sunroom
+    to: 'on'
+  action:
+    service: timer.start
+    data:
+      entity_id: timer.sunroom_lights
+      duration: '01:00:00'
+
+- alias: sunroom_lights_on_motion
+  use_blueprint:
+    path: lights_on_motion.yaml
+    input:
+      light_entity: light.sunroom
+      timer: timer.sunroom_lights
+      motion: binary_sensor.sunroom_motion

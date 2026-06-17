@@ -6,5 +6,7 @@ bathroom_upstairs_lights:
   restore: true
 laundry_room_lights:
   restore: true
+sunroom_lights:
+  restore: true
 brighten_front_yard:
   restore: true
