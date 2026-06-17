@@ -11,7 +11,6 @@
   hot_tolerance: 0
   keep_alive:
     minutes: 90
-  initial_hvac_mode: "off"
   precision: 0.1
 
 - platform: generic_thermostat
@@ -25,7 +24,6 @@
   activity_temp: 70
   cold_tolerance: 0.5
   hot_tolerance: 0
-  initial_hvac_mode: "off"
   precision: 0.1
 
 - platform: generic_thermostat
@@ -39,7 +37,6 @@
   activity_temp: 75
   cold_tolerance: 0
   hot_tolerance: 0.5
-  initial_hvac_mode: "off"
   precision: 0.1
 
 - platform: generic_thermostat
@@ -53,7 +50,6 @@
   activity_temp: 70
   cold_tolerance: 0.5
   hot_tolerance: 0
-  initial_hvac_mode: "off"
   precision: 0.1
 
 - platform: generic_thermostat
@@ -67,5 +63,4 @@
   activity_temp: 70
   cold_tolerance: 0.5
   hot_tolerance: 0
-  initial_hvac_mode: "off"
   precision: 0.1
