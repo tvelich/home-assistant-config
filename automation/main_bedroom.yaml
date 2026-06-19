@@ -111,3 +111,71 @@
       data:
         entity_id: media_player.main_bedroom_home
         volume_level: 0.50
+
+- alias: main_bedroom_shades_time_0830
+  trigger:
+    - platform: time
+      at: "08:30:00"
+  condition:
+    - condition: template
+      value_template: >
+        {{ (state_attr('cover.main_bedroom_shades','current_position') | int(0)) < 25 }}
+  action:
+    - service: cover.set_cover_position
+      target:
+        entity_id: cover.main_bedroom_shades
+      data:
+        position: 25
+
+- alias: main_bedroom_shades_time_0845
+  trigger:
+    - platform: time
+      at: "08:45:00"
+  condition:
+    - condition: template
+      value_template: >
+        {{ (state_attr('cover.main_bedroom_shades','current_position') | int(0)) < 50 }}
+  action:
+    - service: cover.set_cover_position
+      target:
+        entity_id: cover.main_bedroom_shades
+      data:
+        position: 50
+
+- alias: main_bedroom_shades_time_0900
+  trigger:
+    - platform: time
+      at: "09:00:00"
+  action:
+    - service: cover.open_cover
+      target:
+        entity_id: cover.main_bedroom_shades
+
+- alias: main_bedroom_shades_dusk
+  trigger:
+    - platform: sun
+      event: dusk
+  action:
+    - service: cover.close_cover
+      target:
+        entity_id: cover.main_bedroom_shades
+
+- alias: main_bedroom_shades_sleep_mode_on
+  trigger:
+    - platform: state
+      entity_id: input_boolean.sleep_mode_enabled
+      to: "on"
+  action:
+    - service: cover.close_cover
+      target:
+        entity_id: cover.main_bedroom_shades
+
+- alias: main_bedroom_shades_sleep_mode_off
+  trigger:
+    - platform: state
+      entity_id: input_boolean.sleep_mode_enabled
+      to: "off"
+  action:
+    - service: cover.open_cover
+      target:
+        entity_id: cover.main_bedroom_shades
