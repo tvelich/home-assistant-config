@@ -86,3 +86,9 @@
       condition_entity: binary_sensor.nighttime
       condition_state: 'on'
       brightness_pct: 100
+
+- alias: backyard_accent_lights_sleep_mode_on
+  use_blueprint:
+    path: lights_off_sleep_mode_on.yaml
+    input:
+      light_entity: light.backyard_accent
